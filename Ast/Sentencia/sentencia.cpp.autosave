@@ -1,0 +1,24 @@
+#include "Ast/nodo.h"
+#include "General/constantes.h"
+
+static Nodo *Nodo::crearLlamada(QString cadena, QList<Nodo> params, int fila){
+    Nodo *nodo = new Nodo();
+    nodo->rol = RN_LLAMADA;
+    nodo->cadena = cadena;
+    nodo->hijos->append(params);
+    nodo->fila = fila;
+}
+
+static Nodo *Nodo::crearSentencia(QList<Nodo> sentencias){
+    Nodo *nodo = new Nodo();
+    nodo->rol = RN_SENTENCIAS;
+    nodo->hijos->append(sentencias);
+    return nodo;
+}
+
+static Nodo *Nodo::crearDimensiones(QList<Nodo> dims){
+    Nodo *nodo = new Nodo();
+    nodo->rol = RN_SENTENCIAS;
+    nodo->hijos->append(sentencias);
+    return nodo;
+}
