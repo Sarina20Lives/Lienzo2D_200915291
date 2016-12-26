@@ -227,7 +227,7 @@ struct AtributoLienzo{
                     $<METODO->metodo>$ = Metodo::crearMetodo(*$<CADENA>3, $<INT>1, $<INT>2, recorrido->pop(), $<LNODO->lnodo>5, $<LNODO->lnodo>9);
 				}
  ;
- tipof 			: tipo esArr		{ $<INT>$ = $<INT>$ + $<INT>1;}
+ tipof 			: tipo esArr		{ $<INT>$ = $<INT>1 + $<INT>2;}
  				| %empty			{ $<INT>$ = T_VOID;}
  ;
  esArr 			: C_OPEN C_CLOSE 	{ $<INT>$ = 6; }
@@ -365,7 +365,7 @@ struct AtributoLienzo{
  					$<NODO->nodo>$ = Nodo::decVar($<INT>1, $<LSTRING->lstring>4, $<INT>3, *$<NODO->nodo>5, lienzoline);
  				}
  ;
- acceso			: CONSERVAR visibilidad 	{ $<INT>$ = $<INT>2 + 3; }
+ acceso			: CONSERVAR visibilidad 	{ $<INT>$ = $<INT>2 + A_PRI; }
  				| visibilidad				{ $<INT>$ = $<INT>1; }
  				| %empty					{ $<INT>$ = A_PUB; }
  ;
