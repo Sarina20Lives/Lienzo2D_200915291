@@ -56,6 +56,12 @@ public:
     static Resultado *ejecutarSentencia(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo sentencia);
     static Simbolo buscarSimboloArr(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre);
     static Resultado *buscarValArr(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp);
+    static Resultado *resolverAsigVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
+    static void asigDecVar(Contexto *ctxG, Contexto *ctxL, Nodo asig);
+    static void asigIncVar(Contexto *ctxG, Contexto *ctxL, Nodo asig);
+    static void asigDirectaVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
+    static void asigSumSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
+    static void asigSubSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
 };
 
 #endif // INTERPRETE_H

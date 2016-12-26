@@ -46,7 +46,8 @@ SOURCES += main.cpp\
     Ast/Sentencia/funarreglo.cpp \
     Ast/Sentencia/funprimitiva.cpp \
     Ast/Sentencia/otro.cpp \
-    Interprete/Sentencia/_sentencia.cpp
+    Interprete/Sentencia/_sentencia.cpp \
+    Interprete/Sentencia/_asignacion.cpp
 
 HEADERS  += principal.h \
     Gramatica/lexico_lienzo.h \
