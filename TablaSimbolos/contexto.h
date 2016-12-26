@@ -25,6 +25,11 @@ public:
     bool existeVariable(QString nombre);
     void agregarVariable(Simbolo sim);
     void agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo declaracion);
+    static QList<QString> crearEspacios(QList<Resultado> dims);
+    static int obtenerCapacidad(QList<Resultado> dims);
+    static int obtenerCapacidad(QList<int> dims);
+    static int obtenerPosicion(QList<Resultado> *posiciones, QList<int> dims);
+    static QList<int> obtenerPosiciones(QList<Resultado> *posiciones);
 };
 
 

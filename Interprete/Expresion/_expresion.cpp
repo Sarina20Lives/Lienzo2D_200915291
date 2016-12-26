@@ -1,5 +1,6 @@
 #include "Interprete/interprete.h"
 #include "General/constantes.h"
+#include "Interprete/casteo.h"
 
 Resultado *Interprete::resolverExpresion(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
     if(exp.getRol() == RN_ARITMETICA){
@@ -34,10 +35,71 @@ Resultado *Interprete::resolverOperando(QString lienzo, Contexto *ctxGlobal, Con
         return buscarValVar(ctxGlobal, ctxLocal, exp.getCadena());
     }
     if(exp.getSubRol()==SRN_ARR){
-        //FALTA IMPLEMENTAR
-        return resultado;
+        return buscarValArr(lienzo, ctxGlobal, ctxLocal, exp);
     }
     return resultado;
+}
+
+
+Resultado *Interprete::buscarValArr(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
+    //Resolver dimensiones...
+    QList<Resultado> *dims = new QList<Resultado>();
+    Resultado *dim;
+    foreach (Nodo nodo, *exp.getHijos()) {
+        dim = Interprete::resolverExpresion(lienzo, ctxGlobal, ctxLocal, nodo);
+        if(dim->getTipo()!=TENTERO){
+            //TODO-ERROR-Error al querer obtener los valores de las dimensiones
+            return new Resultado();
+        }
+        dims->append(*dim);
+    }
+
+    //Buscar arreglo:
+    Simbolo arreglo = Interprete::buscarSimboloArr(ctxGlobal, ctxLocal, exp.getCadena());
+    if(arreglo.getTipo()==ERR){
+        //TODO-ERROR-El arreglo no existe ;)
+        return new Resultado();
+    }
+
+    //Comprobar la cantidad de dimensiones:
+    if(arreglo.getDims().count()!=dims->count()){
+        //TODO-ERROR-Las dimensiones no corresponden al arreglo
+        return new Resultado();
+    }
+    int cont = 0;
+    foreach (Resultado res, *dims) {
+        if(Casteo::strToInt(res.getValor())<0 || Casteo::strToInt(res.getValor())>arreglo.getDims().at(cont)){
+            //TODO-ERROR-Los indices se encuentran fuera de los limites permitidos
+            return new Resultado();
+        }
+        cont = cont + 1;
+    }
+    int pos= Contexto::obtenerPosicion(dims, arreglo.getDims());
+    if(!arreglo.getInstancia() && QString::compare(arreglo.getValores().at(pos),"")==0){
+        //TODO-ERROR-Se hace referencia a una posición de arreglo no definida
+        return new Resultado();
+    }
+
+    Resultado *resultado = new Resultado();
+    resultado->setTipo(arreglo.getTipo());
+    resultado->setValor(arreglo.getValores().at(pos));
+    return resultado;
+}
+
+
+Simbolo Interprete::buscarSimboloArr(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre){
+    Simbolo arreglo = *new Simbolo();
+    foreach (Simbolo simbolo, *ctxLocal->getContexto()) {
+        if(QString::compare(simbolo.getNombre(), nombre)==0 && simbolo.getEsArr()){
+            return simbolo;
+        }
+    }
+    foreach (Simbolo simbolo, *ctxGlobal->getContexto()) {
+        if(QString::compare(simbolo.getNombre(), nombre)==0 && simbolo.getEsArr()){
+                return simbolo;
+        }
+    }
+    return arreglo;
 }
 
 Resultado *Interprete::buscarValVar(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre){
@@ -71,8 +133,7 @@ Resultado *Interprete::buscarValVar(Contexto *ctxGlobal, Contexto *ctxLocal, QSt
 Resultado *Interprete::resolverRefArr(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
     Resultado *resultado = new Resultado();
     if(exp.getSubRol()==SRN_ARR){
-        //FALTA IMPLEMENTAR
-        return resultado;
+        return Interprete::buscarArr(ctxGlobal, ctxLocal, exp.getCadena());
     }
     if(exp.getSubRol()==SRN_VAL_ARR){
         return Interprete::resolverValArr(lienzo, ctxGlobal, ctxLocal, exp);
@@ -80,6 +141,33 @@ Resultado *Interprete::resolverRefArr(QString lienzo, Contexto *ctxGlobal, Conte
     return resultado;
 }
 
+Resultado *Interprete::buscarArr(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre){
+    Resultado *resultado = new Resultado();
+    foreach (Simbolo simbolo, *ctxLocal->getContexto()) {
+        if(QString::compare(simbolo.getNombre(), nombre)==0 && simbolo.getEsArr()){
+            if(!simbolo.getInstancia()){
+                //TODO-WARNING-El arreglo puede contener valores no instanciados
+            }
+            resultado->setTipo(simbolo.getTipo());
+            resultado->setEsArr(true);
+            resultado->setValores(simbolo.getValores());
+            return resultado;
+        }
+    }
+
+    foreach (Simbolo simbolo, *ctxGlobal->getContexto()) {
+        if(QString::compare(simbolo.getNombre(), nombre)==0 && simbolo.getEsArr()){
+            if(!simbolo.getInstancia()){
+                //TODO-WARNING-El arreglo puede contener valores no instanciados
+            }
+            resultado->setTipo(simbolo.getTipo());
+            resultado->setEsArr(true);
+            resultado->setValores(simbolo.getValores());
+            return resultado;
+        }
+    }
+    return resultado;
+}
 
 Resultado *Interprete::resolverValArr(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo valArr){
     Resultado *unnion = new Resultado();
@@ -90,7 +178,7 @@ Resultado *Interprete::resolverValArr(QString lienzo, Contexto *ctxG, Contexto *
     foreach (Nodo nodo, *valArr.getHijos()) {
         temp = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo);
         tipo = temp->getTipo();
-        hijos = temp->getValores()->count();
+        hijos = temp->getValores().count();
         resultados->append(*temp);
     }
 
@@ -102,14 +190,21 @@ Resultado *Interprete::resolverValArr(QString lienzo, Contexto *ctxG, Contexto *
             //TODO-ERROR-los tipos no corresponden...
             return new Resultado();
         }
-        if(resultado.getValores()->count()!=hijos){
+        if(resultado.getValores().count()!=hijos){
             //TODO-ERROR-las dimensiones no son de igual magnitud..
             return new Resultado();
         }
-        unnion->addValores(*resultado.getValores());
+        if(hijos==0){
+            unnion->addValor(resultado.getValor());
+        }else{
+            unnion->addValores(resultado.getValores());
+        }
         dims = resultado.getDimensiones();
     }
-    unnion->getDimensiones().prepend(cont);
+    unnion->setTipo(tipo);
+    unnion->setEsArr(true);
+    unnion->setDimensiones(dims);
+    unnion->preDimension(cont);
     return unnion;
 }
 

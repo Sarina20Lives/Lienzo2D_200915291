@@ -10,8 +10,8 @@ Simbolo::Simbolo()
     this->nombre = "";
     this->valor = "";
     this->padre = "";
-    this->dims = new QList<int>();
-    this->valores = new QList<QString>();
+    this->dims = *new QList<int>();
+    this->valores = *new QList<QString>();
     this->contDims = 0;
     this->esArr = false;
     this->instancia = false;
@@ -47,11 +47,11 @@ QString Simbolo::getPadre(){
     return this->padre;
 }
 
-QList<int> *Simbolo::getDims(){
+QList<int> Simbolo::getDims(){
     return this->dims;
 }
 
-QList<QString> *Simbolo::getValores(){
+QList<QString> Simbolo::getValores(){
     return this->valores;
 }
 
@@ -100,7 +100,7 @@ void Simbolo::setPadre(QString padre){
     this->padre = padre;
 }
 
-void Simbolo::setValores(QList<QString> *valores){
+void Simbolo::setValores(QList<QString> valores){
     this->valores = valores;
 }
 
@@ -115,7 +115,7 @@ void Simbolo::setEsArr(bool esArr){
 void Simbolo::setDims(QList<Resultado> dims)
 {
     foreach (Resultado dim, dims) {
-        this->dims->append(Casteo::strToInt(dim.getValor()));
+        this->dims.append(Casteo::strToInt(dim.getValor()));
     }
 }
 

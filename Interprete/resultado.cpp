@@ -6,7 +6,7 @@ Resultado::Resultado()
 {
     this->rol = NOTHING;
     this->valor = "";
-    this->valores = new QList<QString>();
+    this->valores = *new QList<QString>();
     this->esArr = false;
     this->dimensiones = *new QList<int>();
     this->tipo = ERR;
@@ -28,13 +28,17 @@ QString Resultado::getValor()
     return this->valor;
 }
 
-QList<QString> *Resultado::getValores()
+QList<QString> Resultado::getValores()
 {
     return this->valores;
 }
 
+void Resultado::addValor(QString valor){
+    this->valores.append(valor);
+}
+
 void Resultado::addValores(QList<QString> valores){
-    this->valores->append(valores);
+    this->valores.append(valores);
 }
 
 bool Resultado::getEsArr()
@@ -45,6 +49,10 @@ bool Resultado::getEsArr()
 QList<int> Resultado::getDimensiones()
 {
     return this->dimensiones;
+}
+
+void Resultado::preDimension(int dim){
+    this->dimensiones.prepend(dim);
 }
 
 void Resultado::setRol(int rol)
@@ -62,7 +70,7 @@ void Resultado::setValor(QString valor)
     this->valor = valor;
 }
 
-void Resultado::setValores(QList<QString> *valores)
+void Resultado::setValores(QList<QString> valores)
 {
     this->valores = valores;
 }

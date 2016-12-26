@@ -14,8 +14,8 @@ private:
     QString nombre;
     QString valor;
     QString padre;
-    QList<int> *dims;
-    QList<QString> *valores;
+    QList<int> dims;
+    QList<QString> valores;
     int contDims;
     bool esArr; //Usado para saber si el método retorna un arreglo
     bool instancia;
@@ -30,8 +30,8 @@ public:
     QString getNombre();
     QString getValor();
     QString getPadre();
-    QList<int> *getDims();
-    QList<QString> *getValores();
+    QList<int> getDims();
+    QList<QString> getValores();
     int getContDims();
     bool getEsArr();
     bool getInstancia();
@@ -43,7 +43,7 @@ public:
     void setNombre(QString nombre);
     void setValor(QString valor);
     void setPadre(QString padre);
-    void setValores(QList<QString> *valores);
+    void setValores(QList<QString> valores);
     void setContDims(int contDims);
     void setEsArr(bool esArr);
     void setDims(QList<Resultado> dims);

@@ -10,5 +10,13 @@ void Interprete::ejecutarDeclaracion(QString lienzo, QString padre, Contexto *ct
         ctxL->agregarVariables(lienzo, padre, ctxG, ctxL, dec);
         return;
     }
+    if(dec.getSubRol()==SRN_ARR){
+        if(esGlobal){
+            ctxG->agregarArreglos(lienzo, padre, ctxG, ctxL, dec);
+            return;
+        }
+        ctxL->agregarArreglos(lienzo, padre, ctxG, ctxL, dec);
+        return;
+    }
 
 }

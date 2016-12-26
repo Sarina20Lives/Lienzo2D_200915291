@@ -25,6 +25,7 @@ public:
     static Resultado *buscarValVar(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre);
     static Resultado *resolverRefArr(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp);
     static Resultado *resolverValArr(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo valArr);
+    static Resultado *buscarArr(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre);
     static QString getParamsToString(QList<Resultado> params);
     static Resultado *resolverLlamada(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp);
     static Resultado *resolverAritmetica(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp);
@@ -53,6 +54,8 @@ public:
     static void ejecutarPrincipal(QString lienzo);
     static void ejecutarDeclaracion(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo dec, bool esGlobal);
     static Resultado *ejecutarSentencia(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo sentencia);
+    static Simbolo buscarSimboloArr(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre);
+    static Resultado *buscarValArr(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp);
 };
 
 #endif // INTERPRETE_H

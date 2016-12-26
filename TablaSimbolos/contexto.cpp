@@ -99,7 +99,7 @@ void Contexto::agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Co
         int pos = 0;
         QList<int> posiciones = valor.getDimensiones();
         foreach (Resultado dim, *dims) {
-            if(posiciones.at(pos)>Casteo::strToInt(dim.getValor())){
+            if(posiciones.at(pos)<0 || posiciones.at(pos)>Casteo::strToInt(dim.getValor())){
                 //TODO-ERROR-Indices fuera de la capacidad del arreglo
             }
             pos = pos+1;
@@ -112,8 +112,10 @@ void Contexto::agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Co
            return;
         }
         if(valor.getTipo()!=ERR){
-            sim.setValores(valor.getValores());
             sim.setInstancia(true);
+            sim.setValores(valor.getValores());
+        }else{
+            sim.setValores(Contexto::crearEspacios(*dims));
         }
         sim.setDims(*dims);
         sim.setNivel(this->getNivel());
@@ -122,6 +124,56 @@ void Contexto::agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Co
 }
 
 
+QList<QString> Contexto::crearEspacios(QList<Resultado> dims){
+    int capacidad = Contexto::obtenerCapacidad(dims);
+    QList<QString> espacios = *new QList<QString>();
+    for (int i = 0; i<capacidad; i++){
+        espacios.append("");
+    }
+    return espacios;
+}
+
+int Contexto::obtenerCapacidad(QList<Resultado> dims){
+    int capacidad = 1;
+    foreach (Resultado dim, dims) {
+        capacidad = capacidad * Casteo::strToInt(dim.getValor());
+    }
+    return capacidad;
+}
+
+int Contexto::obtenerCapacidad(QList<int> dims){
+    int capacidad = 1;
+    foreach (int dim, dims) {
+        capacidad = capacidad * dim;
+    }
+    return capacidad;
+}
+
+int Contexto::obtenerPosicion(QList<Resultado> *posiciones, QList<int> dims){
+    if(posiciones->count()==1){
+        return Casteo::strToInt(posiciones->takeAt(0).getValor());
+    }
+
+    QList<int> poss = Contexto::obtenerPosiciones(posiciones);
+    int capacidad = Contexto::obtenerCapacidad(dims);
+    int pos = 0;
+    int tempPos = 0;
+
+    for (int i = 0; i< poss.count()-1; i++){
+        capacidad = capacidad / dims.at(i);
+        pos = tempPos + poss.at(i) * capacidad + poss.at(i+1);
+        tempPos = pos - poss.at(i+1);
+    }
+    return pos;
+}
+
+QList<int> Contexto::obtenerPosiciones(QList<Resultado> *posiciones){
+    QList<int> poss = *new QList<int>();
+    foreach (Resultado ress, *posiciones) {
+        poss.append(Casteo::strToInt(ress.getValor()));
+    }
+    return poss;
+}
 
 void Contexto::limpiarContexto()
 {
