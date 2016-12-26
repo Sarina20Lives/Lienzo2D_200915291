@@ -2,14 +2,14 @@
 #include "ui_principal.h"
 #include <QMessageBox>
 #include "Interprete/casteo.h"
+#include "Editor/codeeditor.h"
 
 extern bool parselienzo();
 
-Principal::Principal(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::Principal)
+Principal::Principal(QWidget *parent) : QMainWindow(parent), ui(new Ui::Principal)
 {
     ui->setupUi(this);
+    nuevaPestania();
 }
 
 Principal::~Principal()
@@ -32,11 +32,23 @@ void Principal::on_pBanalizar_clicked()
 void Principal::on_pushButton_clicked()
 {
 
-
-
 }
 
 void Principal::showInfo(QString mensaje)
 {
     ui->statusBar->showMessage(mensaje, 5000);
+}
+
+void Principal::nuevaPestania()
+{
+    CodeEditor *editor = new CodeEditor;
+    connect(editor, SIGNAL(cursorPositionChanged()), this, SLOT(mostrarPosicion()));
+    ui->tabArchivos->addTab(editor, "Pestania nueva *");
+}
+
+void Principal::mostrarPosicion()
+{
+    QTextCursor cursor = ((CodeEditor*)ui->tabArchivos->currentWidget())->textCursor();
+    QString posicion = QString("Línea: %1   Columna: %2").arg(cursor.blockNumber()+1).arg(cursor.columnNumber()+1);
+    ui->statusBar->showMessage(posicion);
 }

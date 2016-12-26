@@ -23,12 +23,13 @@ public:
 
     void showInfo(QString mensaje);
 private slots:
+    void mostrarPosicion();
     void on_pBanalizar_clicked();
-
     void on_pushButton_clicked();
 
 private:
     Ui::Principal *ui;
+    void nuevaPestania();
 };
 
 #endif // PRINCIPAL_H

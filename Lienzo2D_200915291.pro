@@ -47,7 +47,9 @@ SOURCES += main.cpp\
     Ast/Sentencia/funprimitiva.cpp \
     Ast/Sentencia/otro.cpp \
     Interprete/Sentencia/_sentencia.cpp \
-    Interprete/Sentencia/_asignacion.cpp
+    Interprete/Sentencia/_asignacion.cpp \
+    Editor/codeeditor.cpp \
+    areagrafica.cpp
 
 HEADERS  += principal.h \
     Gramatica/lexico_lienzo.h \
@@ -63,6 +65,14 @@ HEADERS  += principal.h \
     Interprete/resultado.h \
     Interprete/casteo.h \
     Interprete/interprete.h \
-    TablaSimbolos/contexto.h
+    TablaSimbolos/contexto.h \
+    Editor/codeeditor.h \
+    areagrafica.h
 
-FORMS    += principal.ui
+FORMS    += principal.ui \
+    areagrafica.ui
+
+DISTFILES +=
+
+RESOURCES += \
+    Recursos/recursos.qrc
