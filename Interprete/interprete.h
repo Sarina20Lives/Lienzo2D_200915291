@@ -68,6 +68,7 @@ public:
     static Resultado *resolverSalir();
     static Resultado *resolverContinuar();
     static Resultado *ejecutarHacer(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
+    static Resultado *ejecutarPara(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
 };
 
 #endif // INTERPRETE_H

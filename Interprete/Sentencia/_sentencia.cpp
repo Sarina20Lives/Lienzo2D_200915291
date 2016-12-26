@@ -32,6 +32,9 @@ Resultado *Interprete::ejecutarSentencia(QString lienzo, QString padre, Contexto
     if(sentencia.getRol() == RN_SI){
         return Interprete::ejecutarIf(lienzo, padre, ctxG, ctxL, sentencia);
     }
+    if(sentencia.getRol() == RN_PARA){
+        return Interprete::ejecutarPara(lienzo, padre, ctxG, ctxL, sentencia);
+    }
 
     return new Resultado();
 }
