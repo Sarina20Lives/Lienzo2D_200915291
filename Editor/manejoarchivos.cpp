@@ -1,5 +1,6 @@
 #include "manejoarchivos.h"
 #include <QTextStream>
+#include <QFile>
 
 QString ManejoArchivos::abrirArchivo(QString dir){
     QByteArray ba = dir.toLatin1();
@@ -14,4 +15,12 @@ QString ManejoArchivos::abrirArchivo(QString dir){
     }
     fclose(file);
     return content;
+}
+
+void ManejoArchivos::guardarArchivo(QString path, QString content){
+    QFile file(path);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+       return;
+    QTextStream out(&file);
+    out << content;
 }

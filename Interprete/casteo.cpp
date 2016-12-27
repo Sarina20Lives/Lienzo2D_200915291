@@ -89,10 +89,7 @@ int Casteo::toInt(Resultado resultado)
     if(resultado.getTipo()==TCARACTER){
         return charToInt(resultado.getValor());
     }
-    if(resultado.getTipo()==TBOOLEAN){
-        return boolToInt(resultado.getValor());
-    }
-
+    return boolToInt(resultado.getValor());
 }
 
 double Casteo::toDoble(Resultado resultado)
@@ -109,6 +106,7 @@ double Casteo::toDoble(Resultado resultado)
     if(resultado.getTipo()==TBOOLEAN){
         return intToDoble(boolToInt(resultado.getValor()));
     }
+    fprintf(stderr, "No hay retorno en toDouble");
 }
 
 
@@ -117,6 +115,7 @@ bool Casteo::toBool(Resultado resultado)
     if(resultado.getTipo()==TBOOLEAN){
         return strToBool(resultado.getValor());
     }
+    fprintf(stderr, "No hay retorno en toBool");
 }
 
 Resultado Casteo::toAsigVar(int tipo, Resultado resultado){
@@ -145,6 +144,7 @@ Resultado Casteo::toAsigVar(int tipo, Resultado resultado){
         resultado.setValor(intToChar(toInt(resultado)));
         return resultado;
     }
+    fprintf(stderr, "No hay retorno en toAsigVar");
 }
 
 bool Casteo::EsPrimo(int valor){
