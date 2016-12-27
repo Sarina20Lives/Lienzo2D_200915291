@@ -21,6 +21,12 @@ Resultado *Interprete::resolverExpresion(QString lienzo, Contexto *ctxGlobal, Co
     if(exp.getRol() == RN_LLAMADA){
         return Interprete::resolverLlamada(lienzo, ctxGlobal, ctxLocal, exp);
     }
+    if(exp.getRol() == RN_ORDENAR){
+        return Interprete::resolverOrdenar(ctxGlobal, ctxLocal, exp);
+    }
+    if(exp.getRol() == RN_SUMARIZAR){
+        return Interprete::resolverSumarizar(lienzo, ctxGlobal, ctxLocal, exp);
+    }
     return new Resultado();
 }
 

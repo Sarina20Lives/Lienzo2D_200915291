@@ -33,6 +33,7 @@ public:
     static Resultado toAsigVar(int tipo, Resultado resultado);
 
 
+    static bool EsPrimo(int valor);
 };
 
 #endif // CASTEO_H

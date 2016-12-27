@@ -38,6 +38,12 @@ Resultado *Interprete::ejecutarSentencia(QString lienzo, QString padre, Contexto
     if(sentencia.getRol() == RN_PARA){
         return Interprete::ejecutarPara(lienzo, padre, ctxG, ctxL, sentencia);
     }
+    if(sentencia.getRol() == RN_ORDENAR){
+        return Interprete::resolverOrdenar(ctxG, ctxL, sentencia);
+    }
+    if(sentencia.getRol() == RN_SUMARIZAR){
+        return Interprete::resolverSumarizar(lienzo, ctxG, ctxL, sentencia);
+    }
 
     return new Resultado();
 }

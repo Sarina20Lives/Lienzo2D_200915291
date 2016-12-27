@@ -2425,7 +2425,7 @@ yyreduce:
 #line 638 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
-					(yyval.NODO->nodo) = Nodo::crearOrdenar(*(yyvsp[-3].CADENA), (yyvsp[-2].INT), lienzoline);
+					(yyval.NODO->nodo) = Nodo::crearOrdenar(*(yyvsp[-3].CADENA), (yyvsp[-1].INT), lienzoline);
  				}
 #line 2431 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;

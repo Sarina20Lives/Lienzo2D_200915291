@@ -147,3 +147,16 @@ Resultado Casteo::toAsigVar(int tipo, Resultado resultado){
     }
 }
 
+bool Casteo::EsPrimo(int valor){
+    if(valor % 2 == 0){
+        return false;
+    }
+    for (int divisor=3; divisor<valor; divisor+=2){
+        if(valor % divisor == 0){
+            return false;
+        }
+    }
+    return true;
+}
+
+
