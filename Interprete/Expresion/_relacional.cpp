@@ -73,11 +73,14 @@ Resultado *Interprete::resolverDiferente(Resultado op1, Resultado op2){
 
 Resultado *Interprete::resolverMen(Resultado op1, Resultado op2){
     Resultado *resultado = new Resultado();
-    if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
-        return resultado;
-    }
     resultado->setTipo(TBOOLEAN);
     resultado->setValor("false");
+    if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
+        if(QString::compare(op1.getValor(), op2.getValor())<0){
+            resultado->setValor("true");
+        }
+        return resultado;
+    }
     if(op1.getTipo()==TDOBLE || op2.getTipo()==TDOBLE){
         if(Casteo::toDoble(op1)<Casteo::toDoble(op2)){
             resultado->setValor("true");
@@ -92,11 +95,14 @@ Resultado *Interprete::resolverMen(Resultado op1, Resultado op2){
 
 Resultado *Interprete::resolverMenIgual(Resultado op1, Resultado op2){
     Resultado *resultado = new Resultado();
-    if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
-        return resultado;
-    }
     resultado->setTipo(TBOOLEAN);
     resultado->setValor("false");
+    if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
+        if(QString::compare(op1.getValor(), op2.getValor())<=0){
+            resultado->setValor("true");
+        }
+        return resultado;
+    }
     if(op1.getTipo()==TDOBLE || op2.getTipo()==TDOBLE){
         if(Casteo::toDoble(op1)<=Casteo::toDoble(op2)){
             resultado->setValor("true");
@@ -111,11 +117,14 @@ Resultado *Interprete::resolverMenIgual(Resultado op1, Resultado op2){
 
 Resultado *Interprete::resolverMay(Resultado op1, Resultado op2){
     Resultado *resultado = new Resultado();
-    if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
-        return resultado;
-    }
     resultado->setTipo(TBOOLEAN);
     resultado->setValor("false");
+    if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
+        if(QString::compare(op1.getValor(), op2.getValor())>0){
+            resultado->setValor("true");
+        }
+        return resultado;
+    }
     if(op1.getTipo()==TDOBLE || op2.getTipo()==TDOBLE){
         if(Casteo::toDoble(op1)>Casteo::toDoble(op2)){
             resultado->setValor("true");
@@ -130,11 +139,14 @@ Resultado *Interprete::resolverMay(Resultado op1, Resultado op2){
 
 Resultado *Interprete::resolverMayIgual(Resultado op1, Resultado op2){
     Resultado *resultado = new Resultado();
-    if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
-        return resultado;
-    }
     resultado->setTipo(TBOOLEAN);
     resultado->setValor("false");
+    if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
+        if(QString::compare(op1.getValor(), op2.getValor())>=0){
+            resultado->setValor("true");
+        }
+        return resultado;
+    }
     if(op1.getTipo()==TDOBLE || op2.getTipo()==TDOBLE){
         if(Casteo::toDoble(op1)>=Casteo::toDoble(op2)){
             resultado->setValor("true");

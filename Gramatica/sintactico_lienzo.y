@@ -637,7 +637,7 @@ struct AtributoLienzo{
  funArr 		: ORDENAR P_OPEN ID COMA forma P_CLOSE
  				{
  					$<NODO>$ = new AtributoNodo();
-					$<NODO->nodo>$ = Nodo::crearOrdenar(*$<CADENA>3, $<INT>4, lienzoline);
+					$<NODO->nodo>$ = Nodo::crearOrdenar(*$<CADENA>3, $<INT>5, lienzoline);
  				}  			
  				| SUMARIZAR P_OPEN refArr P_CLOSE 
  				{

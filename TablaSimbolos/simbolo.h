@@ -29,6 +29,7 @@ public:
     int getNivel();
     QString getNombre();
     QString getValor();
+    QString getValor(int pos);
     QString getPadre();
     QList<int> getDims();
     QList<QString> getValores();
@@ -42,6 +43,7 @@ public:
     void setNivel(int nivel);
     void setNombre(QString nombre);
     void setValor(QString valor);
+    void setValor(int pos, QString valor);
     void setPadre(QString padre);
     void setValores(QList<QString> valores);
     void setContDims(int contDims);

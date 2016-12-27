@@ -68,6 +68,22 @@ public:
     static Resultado *resolverSalir();
     static Resultado *resolverContinuar();
     static Resultado *ejecutarHacer(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
+    static Resultado *ejecutarPara(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
+    static Resultado *asigDirectaArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL);
+    static Resultado *resolverAsigArr(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
+    static Resultado *asigSumSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL);
+    static Resultado *asigSubSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL);
+    static Resultado *asigIncArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL);
+    static Resultado *asigDecArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL);
+    static void asigArrArr(Contexto *ctxG, Contexto *ctxL, QString nombre, Resultado arr);
+    static QList<QString> ascValores(QList<QString> original, int tipo);
+    static QList<QString> descValores(QList<QString> original, int tipo);
+    static Resultado *resolverOrdenar(Contexto *ctxG, Contexto *ctxL, Nodo ordenar);
+    static QList<QString> parImparValores(QList<QString> original, int tipo, bool parImpar);
+    static QList<QString> primosValores(QList<QString> original, int tipo);
+    static QString sumarizarValores(QList<QString> valores, int tipo);
+    static Resultado *resolverSumarizar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo ordenar);
+    static Resultado *ejectuarComprobar(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
 };
 
-#endif // INTERPRETE_H
+#endif // INTERPRETE_Hpo

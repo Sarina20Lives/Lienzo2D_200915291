@@ -14,6 +14,9 @@ Resultado *Interprete::ejecutarSentencia(QString lienzo, QString padre, Contexto
     if(sentencia.getRol() ==RN_ASIG_VAR){
         return Interprete::resolverAsigVar(lienzo, ctxG, ctxL, sentencia);
     }
+    if(sentencia.getRol() ==RN_ASIG_ARR){
+        return Interprete::resolverAsigArr(lienzo, ctxG, ctxL, sentencia);
+    }
     if(sentencia.getRol() == RN_HACER){
         return Interprete::ejecutarHacer(lienzo, padre, ctxG, ctxL, sentencia);
     }
@@ -31,6 +34,18 @@ Resultado *Interprete::ejecutarSentencia(QString lienzo, QString padre, Contexto
     }
     if(sentencia.getRol() == RN_SI){
         return Interprete::ejecutarIf(lienzo, padre, ctxG, ctxL, sentencia);
+    }
+    if(sentencia.getRol() == RN_PARA){
+        return Interprete::ejecutarPara(lienzo, padre, ctxG, ctxL, sentencia);
+    }
+    if(sentencia.getRol() == RN_ORDENAR){
+        return Interprete::resolverOrdenar(ctxG, ctxL, sentencia);
+    }
+    if(sentencia.getRol() == RN_SUMARIZAR){
+        return Interprete::resolverSumarizar(lienzo, ctxG, ctxL, sentencia);
+    }
+    if(sentencia.getRol() == RN_COMPROBAR){
+        return Interprete::ejectuarComprobar(lienzo, padre, ctxG, ctxL, sentencia);
     }
 
     return new Resultado();

@@ -50,6 +50,8 @@ SOURCES += main.cpp\
     Interprete/Sentencia/_asignacion.cpp \
     Interprete/Sentencia/_if.cpp \
     Interprete/Sentencia/_hacer.cpp \
+    Interprete/Sentencia/_comprobar.cpp \
+    Interprete/Sentencia/_funarreglo.cpp \
     Editor/codeeditor.cpp \
     Editor/extras.cpp \
     Editor/areagrafica.cpp \

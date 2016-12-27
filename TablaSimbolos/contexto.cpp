@@ -168,6 +168,20 @@ int Contexto::obtenerPosicion(QList<Resultado> *posiciones, QList<int> dims){
     return pos;
 }
 
+bool Contexto::verificarDims(QList<Resultado> *posiciones, QList<int> dims){
+    if(posiciones->count()!=dims.count()){
+        return false;
+    }
+    QList<int> poss = Contexto::obtenerPosiciones(posiciones);
+    for (int i = 0; i< poss.count(); i++){
+        if(poss.at(i)<0 || poss.at(i)>dims.at(i)){
+            return false;
+        }
+    }
+    return true;
+}
+
+
 QList<int> Contexto::obtenerPosiciones(QList<Resultado> *posiciones){
     QList<int> poss = *new QList<int>();
     foreach (Resultado ress, *posiciones) {
