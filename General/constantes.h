@@ -126,5 +126,13 @@ const int A_PRO_CON           =   5;
 const int A_PRI_CON           =   6;
 const QString ACCESOS[]     = {"Publico", "Publico", "Protegido", "Privado", "Conservar Publico", "Conservar Protegido", "Conservar Privado"};
 
+/* ------------------------------------------------------------------------------------------------------------ *
+ *  Errores
+ * ------------------------------------------------------------------------------------------------------------ */
+const int ERR_GENERAL          =   0;
+const int ERR_LEXICO           =   1;
+const int ERR_SINTACTICO       =   2;
+const int ERR_SEMANTICO        =   3;
+const QString ERRORES[]        = {"General", "Lexico", "Sintactico", "Semantico"};
 
 #endif // CONSTANTES_H

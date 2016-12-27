@@ -61,7 +61,13 @@ void Principal::on_pushBtn_AreaGrafica_clicked()
 
 void Principal::on_pushBtn_Ejecutar_clicked()
 {
-
+    QString entrada = ui->pTEentrada->toPlainText();
+    if(entrada==""){
+        QMessageBox::critical(this, "Error en el análisis","No se admite una cadena vacia.");
+        return;
+    }
+    Principal::analisis(entrada);
+    QMessageBox::information(this, "Fin del análisis","El análisis ha sido exitoso.");
 }
 
 void Principal::on_pushBtn_Debuggear_clicked()

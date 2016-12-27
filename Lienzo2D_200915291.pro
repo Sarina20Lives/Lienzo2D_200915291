@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += network core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -56,8 +56,9 @@ SOURCES += main.cpp\
     Editor/codeeditor.cpp \
     Editor/extras.cpp \
     Editor/areagrafica.cpp \
-    Editor/lienzografico.cpp \
-    Editor/elemento.cpp
+    Editor/elemento.cpp \
+    Editor/canvas.cpp \
+    Errores/errores.cpp
 
 HEADERS  += principal.h \
     Gramatica/lexico_lienzo.h \
@@ -76,8 +77,9 @@ HEADERS  += principal.h \
     TablaSimbolos/contexto.h \
     Editor/codeeditor.h \
     Editor/areagrafica.h \
-    Editor/lienzografico.h \
-    Editor/elemento.h
+    Editor/elemento.h \
+    Editor/canvas.h \
+    Errores/errores.h
 
 FORMS    += principal.ui \
     Editor/areagrafica.ui

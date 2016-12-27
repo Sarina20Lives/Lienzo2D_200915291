@@ -1,7 +1,7 @@
 #ifndef AREAGRAFICA_H
 #define AREAGRAFICA_H
 #include <QWidget>
-#include "lienzografico.h"
+#include "canvas.h"
 
 namespace Ui {
 class AreaGrafica;
@@ -16,11 +16,7 @@ public:
     ~AreaGrafica();
 
 private slots:
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
-    void on_pushButton_3_clicked();
-    void on_pushButton_4_clicked();
-    void on_pushButton_5_clicked();
+    void on_pushBtn_Publicar_clicked();
 
 private:
     Ui::AreaGrafica *ui;
@@ -28,7 +24,7 @@ private:
     int y;
     int diametro;
     QColor color;
-    LienzoGrafico *lienzo;
+    Canvas *lienzo;
 
 protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;

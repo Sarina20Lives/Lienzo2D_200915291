@@ -3,17 +3,20 @@
 #include "QMouseEvent"
 #include "QPainter"
 #include "QColorDialog"
-#include "stdio.h"
+#include "QJsonObject"
+#include "QJsonDocument"
+#include "QDateTime"
+#include <QtNetwork>
 
 AreaGrafica::AreaGrafica(QWidget *parent) : QWidget(parent), ui(new Ui::AreaGrafica) {
     ui->setupUi(this);
     x = 0;
     y = 0;
     diametro = 20;
-    color = QColor("#0F0");
-    lienzo = new LienzoGrafico();
+    color = QColor("#000");
+    lienzo = Canvas::getInstance();
     lienzo->setStyleSheet("background-color:#FFFFFF;");
-    ui->verticalLayout->addWidget(lienzo);
+    ui->verticalLayout_2->addWidget(lienzo);
 }
 
 AreaGrafica::~AreaGrafica() {
@@ -27,34 +30,16 @@ void AreaGrafica::mousePressEvent(QMouseEvent *event) {
     }
 }
 
-void AreaGrafica::on_pushButton_clicked()
-{
-    Elemento *e = Elemento::creaRectangulo(x, y, 100, 60, color);
-    lienzo->addElemento(e);
-    lienzo->update();
+void AreaGrafica::on_pushBtn_Publicar_clicked() {
+    QNetworkAccessManager *networkManager = new QNetworkAccessManager;
+    QByteArray datos;
+    QJsonObject jsonObject;
+    jsonObject["titulo"] = ui->txt_Titulo->text();
+    jsonObject["descripcion"] = ui->txt_Descripcion->toPlainText();
+    jsonObject["fecha"] = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    jsonObject["imagen"] = "asdfasdfasdf";
+    QJsonDocument doc(jsonObject);
+    datos.append("json="+doc.toJson());
+    networkManager->post(QNetworkRequest(QUrl("http://127.0.0.1:5000/publica")), datos);
 }
 
-void AreaGrafica::on_pushButton_2_clicked()
-{
-    Elemento *e = Elemento::creaOvalo(x, y, 20, 60, QColor("#FF0"));
-    lienzo->addElemento(e);
-    lienzo->update();
-}
-
-void AreaGrafica::on_pushButton_3_clicked()
-{
-
-}
-
-void AreaGrafica::on_pushButton_4_clicked()
-{
-
-}
-
-void AreaGrafica::on_pushButton_5_clicked()
-{
-    QColor temp = QColorDialog::getColor();
-    if(temp.isValid()){
-        color = temp;
-    }
-}

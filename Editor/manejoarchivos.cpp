@@ -1,5 +1,6 @@
 #include "manejoarchivos.h"
 #include <QTextStream>
+#include <QFile>
 
 QString ManejoArchivos::abrirArchivo(QString dir){
     QByteArray ba = dir.toLatin1();
