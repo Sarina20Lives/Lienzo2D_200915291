@@ -1,7 +1,7 @@
 #ifndef AREAGRAFICA_H
 #define AREAGRAFICA_H
 #include <QWidget>
-#include "lienzografico.h"
+#include "canvas.h"
 
 namespace Ui {
 class AreaGrafica;
@@ -28,7 +28,7 @@ private:
     int y;
     int diametro;
     QColor color;
-    LienzoGrafico *lienzo;
+    Canvas *lienzo;
 
 protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;

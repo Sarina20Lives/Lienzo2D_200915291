@@ -10,8 +10,8 @@ AreaGrafica::AreaGrafica(QWidget *parent) : QWidget(parent), ui(new Ui::AreaGraf
     x = 0;
     y = 0;
     diametro = 20;
-    color = QColor("#0F0");
-    lienzo = new LienzoGrafico();
+    color = QColor("#000");
+    lienzo = Canvas::getInstance();
     lienzo->setStyleSheet("background-color:#FFFFFF;");
     ui->verticalLayout->addWidget(lienzo);
 }
@@ -36,19 +36,23 @@ void AreaGrafica::on_pushButton_clicked()
 
 void AreaGrafica::on_pushButton_2_clicked()
 {
-    Elemento *e = Elemento::creaOvalo(x, y, 20, 60, QColor("#FF0"));
+    Elemento *e = Elemento::creaOvalo(x, y, 20, 60, color);
     lienzo->addElemento(e);
     lienzo->update();
 }
 
 void AreaGrafica::on_pushButton_3_clicked()
 {
-
+    Elemento *e = Elemento::creaCirculo(x, y, 40, color);
+    lienzo->addElemento(e);
+    lienzo->update();
 }
 
 void AreaGrafica::on_pushButton_4_clicked()
 {
-
+    Elemento *e = Elemento::creaTexto(x, y, color, ui->lineEdit->text());
+    lienzo->addElemento(e);
+    lienzo->update();
 }
 
 void AreaGrafica::on_pushButton_5_clicked()

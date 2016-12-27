@@ -56,8 +56,8 @@ SOURCES += main.cpp\
     Editor/codeeditor.cpp \
     Editor/extras.cpp \
     Editor/areagrafica.cpp \
-    Editor/lienzografico.cpp \
-    Editor/elemento.cpp
+    Editor/elemento.cpp \
+    Editor/canvas.cpp
 
 HEADERS  += principal.h \
     Gramatica/lexico_lienzo.h \
@@ -76,8 +76,8 @@ HEADERS  += principal.h \
     TablaSimbolos/contexto.h \
     Editor/codeeditor.h \
     Editor/areagrafica.h \
-    Editor/lienzografico.h \
-    Editor/elemento.h
+    Editor/elemento.h \
+    Editor/canvas.h
 
 FORMS    += principal.ui \
     Editor/areagrafica.ui
