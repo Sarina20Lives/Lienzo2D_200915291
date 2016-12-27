@@ -1767,7 +1767,7 @@ yyreduce:
 
   case 23:
 #line 230 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = (yyval.INT) + (yyvsp[-1].INT);}
+    { (yyval.INT) = (yyvsp[-1].INT) + (yyvsp[0].INT);}
 #line 1772 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
@@ -2000,7 +2000,7 @@ yyreduce:
 
   case 50:
 #line 368 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = (yyvsp[0].INT) + 3; }
+    { (yyval.INT) = (yyvsp[0].INT) + A_PRI; }
 #line 2005 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 

@@ -24,7 +24,6 @@ Resultado *Interprete::resolverAsigVar(QString lienzo, Contexto *ctxG, Contexto 
 }
 
 void Interprete::asigDecVar(Contexto *ctxG, Contexto *ctxL, Nodo asig){
-
     QList<Simbolo>::iterator simL;
     for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
         if(QString::compare(simL->getNombre(), asig.getCadena())==0 && !simL->getEsArr()){
@@ -40,7 +39,6 @@ void Interprete::asigDecVar(Contexto *ctxG, Contexto *ctxL, Nodo asig){
             return;
         }
     }
-
 
     QList<Simbolo>::iterator simG;
     for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){

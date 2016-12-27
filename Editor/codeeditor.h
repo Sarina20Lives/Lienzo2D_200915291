@@ -71,9 +71,15 @@ class CodeEditor : public QPlainTextEdit
 
 public:
     CodeEditor(QWidget *parent = 0);
-
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
+
+    void readFile(QString path);
+    void writeFile(QString path);
+    void setPath(QString path) { this->path = path; }
+    void setTitle(QString title) { this->title = title; }
+    QString getPath() { return path; }
+    QString getTitle() { return title; }
 
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
@@ -85,6 +91,7 @@ private slots:
 
 private:
     QWidget *lineNumberArea;
+    QString path, title;
 };
 
 //![codeeditordefinition]

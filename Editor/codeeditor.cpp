@@ -53,6 +53,14 @@
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
+    QFont font;
+    font.setFamily("Courier");
+    font.setStyleHint(QFont::Monospace);
+    font.setFixedPitch(true);
+    font.setPointSize(11);
+    this->setFont(font);
+    QFontMetrics metrics(font);
+    this->setTabStopWidth(4 * metrics.width(' '));
     this->setStyleSheet("background-color:#fff;");
     lineNumberArea = new LineNumberArea(this);
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
@@ -60,6 +68,36 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
+    title = "Sin guardar*.lz";
+    path = "";
+}
+
+void CodeEditor::readFile(QString path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    QTextStream in(&file);
+    QString content="";
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        content = content + line + "\n";
+    }
+    this->setPlainText(content);
+    this->path = path;
+    this->title = path.remove(0, path.lastIndexOf('/') + 1);
+}
+
+void CodeEditor::writeFile(QString path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+       return;
+    QString content = this->toPlainText();
+    QTextStream out(&file);
+    out << content;
+    this->path = path;
+    this->title = path.remove(0, path.lastIndexOf('/') + 1);
 }
 
 

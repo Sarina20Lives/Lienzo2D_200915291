@@ -34,21 +34,47 @@ void Principal::on_pushButton_clicked()
 
 }
 
-void Principal::showInfo(QString mensaje)
-{
-    ui->statusBar->showMessage(mensaje, 5000);
+void Principal::on_pushBtn_Nuevo_clicked() {
+    nuevaPestania();
 }
 
-void Principal::nuevaPestania()
-{
-    CodeEditor *editor = new CodeEditor;
-    connect(editor, SIGNAL(cursorPositionChanged()), this, SLOT(mostrarPosicion()));
-    ui->tabArchivos->addTab(editor, "Pestania nueva *");
+void Principal::on_pushBtn_Abrir_clicked() {
+    abrirArchivo();
 }
 
-void Principal::mostrarPosicion()
+void Principal::on_pushBtn_Guardar_clicked() {
+    guardarArchivo();
+}
+
+void Principal::on_pushBtn_GuardarComo_clicked() {
+    guardarArchivoComo();
+}
+
+void Principal::on_pushBtn_Cerrar_clicked() {
+    cerrarArchivo();
+}
+
+void Principal::on_pushBtn_AreaGrafica_clicked()
 {
-    QTextCursor cursor = ((CodeEditor*)ui->tabArchivos->currentWidget())->textCursor();
-    QString posicion = QString("Línea: %1   Columna: %2").arg(cursor.blockNumber()+1).arg(cursor.columnNumber()+1);
-    ui->statusBar->showMessage(posicion);
+    abrirAreaGrafica();
+}
+
+void Principal::on_pushBtn_Ejecutar_clicked()
+{
+
+}
+
+void Principal::on_pushBtn_Debuggear_clicked()
+{
+
+}
+
+void Principal::on_pushBtn_Errores_clicked()
+{
+
+}
+
+void Principal::on_pushBtn_TablaSimbolos_clicked()
+{
+
 }

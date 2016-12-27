@@ -48,8 +48,13 @@ SOURCES += main.cpp\
     Ast/Sentencia/otro.cpp \
     Interprete/Sentencia/_sentencia.cpp \
     Interprete/Sentencia/_asignacion.cpp \
+    Interprete/Sentencia/_if.cpp \
+    Interprete/Sentencia/_hacer.cpp \
     Editor/codeeditor.cpp \
-    areagrafica.cpp
+    Editor/extras.cpp \
+    Editor/areagrafica.cpp \
+    Editor/lienzografico.cpp \
+    Editor/elemento.cpp
 
 HEADERS  += principal.h \
     Gramatica/lexico_lienzo.h \
@@ -67,10 +72,12 @@ HEADERS  += principal.h \
     Interprete/interprete.h \
     TablaSimbolos/contexto.h \
     Editor/codeeditor.h \
-    areagrafica.h
+    Editor/areagrafica.h \
+    Editor/lienzografico.h \
+    Editor/elemento.h
 
 FORMS    += principal.ui \
-    areagrafica.ui
+    Editor/areagrafica.ui
 
 DISTFILES +=
 

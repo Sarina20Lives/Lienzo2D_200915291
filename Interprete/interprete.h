@@ -62,6 +62,12 @@ public:
     static void asigDirectaVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
     static void asigSumSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
     static void asigSubSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
+    static Resultado *ejecutarWhile(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
+    static Resultado *ejecutarIf(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
+    static Resultado *resolverRetorna(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo sentencia);
+    static Resultado *resolverSalir();
+    static Resultado *resolverContinuar();
+    static Resultado *ejecutarHacer(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
 };
 
 #endif // INTERPRETE_H

@@ -49,6 +49,7 @@ Contexto *Contexto::generarContextoLocal(QString padre, int acceso, QList<Nodo> 
             nuevo.setValor(res.getValor());
         }
         temp->contexto->append(nuevo);
+        cont = cont + 1;
     }
     return temp;
 }

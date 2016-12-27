@@ -2,17 +2,11 @@
 #include "General/constantes.h"
 #include "Interprete/casteo.h"
 
-Resultado *Interprete::ejecutarWhile(QString lienzo, QString padre,  Contexto *ctxG, Contexto *ctxL, Nodo nodo){
+Resultado *Interprete::ejecutarHacer(QString lienzo, QString padre,  Contexto *ctxG, Contexto *ctxL, Nodo nodo){
     Resultado *resultado = new Resultado();
+    Resultado *condicion;
     ctxL->aumentarNivel();
-    linicio:
-    Resultado *condicion = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(0));
-    if(condicion->getTipo()!=TBOOLEAN){
-        return resultado;
-    }
-    if(!Casteo::strToBool(condicion->getValor())){
-        return resultado;
-    }
+linicio:
     foreach (Nodo sentencia, *nodo.getHijo(1).getHijos()) {
         resultado = Interprete::ejecutarSentencia(lienzo, padre, ctxG, ctxL, sentencia);
         if(resultado->getRol()==RN_RETORNA){
@@ -24,9 +18,19 @@ Resultado *Interprete::ejecutarWhile(QString lienzo, QString padre,  Contexto *c
             return new Resultado;
         }
         if(resultado->getRol()==RN_CONTINUAR){
-            goto linicio;
+            break;
         }
         resultado = new Resultado();
+    }
+
+    condicion = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(0));
+    if(condicion->getTipo()!=TBOOLEAN){
+        ctxL->limpiarContexto();
+        return new Resultado();
+    }
+    if(Casteo::strToBool(condicion->getValor())){
+        ctxL->limpiarContexto();
+        return new Resultado();
     }
     goto linicio;
 }
