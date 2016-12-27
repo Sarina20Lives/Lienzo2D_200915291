@@ -82,7 +82,12 @@ HEADERS  += principal.h \
 FORMS    += principal.ui \
     Editor/areagrafica.ui
 
-DISTFILES +=
+DISTFILES += \
+    Recursos/Lienzos/Mouse.lz \
+    Recursos/Lienzos/PlantillaTS.html \
+    Recursos/Lienzos/TS.html \
+    TablaSimbolos/PlantillaTS.html \
+    Recursos/Lienzos/Mouse.txt
 
 RESOURCES += \
     Recursos/recursos.qrc

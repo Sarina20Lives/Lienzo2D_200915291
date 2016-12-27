@@ -2,8 +2,10 @@
 #define CONSTANTES_H
 #include "qstring.h"
 
-const QString RAIZ                = "/home/sarina/Escritorio/Lienzos/";
+const QString RAIZ                = "/home/sarina/QtProjects/Lienzo2D_200915291/Lienzo2D_200915291/Recursos/Lienzos/";
 const QString EXT                 = ".lz";
+const QString RUTA_PLANTILLA_TS   = RAIZ + "PlantillaTS.html";
+const QString RUTA_TS             = RAIZ + "TS.html";
 
 const int ERR                     =  -2;
 const int NOTHING                 =  -1;
@@ -88,9 +90,11 @@ const int SRN_PRIMO              =   74;
  *  Roles para simbolos
  * ------------------------------------------------------------------------------------------------------------ */
 const int RS_METODO           =   0;
-const int RS_VAR              =   2;
-const int RS_PARAMETRO        =   4;
-const int RS_ARREGLO          =   6;
+const int RS_VAR              =   1;
+const int RS_PARAMETRO        =   2;
+const int RS_ARREGLO          =   3;
+const int RS_LIENZO           =   4;
+const QString ROLES[]     = {"Metodo", "Variable", "Parametro", "Arreglo", "Lienzo"};
 
 /* ------------------------------------------------------------------------------------------------------------ *
  *  Tipos
@@ -108,8 +112,8 @@ const QString TIPOS[]     = {"Void", "Entero", "Doble", "Caracter", "Cadena", "B
  *  Visualizacion
  * ------------------------------------------------------------------------------------------------------------ */
 const int V_PUB               =   1;
-const int V_PRI               =   2;
-const int V_PRO               =   3;
+const int V_PRO               =   2;
+const int V_PRI               =   3;
 
 /* ------------------------------------------------------------------------------------------------------------ *
  *  Acceso
@@ -120,6 +124,7 @@ const int A_PRI               =   3;
 const int A_PUB_CON           =   4;
 const int A_PRO_CON           =   5;
 const int A_PRI_CON           =   6;
+const QString ACCESOS[]     = {"Publico", "Publico", "Protegido", "Privado", "Conservar Publico", "Conservar Protegido", "Conservar Privado"};
 
 
 #endif // CONSTANTES_H

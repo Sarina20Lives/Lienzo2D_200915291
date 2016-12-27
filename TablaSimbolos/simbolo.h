@@ -13,6 +13,7 @@ private:
     int nivel;
     QString nombre;
     QString valor;
+    QString lienzo;
     QString padre;
     QList<int> dims;
     QList<QString> valores;
@@ -29,6 +30,7 @@ public:
     int getNivel();
     QString getNombre();
     QString getValor();
+    QString getLienzo();
     QString getValor(int pos);
     QString getPadre();
     QList<int> getDims();
@@ -43,6 +45,7 @@ public:
     void setNivel(int nivel);
     void setNombre(QString nombre);
     void setValor(QString valor);
+    void setLienzo(QString lienzo);
     void setValor(int pos, QString valor);
     void setPadre(QString padre);
     void setValores(QList<QString> valores);
@@ -52,13 +55,14 @@ public:
     void setInstancia(bool instancia);
     void setParamsToString(QString paramsToString);
 
-    static QList<Simbolo> *crearArrs(QString padre, Nodo declaracion);
-    static QList<Simbolo> *crearParams(QString padre, int acceso, QList<Nodo> params);
-    static QList<Simbolo> *crearVars(QString padre, Nodo declaracion);
-    //static QList<Simbolo> *crearMtd(QString padre, Metodo mtd);
-    //static Simbolo *crearPrincipal(QString padre, int acceso);
-    //static Simbolo *crearLienzo(QString nombre, int acceso);
+    static Simbolo *crearLienzo(QString lienzo, int acceso);
+    static Simbolo *crearMtd(QString lienzo, QString padre, Metodo mtd);
+    static QList<Simbolo> *crearArrs(QString lienzo, QString padre, Nodo declaracion);
+    static QList<Simbolo> *crearParams(QString lienzo, QString padre, int acceso, QList<Nodo> params);
+    static QList<Simbolo> *crearVars(QString lienzo, QString padre, Nodo declaracion);
 
+    QString getHTML();
+    static void reporte(QList<Simbolo> ts, QString principal);
 };
 
 #endif // SIMBOLO_H

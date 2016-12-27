@@ -7,6 +7,8 @@
 #include "Ast/lienzo.h"
 #include "Ast/metodo.h"
 #include "General/constantes.h"
+#include "TablaSimbolos/simbolo.h"
+#include <QList>
 #include <QString>
 #include <QStack>
 extern int lienzolex();
@@ -19,6 +21,9 @@ void lienzoerror(char * s);
  *--------------------------------------------------------------------------*/
 Lienzo *lienzoRaiz = new Lienzo();
 QStack<int> *recorrido = new QStack<int>();
+QStack<QString> *padre = new QStack<QString>();
+QList<Simbolo> *ts = new QList<Simbolo>();
+QString nombreLienzo = "";
 
 /*--------------------------------------------------------------------------
  *	Declaracion de structs
@@ -53,11 +58,14 @@ struct AtributoLienzo{
  *	Declaracion de métodos 
  *--------------------------------------------------------------------------*/
 %code requires {
+	#include <QList>
     #include <QString>
     #include "Ast/lienzo.h"
+    #include "TablaSimbolos/simbolo.h"
 }
 %code provides { 
 	Lienzo *parselienzo(QString *entrada);
+	QList<Simbolo> *getTS();
 }
 
 /*--------------------------------------------------------------------------
@@ -124,10 +132,18 @@ struct AtributoLienzo{
 
  inicio 		: lienzo
  ;
- lienzo 		: acceso LIENZO ID extends OPEN {recorrido->push(lienzoline);} contenido CLOSE
+ lienzo 		: acceso LIENZO ID extends OPEN 
+ 				{
+ 					recorrido->push(lienzoline); 
+ 					padre->push(*$<CADENA>3); 
+ 					ts=new QList<Simbolo>();
+ 					nombreLienzo = *$<CADENA>3;
+ 				} 
+ 				contenido CLOSE
  				{
  					lienzoRaiz = $<LIENZO->lienzo>7;
                     lienzoRaiz->setAtributos(*$<CADENA>3, $<INT>1, recorrido->pop(), $<LSTRING->lstring>4);
+                    ts->append(*Simbolo::crearLienzo(padre->pop(), $<INT>1));
  				}
 
  ;
@@ -169,7 +185,7 @@ struct AtributoLienzo{
  					$<LIENZO>$ = new AtributoLienzo();
  					$<LIENZO->lienzo>$ = $<LIENZO->lienzo>2;
  					$<LIENZO->lienzo>$->addVariable(*$<NODO->nodo>1);
- 				}
+				}
  				| decFun contenido
  				{
  					$<LIENZO>$ = new AtributoLienzo();
@@ -210,10 +226,17 @@ struct AtributoLienzo{
  *	Principal
  *--------------------------------------------------------------------------*/
 
- fprincipal 	: acceso PRINCIPAL {recorrido->push(lienzoline);} P_OPEN P_CLOSE OPEN sentencias CLOSE	
+ fprincipal 	: acceso PRINCIPAL 
+ 				{
+ 					recorrido->push(lienzoline);
+ 					padre->push("Principal");
+ 				} 
+ 				P_OPEN P_CLOSE OPEN sentencias CLOSE	
  				{
 					$<METODO>$ = new AtributoMetodo();
 					$<METODO->metodo>$ = Metodo::crearPrincipal($<INT>1, recorrido->pop(), $<LNODO->lnodo>7);
+					padre->pop();
+	                ts->append(*Simbolo::crearMtd(nombreLienzo, padre->top(), *$<METODO->metodo>$));
 				}	
  ;
 
@@ -221,10 +244,21 @@ struct AtributoLienzo{
  *	Funciones y procedimientos
  *--------------------------------------------------------------------------*/
 
- funcion 		: acceso tipof ID P_OPEN params P_CLOSE  {recorrido->push(lienzoline);} OPEN sentencias CLOSE
+ funcion 		: acceso tipof ID P_OPEN 
+ 				{
+ 					recorrido->push(lienzoline);
+ 					padre->push(*$<CADENA>3);
+ 				} 
+ 				params 
+ 				{
+				    ts->append(*Simbolo::crearParams(nombreLienzo, padre->top(), $<INT>1, *$<LNODO->lnodo>6));
+ 				}
+ 				P_CLOSE OPEN sentencias CLOSE
 				{
 					$<METODO>$ = new AtributoMetodo();
-                    $<METODO->metodo>$ = Metodo::crearMetodo(*$<CADENA>3, $<INT>1, $<INT>2, recorrido->pop(), $<LNODO->lnodo>5, $<LNODO->lnodo>9);
+                    $<METODO->metodo>$ = Metodo::crearMetodo(*$<CADENA>3, $<INT>1, $<INT>2, recorrido->pop(), $<LNODO->lnodo>6, $<LNODO->lnodo>10);
+                    padre->pop();
+	                ts->append(*Simbolo::crearMtd(nombreLienzo, padre->top(), *$<METODO->metodo>$));
 				}
  ;
  tipof 			: tipo esArr		{ $<INT>$ = $<INT>1 + $<INT>2;}
@@ -363,6 +397,7 @@ struct AtributoLienzo{
  				{
  					$<NODO>$ = new AtributoNodo();
  					$<NODO->nodo>$ = Nodo::decVar($<INT>1, $<LSTRING->lstring>4, $<INT>3, *$<NODO->nodo>5, lienzoline);
+                    ts->append(*Simbolo::crearVars(nombreLienzo, padre->top(), *$<NODO->nodo>$));
  				}
  ;
  acceso			: CONSERVAR visibilidad 	{ $<INT>$ = $<INT>2 + A_PRI; }
@@ -426,6 +461,7 @@ struct AtributoLienzo{
  				{
  					$<NODO>$ = new AtributoNodo();
  					$<NODO->nodo>$ = Nodo::decArr($<INT>1, $<INT>3, $<LSTRING->lstring>5, $<LNODO->lnodo>6,  *$<NODO->nodo>7, lienzoline);
+                    ts->append(*Simbolo::crearArrs(nombreLienzo, padre->top(), *$<NODO->nodo>$));
  				}
  ;
  ldims 			: C_OPEN expresion C_CLOSE ldims
@@ -885,6 +921,10 @@ void lienzoinit(){
 void lienzoerror(char *s)
 {
   fprintf(stderr, "Error sintactico: %s", s);
+}
+
+QList<Simbolo> *getTS(){
+	return ts;
 }
 
 Lienzo *parselienzo(QString *entrada){

@@ -15,18 +15,20 @@ void Principal::analisis(QString contenido){
         //QMessageBox::critical(this, "Error en el análisis","El lienzo no se puede generar.");
         return;
     }
-    prin->setEsPrincipal(true);
+    QList<Simbolo> *ts = new QList<Simbolo>();
     QList<Lienzo> * lnzs = new QList<Lienzo>();
+    ts->append(*getTS());
+    prin->setEsPrincipal(true);
     lnzs->append(*prin);
-    Principal::agregarExtends(lnzs, *prin->getExtends());
+    Principal::agregarExtends(ts, lnzs, *prin->getExtends());
     Interprete::lienzos = lnzs;
     Interprete::ejecutarPrincipal(prin->getNombre());
-
+    Simbolo::reporte(*ts, prin->getNombre());
 }
 
 
 //AGREGAR EXTEND AL QLIST DE LIENZOS
-void Principal::agregarExtends(QList<Lienzo> *lienzos, QList<QString> extends){
+void Principal::agregarExtends(QList<Simbolo> *ts, QList<Lienzo> *lienzos, QList<QString> extends){
     QString direccion = "";
     QString contenido = "";
     Lienzo *lienzo;
@@ -44,8 +46,9 @@ void Principal::agregarExtends(QList<Lienzo> *lienzos, QList<QString> extends){
             //QMessageBox::critical(this, "Error en el análisis","El lienzo "+nombre+" hace una referencia redundante.");
             return;
         }
+        ts->append(*getTS());
         lienzos->append(*lienzo);
-        Principal::agregarExtends(lienzos, *lienzo->getExtends());
+        Principal::agregarExtends(ts, lienzos, *lienzo->getExtends());
     }
 }
 

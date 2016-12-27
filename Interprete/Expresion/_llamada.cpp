@@ -43,7 +43,7 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
         ctxG2 = Contexto::generarContextoGlobal(conservar.getLienzoPadre());
         ctxG2->agregarVariablesExtends(conservar.getLienzoPadre());
         //Crear contexto Local...
-        ctxL2 = Contexto::generarContextoLocal(conservar.getNombre(), conservar.getAcceso(), *conservar.getParametros(), *params);
+        ctxL2 = Contexto::generarContextoLocal(lienzo, conservar.getNombre(), conservar.getAcceso(), *conservar.getParametros(), *params);
         //ejecutar el metodo conservar
         return resultado = Interprete::ejecutarMtd(conservar.getLienzoPadre(), conservar.getNombre(), ctxG2, ctxL2, conservar);
     }
@@ -54,7 +54,7 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
         ctxG2 = Contexto::generarContextoGlobal(encontrado.getLienzoPadre());
         ctxG2->agregarVariablesExtends(encontrado.getLienzoPadre());
         //Crear contexto Local...
-        ctxL2 = Contexto::generarContextoLocal(encontrado.getNombre(), encontrado.getAcceso(), *encontrado.getParametros(), *params);
+        ctxL2 = Contexto::generarContextoLocal(lienzo, encontrado.getNombre(), encontrado.getAcceso(), *encontrado.getParametros(), *params);
         //ejecutar el metodo conservar
         return Interprete::ejecutarMtd(encontrado.getLienzoPadre(), encontrado.getNombre(), ctxG2, ctxL2, encontrado);
 
@@ -66,7 +66,7 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
     ctxG2 = Contexto::generarContextoGlobal(seleccionado.getLienzoPadre());
     ctxG2->agregarVariablesExtends(seleccionado.getLienzoPadre());
     //Crear contexto Local...
-    ctxL2 = Contexto::generarContextoLocal(seleccionado.getNombre(), seleccionado.getAcceso(), *seleccionado.getParametros(), *params);
+    ctxL2 = Contexto::generarContextoLocal(lienzo, seleccionado.getNombre(), seleccionado.getAcceso(), *seleccionado.getParametros(), *params);
     //ejecutar el metodo conservar
     return Interprete::ejecutarMtd(seleccionado.getLienzoPadre(), seleccionado.getNombre(), ctxG2, ctxL2, seleccionado);
 }
