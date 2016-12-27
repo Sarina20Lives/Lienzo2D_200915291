@@ -51,7 +51,8 @@ SOURCES += main.cpp\
     Interprete/Sentencia/_if.cpp \
     Interprete/Sentencia/_hacer.cpp \
     Interprete/Sentencia/_comprobar.cpp \
-    Interprete/Sentencia/_funarreglo.cpp
+    Interprete/Sentencia/_funarreglo.cpp \
+    Interprete/Sentencia/_funprimitiva.cpp
 
 HEADERS  += principal.h \
     Gramatica/lexico_lienzo.h \
