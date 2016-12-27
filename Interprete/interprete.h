@@ -84,6 +84,10 @@ public:
     static QString sumarizarValores(QList<QString> valores, int tipo);
     static Resultado *resolverSumarizar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo ordenar);
     static Resultado *ejectuarComprobar(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
+    static void pintarS(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo func);
+    static void pintarOR(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo func);
+    static void pintarP(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo func);
+    static void ejecutarPrimitiva(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo func);
 };
 
 #endif // INTERPRETE_Hpo

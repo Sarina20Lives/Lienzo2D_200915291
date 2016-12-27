@@ -47,6 +47,10 @@ Resultado *Interprete::ejecutarSentencia(QString lienzo, QString padre, Contexto
     if(sentencia.getRol() == RN_COMPROBAR){
         return Interprete::ejectuarComprobar(lienzo, padre, ctxG, ctxL, sentencia);
     }
+    if(sentencia.getRol() == RN_PRIMITIVA){
+        Interprete::ejecutarPrimitiva(lienzo, ctxG, ctxL, sentencia);
+        return new Resultado();
+    }
 
     return new Resultado();
 }

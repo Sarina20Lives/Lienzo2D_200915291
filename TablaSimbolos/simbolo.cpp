@@ -138,6 +138,7 @@ void Simbolo::setParamsToString(QString paramsToString){
     this->paramsToString = paramsToString;
 }
 
+
 QList<Simbolo> *Simbolo::crearArrs(QString padre, Nodo declaracion)
 {
     QList<Simbolo> *arreglos = new QList<Simbolo>();
