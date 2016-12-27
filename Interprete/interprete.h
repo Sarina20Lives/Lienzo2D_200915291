@@ -83,6 +83,7 @@ public:
     static QList<QString> primosValores(QList<QString> original, int tipo);
     static QString sumarizarValores(QList<QString> valores, int tipo);
     static Resultado *resolverSumarizar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo ordenar);
+    static Resultado *ejectuarComprobar(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
 };
 
 #endif // INTERPRETE_Hpo
