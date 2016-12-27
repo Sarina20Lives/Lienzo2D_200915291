@@ -14,6 +14,9 @@ Resultado *Interprete::ejecutarSentencia(QString lienzo, QString padre, Contexto
     if(sentencia.getRol() ==RN_ASIG_VAR){
         return Interprete::resolverAsigVar(lienzo, ctxG, ctxL, sentencia);
     }
+    if(sentencia.getRol() ==RN_ASIG_ARR){
+        return Interprete::resolverAsigArr(lienzo, ctxG, ctxL, sentencia);
+    }
     if(sentencia.getRol() == RN_HACER){
         return Interprete::ejecutarHacer(lienzo, padre, ctxG, ctxL, sentencia);
     }

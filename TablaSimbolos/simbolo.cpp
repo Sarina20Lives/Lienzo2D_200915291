@@ -96,6 +96,17 @@ void Simbolo::setValor(QString valor){
     this->valor = valor;
 }
 
+void Simbolo::setValor(int pos, QString valor)
+{
+    this->valores.replace(pos, valor);
+}
+
+QString Simbolo::getValor(int pos)
+{
+    return this->valores.at(pos);
+}
+
+
 void Simbolo::setPadre(QString padre){
     this->padre = padre;
 }

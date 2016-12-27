@@ -30,6 +30,7 @@ public:
     static int obtenerCapacidad(QList<int> dims);
     static int obtenerPosicion(QList<Resultado> *posiciones, QList<int> dims);
     static QList<int> obtenerPosiciones(QList<Resultado> *posiciones);
+    static bool verificarDims(QList<Resultado> *posiciones, QList<int> dims);
 };
 
 

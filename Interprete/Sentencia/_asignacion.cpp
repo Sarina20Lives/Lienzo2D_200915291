@@ -3,6 +3,334 @@
 #include "General/constantes.h"
 
 
+Resultado *Interprete::resolverAsigArr(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig ){
+    Resultado *resultado = new Resultado();
+
+    //Resolviendo valor
+    Resultado *valor = new Resultado();
+    if(asig.getSubRol()==SRN_DIRECTO || asig.getSubRol()==SRN_SUM_SIMPLY || asig.getSubRol()==SRN_SUB_SIMPLY){
+       valor = Interprete::resolverExpresion(lienzo, ctxG, ctxL, asig.getHijo(1));
+       if(valor->getTipo()==ERR || valor->getEsArr()){
+           //TODO-ERROR-La asignación no puede ser posible
+           return resultado;
+       }
+    }
+
+    //Resolviendo las dimensiones
+    QList<Resultado> *dims = new QList<Resultado>();
+    Resultado *temp;
+    foreach (Nodo nodo, *asig.getHijo(0).getHijos()) {
+        temp = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo);
+        if(temp->getTipo()!=TENTERO || temp->getEsArr()){
+            //TODO-ERROR-Las dimensiones deben ser de tipo entero
+            return resultado;
+        }
+        dims->append(*temp);
+    }
+
+    if(asig.getSubRol()==SRN_DIRECTO){
+        return Interprete::asigDirectaArr(asig.getCadena(), dims, *valor, ctxG, ctxL);
+    }
+    if(asig.getSubRol()==SRN_SUM_SIMPLY){
+        return Interprete::asigSumSimplyArr(asig.getCadena(), dims, *valor, ctxG, ctxL);
+    }
+    if(asig.getSubRol()==SRN_SUB_SIMPLY){
+        return Interprete::asigSubSimplyArr(asig.getCadena(), dims, *valor, ctxG, ctxL);
+    }
+    if(asig.getSubRol()==SRN_INC){
+        return Interprete::asigIncArr(asig.getCadena(), dims, ctxG, ctxL);
+    }
+    if(asig.getSubRol()==SRN_DEC){
+        return Interprete::asigDecArr(asig.getCadena(), dims, ctxG, ctxL);
+    }
+
+    return resultado;
+}
+
+Resultado *Interprete::asigDirectaArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
+    Resultado *resultado = new Resultado();
+    //Buscando el arreglo en el contexto local
+    QList<Simbolo>::iterator simL;
+    for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
+        if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simL->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simL->getDims());
+            valor = Casteo::toAsigVar(simL->getTipo(), valor);
+            if(valor.getTipo()==ERR){
+                //TODO-ERROR-La asignación no es posible
+                return resultado;
+            }
+            simL->setValor(pos, valor.getValor());
+            return resultado;
+        }
+    }
+    //Buscando el arreglo en el contexto global
+    QList<Simbolo>::iterator simG;
+    for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){
+        if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simG->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simG->getDims());
+            valor = Casteo::toAsigVar(simG->getTipo(), valor);
+            if(valor.getTipo()==ERR){
+                //TODO-ERROR-La asignación no es posible
+                return resultado;
+            }
+            simG->setValor(pos, valor.getValor());
+            return resultado;
+        }
+    }
+
+    return resultado;
+}
+
+Resultado *Interprete::asigSumSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
+    Resultado *resultado = new Resultado();
+    Resultado *tempL = new Resultado();
+    //Buscando el arreglo en el contexto local
+    QList<Simbolo>::iterator simL;
+    for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
+        if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simL->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simL->getDims());
+
+            tempL->setTipo(simL->getTipo());
+            tempL->setValor(simL->getValor(pos));
+            valor = *Interprete::resolverSum(*tempL, valor);
+            valor = Casteo::toAsigVar(simL->getTipo(), valor);
+            if(valor.getTipo()==ERR){
+                //TODO-ERROR-Los tipos de asignación no son permitidos
+                return resultado;
+            }
+            simL->setValor(pos, valor.getValor());
+            return resultado;
+        }
+    }
+    Resultado *tempG = new Resultado();
+    //Buscando el arreglo en el contexto global
+    QList<Simbolo>::iterator simG;
+    for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){
+        if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simG->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simG->getDims());
+
+            tempG->setTipo(simG->getTipo());
+            tempG->setValor(simG->getValor(pos));
+            valor = *Interprete::resolverSum(*tempG, valor);
+            valor = Casteo::toAsigVar(simG->getTipo(), valor);
+            if(valor.getTipo()==ERR){
+                //TODO-ERROR-Los tipos de asignación no son permitidos
+                return resultado;
+            }
+            simG->setValor(pos, valor.getValor());
+            return resultado;
+        }
+    }
+    return resultado;
+}
+
+Resultado *Interprete::asigSubSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
+    Resultado *resultado = new Resultado();
+    Resultado *tempL = new Resultado();
+    //Buscando el arreglo en el contexto local
+    QList<Simbolo>::iterator simL;
+    for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
+        if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simL->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simL->getDims());
+
+            tempL->setTipo(simL->getTipo());
+            tempL->setValor(simL->getValor(pos));
+            valor = *Interprete::resolverSub(*tempL, valor);
+            valor = Casteo::toAsigVar(simL->getTipo(), valor);
+            if(valor.getTipo()==ERR){
+                //TODO-ERROR-Los tipos de asignación no son permitidos
+                return resultado;
+            }
+            simL->setValor(pos, valor.getValor());
+            return resultado;
+        }
+    }
+    Resultado *tempG = new Resultado();
+    //Buscando el arreglo en el contexto global
+    QList<Simbolo>::iterator simG;
+    for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){
+        if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simG->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simG->getDims());
+
+            tempG->setTipo(simG->getTipo());
+            tempG->setValor(simG->getValor(pos));
+            valor = *Interprete::resolverSub(*tempG, valor);
+            valor = Casteo::toAsigVar(simG->getTipo(), valor);
+            if(valor.getTipo()==ERR){
+                //TODO-ERROR-Los tipos de asignación no son permitidos
+                return resultado;
+            }
+            simG->setValor(pos, valor.getValor());
+            return resultado;
+        }
+    }
+    return resultado;
+}
+
+Resultado *Interprete::asigIncArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL){
+    Resultado *resultado = new Resultado();
+    //Buscando el arreglo en el contexto local
+    QList<Simbolo>::iterator simL;
+    for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
+        if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simL->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simL->getDims());
+
+            if(simL->getValor(pos) == "" && !simL->getInstancia()){
+                //TODO-ERROR-Se requiere una instancia previa para realizar un incremento
+                return resultado;
+            }
+
+            if(simL->getTipo()==TENTERO){
+                simL->setValor(pos, Casteo::intToStr(Casteo::strToInt(simL->getValor(pos)) + 1));
+            }
+            if(simL->getTipo()==TDOBLE){
+                simL->setValor(pos, Casteo::intToStr(Casteo::dobleToInt(simL->getValor(pos)) + 1));
+
+            }
+            if(simL->getTipo()==TCARACTER){
+                simL->setValor(pos, Casteo::intToStr(Casteo::charToInt(simL->getValor(pos)) + 1));
+
+            }
+            //TODO-ERROR-El tipo de arreglo no es valido para realizar un incremento
+            return resultado;
+        }
+    }
+    //Buscando el arreglo en el contexto global
+    QList<Simbolo>::iterator simG;
+    for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){
+        if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simG->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simG->getDims());
+
+            if(simG->getValor(pos) == "" && !simG->getInstancia()){
+                //TODO-ERROR-Se requiere una instancia previa para realizar un incremento
+                return resultado;
+            }
+
+            if(simG->getTipo()==TENTERO){
+                simG->setValor(pos, Casteo::intToStr(Casteo::strToInt(simG->getValor(pos)) + 1));
+            }
+            if(simG->getTipo()==TDOBLE){
+                simG->setValor(pos, Casteo::intToStr(Casteo::dobleToInt(simG->getValor(pos)) + 1));
+
+            }
+            if(simG->getTipo()==TCARACTER){
+                simG->setValor(pos, Casteo::intToStr(Casteo::charToInt(simG->getValor(pos)) + 1));
+
+            }
+            //TODO-ERROR-El tipo de arreglo no es valido para realizar un incremento
+            return resultado;
+        }
+    }
+    return resultado;
+}
+
+Resultado *Interprete::asigDecArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL){
+    Resultado *resultado = new Resultado();
+    //Buscando el arreglo en el contexto local
+    QList<Simbolo>::iterator simL;
+    for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
+        if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simL->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simL->getDims());
+
+            if(simL->getValor(pos) == "" && !simL->getInstancia()){
+                //TODO-ERROR-Se requiere una instancia previa para realizar un Decremento
+                return resultado;
+            }
+
+            if(simL->getTipo()==TENTERO){
+                simL->setValor(pos, Casteo::intToStr(Casteo::strToInt(simL->getValor(pos)) - 1));
+            }
+            if(simL->getTipo()==TDOBLE){
+                simL->setValor(pos, Casteo::intToStr(Casteo::dobleToInt(simL->getValor(pos)) - 1));
+
+            }
+            if(simL->getTipo()==TCARACTER){
+                simL->setValor(pos, Casteo::intToStr(Casteo::charToInt(simL->getValor(pos)) - 1));
+
+            }
+            //TODO-ERROR-El tipo de arreglo no es valido para realizar un Decremento
+            return resultado;
+        }
+    }
+    //Buscando el arreglo en el contexto global
+    QList<Simbolo>::iterator simG;
+    for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){
+        if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
+            //Verificar que las dimensiones concuerdan
+            if(!Contexto::verificarDims(dims, simG->getDims())){
+                //TODO-ERROR-Las dimensiones no corresponden al arreglo
+                return resultado;
+            }
+            int pos = Contexto::obtenerPosicion(dims, simG->getDims());
+
+            if(simG->getValor(pos) == "" && !simG->getInstancia()){
+                //TODO-ERROR-Se requiere una instancia previa para realizar un Decremento
+                return resultado;
+            }
+
+            if(simG->getTipo()==TENTERO){
+                simG->setValor(pos, Casteo::intToStr(Casteo::strToInt(simG->getValor(pos)) - 1));
+            }
+            if(simG->getTipo()==TDOBLE){
+                simG->setValor(pos, Casteo::intToStr(Casteo::dobleToInt(simG->getValor(pos)) - 1));
+
+            }
+            if(simG->getTipo()==TCARACTER){
+                simG->setValor(pos, Casteo::intToStr(Casteo::charToInt(simG->getValor(pos)) - 1));
+
+            }
+            //TODO-ERROR-El tipo de arreglo no es valido para realizar un Decremento
+            return resultado;
+        }
+    }
+    return resultado;
+}
+
 Resultado *Interprete::resolverAsigVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig){
     Resultado *resultado = new Resultado();
     if(asig.getSubRol()==SRN_DIRECTO){

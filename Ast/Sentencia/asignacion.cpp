@@ -59,7 +59,7 @@ Nodo *Nodo::asigArrInc(QString cadena, QList<Nodo> *dims, int fila){
 }
 
 Nodo *Nodo::asigArrDec(QString cadena, QList<Nodo> *dims, int fila){
-    return Nodo::asigArr(SRN_INC, cadena, dims, fila);
+    return Nodo::asigArr(SRN_DEC, cadena, dims, fila);
 }
 
 Nodo *Nodo::asigArrSumSimply(QString cadena, QList<Nodo> *dims, Nodo exp, int fila){

@@ -69,6 +69,12 @@ public:
     static Resultado *resolverContinuar();
     static Resultado *ejecutarHacer(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
     static Resultado *ejecutarPara(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo);
+    static Resultado *asigDirectaArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL);
+    static Resultado *resolverAsigArr(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig);
+    static Resultado *asigSumSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL);
+    static Resultado *asigSubSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL);
+    static Resultado *asigIncArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL);
+    static Resultado *asigDecArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL);
 };
 
-#endif // INTERPRETE_H
+#endif // INTERPRETE_Hpo

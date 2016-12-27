@@ -49,7 +49,8 @@ SOURCES += main.cpp\
     Interprete/Sentencia/_sentencia.cpp \
     Interprete/Sentencia/_asignacion.cpp \
     Interprete/Sentencia/_if.cpp \
-    Interprete/Sentencia/_hacer.cpp
+    Interprete/Sentencia/_hacer.cpp \
+    Interprete/Sentencia/_comprobar.cpp
 
 HEADERS  += principal.h \
     Gramatica/lexico_lienzo.h \
