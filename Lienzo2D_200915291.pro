@@ -52,7 +52,7 @@ SOURCES += main.cpp\
     Interprete/Sentencia/_hacer.cpp \
     Interprete/Sentencia/_comprobar.cpp \
     Interprete/Sentencia/_funarreglo.cpp \
-    Interprete/Sentencia/_funprimitiva.cpp
+    Interprete/Sentencia/_funprimitiva.cpp \
     Editor/codeeditor.cpp \
     Editor/extras.cpp \
     Editor/areagrafica.cpp \
