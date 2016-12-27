@@ -53,6 +53,11 @@ SOURCES += main.cpp\
     Interprete/Sentencia/_comprobar.cpp \
     Interprete/Sentencia/_funarreglo.cpp \
     Interprete/Sentencia/_funprimitiva.cpp
+    Editor/codeeditor.cpp \
+    Editor/extras.cpp \
+    Editor/areagrafica.cpp \
+    Editor/lienzografico.cpp \
+    Editor/elemento.cpp
 
 HEADERS  += principal.h \
     Gramatica/lexico_lienzo.h \
@@ -68,6 +73,16 @@ HEADERS  += principal.h \
     Interprete/resultado.h \
     Interprete/casteo.h \
     Interprete/interprete.h \
-    TablaSimbolos/contexto.h
+    TablaSimbolos/contexto.h \
+    Editor/codeeditor.h \
+    Editor/areagrafica.h \
+    Editor/lienzografico.h \
+    Editor/elemento.h
 
-FORMS    += principal.ui
+FORMS    += principal.ui \
+    Editor/areagrafica.ui
+
+DISTFILES +=
+
+RESOURCES += \
+    Recursos/recursos.qrc

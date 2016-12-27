@@ -2,14 +2,14 @@
 #include "ui_principal.h"
 #include <QMessageBox>
 #include "Interprete/casteo.h"
+#include "Editor/codeeditor.h"
 
 extern bool parselienzo();
 
-Principal::Principal(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::Principal)
+Principal::Principal(QWidget *parent) : QMainWindow(parent), ui(new Ui::Principal)
 {
     ui->setupUi(this);
+    nuevaPestania();
 }
 
 Principal::~Principal()
@@ -32,11 +32,49 @@ void Principal::on_pBanalizar_clicked()
 void Principal::on_pushButton_clicked()
 {
 
+}
 
+void Principal::on_pushBtn_Nuevo_clicked() {
+    nuevaPestania();
+}
+
+void Principal::on_pushBtn_Abrir_clicked() {
+    abrirArchivo();
+}
+
+void Principal::on_pushBtn_Guardar_clicked() {
+    guardarArchivo();
+}
+
+void Principal::on_pushBtn_GuardarComo_clicked() {
+    guardarArchivoComo();
+}
+
+void Principal::on_pushBtn_Cerrar_clicked() {
+    cerrarArchivo();
+}
+
+void Principal::on_pushBtn_AreaGrafica_clicked()
+{
+    abrirAreaGrafica();
+}
+
+void Principal::on_pushBtn_Ejecutar_clicked()
+{
 
 }
 
-void Principal::showInfo(QString mensaje)
+void Principal::on_pushBtn_Debuggear_clicked()
 {
-    ui->statusBar->showMessage(mensaje, 5000);
+
+}
+
+void Principal::on_pushBtn_Errores_clicked()
+{
+
+}
+
+void Principal::on_pushBtn_TablaSimbolos_clicked()
+{
+
 }

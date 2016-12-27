@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Iconos/icono_debug.png</file>
+        <file>Iconos/icono_eliminar.png</file>
+        <file>Iconos/icono_folder_abrir.png</file>
+        <file>Iconos/icono_guardar.png</file>
+        <file>Iconos/icono_guardarComo.png</file>
+        <file>Iconos/icono_logerror.png</file>
+        <file>Iconos/icono_nuevo.png</file>
+        <file>Iconos/icono_play.png</file>
+        <file>Iconos/icono_tabla.png</file>
+        <file>Iconos/icono_paleta.png</file>
+    </qresource>
+</RCC>
