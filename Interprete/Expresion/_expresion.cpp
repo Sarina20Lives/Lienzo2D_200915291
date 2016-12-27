@@ -32,7 +32,10 @@ Resultado *Interprete::resolverOperando(QString lienzo, Contexto *ctxGlobal, Con
         return resultado;
     }
     if(exp.getSubRol()==SRN_VAR){
-        return buscarValVar(ctxGlobal, ctxLocal, exp.getCadena());
+        resultado = Interprete::resolverRefArr(lienzo, ctxGlobal, ctxLocal, exp);
+        if(resultado->getTipo()==ERR){
+            return buscarValVar(ctxGlobal, ctxLocal, exp.getCadena());
+        }
     }
     if(exp.getSubRol()==SRN_ARR){
         return buscarValArr(lienzo, ctxGlobal, ctxLocal, exp);
@@ -132,7 +135,7 @@ Resultado *Interprete::buscarValVar(Contexto *ctxGlobal, Contexto *ctxLocal, QSt
 
 Resultado *Interprete::resolverRefArr(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
     Resultado *resultado = new Resultado();
-    if(exp.getSubRol()==SRN_ARR){
+    if(exp.getSubRol()==SRN_ARR || exp.getSubRol()==SRN_VAR){
         return Interprete::buscarArr(ctxGlobal, ctxLocal, exp.getCadena());
     }
     if(exp.getSubRol()==SRN_VAL_ARR){

@@ -75,6 +75,7 @@ public:
     static Resultado *asigSubSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL);
     static Resultado *asigIncArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL);
     static Resultado *asigDecArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL);
+    static void asigArrArr(Contexto *ctxG, Contexto *ctxL, QString nombre, Resultado arr);
 };
 
 #endif // INTERPRETE_Hpo

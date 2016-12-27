@@ -425,10 +425,45 @@ void Interprete::asigIncVar(Contexto *ctxG, Contexto *ctxL, Nodo asig){
     //TODO-ERROR-La variable no existe
 }
 
+void Interprete::asigArrArr(Contexto *ctxG, Contexto *ctxL, QString nombre, Resultado arr){
+
+    QList<Simbolo>::iterator simL;
+    for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
+        if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
+            if(arr.getTipo()!=simL->getTipo()){
+                //TODO-ERROR-Los tipos de asignación no son permitidos
+                return;
+            }
+            simL->setValores(arr.getValores());
+            simL->setInstancia(true);
+            return;
+        }
+    }
+
+    QList<Simbolo>::iterator simG;
+    for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){
+        if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
+            if(arr.getTipo()!=simG->getTipo()){
+                //TODO-ERROR-Los tipos de asignación no son permitidos
+                return;
+            }
+            simG->setValores(arr.getValores());
+            simG->setInstancia(true);
+            return;
+        }
+    }
+}
+
+
+
 void Interprete::asigDirectaVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig){
     Resultado valor = *Interprete::resolverExpresion(lienzo, ctxG, ctxL, asig.getHijo(0));
-    if(valor.getTipo()==ERR || valor.getEsArr()){
+    if(valor.getTipo()==ERR){
         //TODO-ERROR-La asignación no es posible
+        return;
+    }
+    if(valor.getEsArr()){
+        Interprete::asigArrArr(ctxG, ctxL, asig.getCadena(), valor);
         return;
     }
 
