@@ -13,7 +13,7 @@ Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto
     bool esPrimero = true;
     Resultado *cond;
     Resultado *resultado = new Resultado();
-
+    bool encontrado = false;
     linicio:
     esPrimero = true;
     foreach (Nodo caso, *nodo.getHijos()) {
@@ -25,7 +25,8 @@ Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto
                     ctxL->limpiarContexto();
                     return new Resultado();
                 }
-                if(cond->getValor()==ini->getValor()){
+                if(encontrado || cond->getValor()==ini->getValor()){
+                    encontrado = true;
                     foreach (Nodo sentencia, *caso.getHijo(1).getHijos()) {
                         resultado = Interprete::ejecutarSentencia(lienzo, padre, ctxG, ctxL, sentencia);
                         if(resultado->getRol()==RN_RETORNA){
