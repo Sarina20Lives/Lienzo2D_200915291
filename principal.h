@@ -5,6 +5,7 @@
 #include <QList>
 #include <QString>
 #include "Ast/lienzo.h"
+#include "TablaSimbolos/simbolo.h"
 
 namespace Ui {
 class Principal;
@@ -17,8 +18,8 @@ class Principal : public QMainWindow
 public:
     explicit Principal(QWidget *parent = 0);
     ~Principal();
-    static bool existeUnLienzo(QList<Lienzo> *lienzos, QString nombre);
-    static void agregarExtends(QList<Lienzo> *lienzos, QList<QString> extends);
+    static bool existeUnLienzo(QList<Lienzo> *lienzos, QString nombre);    
+    static void agregarExtends(QList<Simbolo> *ts, QList<Lienzo> *lienzos, QList<QString> extends);
     static void analisis(QString contenido);
 
 private slots:

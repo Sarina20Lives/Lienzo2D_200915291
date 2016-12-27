@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Tabla de s&iacute;mbolos - Lienzos2D</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+	<style>
+		th{
+			padding: 5px 0px !important;
+			margin: 0px !important;
+		}
+	</style>
+</head>
+<body>
+	<div class="container" style="width:95%;">
+		<div class="row lime lighten-5">
+			<div class="col s12">
+				<h3 class="thin right">
+					<span class="lime-text text-darken-4">	TABLA DE S&Iacute;MBOLOS	</span>
+				</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<h5 class="thin"><span class="lime-text text-darken-3">Lienzo Principal:</span>	__FILE__</h5>
+				<h5 class="thin"><span class="lime-text text-darken-3">Fecha del analisis:</span>	__DATE__</h5>
+				<h5 class="thin"><span class="lime-text text-darken-3">Detalle del resultado:</span>	__STATE__</h5>				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<table class="bordered striped">
+					<thead>
+						<tr>
+							<th rowspan="2" class="thin">LIENZO</th>
+							<th rowspan="2" class="thin">PADRE</th>
+							<th rowspan="2" class="thin">ROL</th>
+							<th rowspan="2" class="thin">ACCESO</th>
+							<th rowspan="2" class="thin">TIPO</th>
+							<th rowspan="2" class="thin">ES_ARR</th>
+							<th rowspan="2" class="thin">NOMBRE</th>
+							<th rowspan="2" class="thin">PARAMETROS</th>
+						</tr>
+					</thead>
+					<tbody>
+						__BODY__	
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+</body>
+</html>

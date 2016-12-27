@@ -40,12 +40,14 @@
 extern int lienzodebug;
 #endif
 /* "%code requires" blocks.  */
-#line 55 "sintactico_lienzo.y" /* yacc.c:1909  */
+#line 60 "sintactico_lienzo.y" /* yacc.c:1909  */
 
+	#include <QList>
     #include <QString>
     #include "Ast/lienzo.h"
+    #include "TablaSimbolos/simbolo.h"
 
-#line 49 "sintactico_lienzo.h" /* yacc.c:1909  */
+#line 51 "sintactico_lienzo.h" /* yacc.c:1909  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -138,7 +140,7 @@ extern int lienzodebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 67 "sintactico_lienzo.y" /* yacc.c:1909  */
+#line 75 "sintactico_lienzo.y" /* yacc.c:1909  */
 
     QString *CADENA;
     int INT;
@@ -148,7 +150,7 @@ union YYSTYPE
     struct AtributoMetodo *METODO;
     struct AtributoLienzo *LIENZO;
 
-#line 152 "sintactico_lienzo.h" /* yacc.c:1909  */
+#line 154 "sintactico_lienzo.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -159,10 +161,11 @@ extern YYSTYPE lienzolval;
 
 int lienzoparse (void);
 /* "%code provides" blocks.  */
-#line 59 "sintactico_lienzo.y" /* yacc.c:1909  */
+#line 66 "sintactico_lienzo.y" /* yacc.c:1909  */
  
 	Lienzo *parselienzo(QString *entrada);
+	QList<Simbolo> *getTS();
 
-#line 167 "sintactico_lienzo.h" /* yacc.c:1909  */
+#line 170 "sintactico_lienzo.h" /* yacc.c:1909  */
 
 #endif /* !YY_LIENZO_SINTACTICO_LIENZO_H_INCLUDED  */

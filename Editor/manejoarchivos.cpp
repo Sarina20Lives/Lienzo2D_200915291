@@ -17,10 +17,14 @@ QString ManejoArchivos::abrirArchivo(QString dir){
     return content;
 }
 
-void ManejoArchivos::guardarArchivo(QString path, QString content){
-    QFile file(path);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-       return;
-    QTextStream out(&file);
-    out << content;
+void ManejoArchivos::guardarArchivo(QString dir, QString contenido)
+{
+    QByteArray ba = dir.toLatin1();
+    char *acceso = ba.data();
+
+    FILE* f = fopen(acceso, "w+r");
+    if(f!=NULL){
+        fprintf(f, "%s", contenido.toUtf8().data());
+        fclose(f);
+    }
 }

@@ -13,7 +13,7 @@ public:
     Contexto();
     void agregarVariablesExtends(QString nombreL);
     static Contexto *generarContextoGlobal(QString lienzo);
-    static Contexto *generarContextoLocal(QString padre, int acceso, QList<Nodo> params, QList<Resultado> valores);
+    static Contexto *generarContextoLocal(QString lienzo, QString padre, int acceso, QList<Nodo> params, QList<Resultado> valores);
     void agregarVariables(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo declaracion);
     void limpiarContexto();
     int getNivel();

@@ -33,9 +33,9 @@ Contexto *Contexto::generarContextoGlobal(QString lienzo){
 }
 
 
-Contexto *Contexto::generarContextoLocal(QString padre, int acceso, QList<Nodo> params, QList<Resultado> valores){
+Contexto *Contexto::generarContextoLocal(QString lienzo, QString padre, int acceso, QList<Nodo> params, QList<Resultado> valores){
     Contexto *temp = new Contexto();
-    QList<Simbolo> *parametros = Simbolo::crearParams(padre, acceso, params);
+    QList<Simbolo> *parametros = Simbolo::crearParams(lienzo, padre, acceso, params);
     Resultado res = *new Resultado();
     int cont = 0;
     foreach (Simbolo nuevo, *parametros) {
@@ -59,7 +59,7 @@ Contexto *Contexto::generarContextoLocal(QString padre, int acceso, QList<Nodo> 
 //Local ->Lienzo = nombre del lienzo actual, Padre = nombre del método donde se ha declarado
 void Contexto::agregarVariables(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo declaracion){
 
-    QList<Simbolo> *variables = Simbolo::crearVars(padre, declaracion);
+    QList<Simbolo> *variables = Simbolo::crearVars(lienzo, padre, declaracion);
     //Setear Valor
     Resultado valor = *Interprete::resolverExpresion(lienzo, ctxG, ctxL, declaracion.getHijo(0) );
     valor = Casteo::toAsigVar(declaracion.getTipo(), valor);
@@ -107,7 +107,7 @@ void Contexto::agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Co
         }
     }
 
-    QList<Simbolo> *arreglos = Simbolo::crearArrs(padre, declaracion);
+    QList<Simbolo> *arreglos = Simbolo::crearArrs(lienzo, padre, declaracion);
     foreach (Simbolo sim, *arreglos) {
         if(existeVariable(sim.getNombre())){
            return;

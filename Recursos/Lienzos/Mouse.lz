@@ -1,0 +1,30 @@
+publico Lienzo Mouse¿ 
+   Principal()¿       
+        var Entero scala=40$
+        var Entero x, y=400$
+        >>Pinta la cara
+        Pintar_P(x, y, "#000000", 300)$
+        >>Pinta las orejas
+        mientras(x < 540)¿
+            x += 1$
+            diam++$
+            y -= 1$
+            Pintar_P(x, y, "#000000", diam)$            
+        ?
+        x=x - 390$
+        mientras(x<550)¿
+            x+=1$
+            diam--$
+            y+=1$
+            Pintar_P(x, y, "#000000", diam)$            
+        ?
+        x=350$
+        y=400$
+        Pintar_P(x, y, "#FFFFFF", 270)$
+        para(var Entero aux=y; aux>265; aux--)¿
+            Pintar_OR(x, aux, "#000000",x - 50, 10, 'o')$            
+        ?
+        Pintar_OR(x + 75, y - 75, "#FFFFFF",25, 50, 'o')$ 
+        Pintar_OR(x - 75, y - 75, "#FFFFFF",25, 50, 'o')$ 
+    ?
+? 
