@@ -91,12 +91,12 @@ void Contexto::agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Co
     }
 
     Resultado valor = *Interprete::resolverExpresion(lienzo, ctxG, ctxL, declaracion.getHijo(1));
-    if(valor.getTipo()!=ERR && dims->count()!=valor.getDimensiones().count()){
+    if(valor.getEsArr() && dims->count()!=valor.getDimensiones().count()){
         //TODO-ERROR-La magnitud de los arreglos no corresponden
         return;
     }
 
-    if(valor.getTipo()!=ERR){
+    if(valor.getEsArr()){
         int pos = 0;
         QList<int> posiciones = valor.getDimensiones();
         foreach (Resultado dim, *dims) {

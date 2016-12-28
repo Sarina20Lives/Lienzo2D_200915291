@@ -2,6 +2,7 @@
 #include "General/constantes.h"
 
 QList<Lienzo> *Interprete::lienzos;
+ManejoErrores *Interprete::ma = ManejoErrores::getInstance();
 
 Lienzo Interprete::searchLienzo(QString nombre){
     foreach (Lienzo lienzo, *Interprete::lienzos) {

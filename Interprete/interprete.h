@@ -7,10 +7,12 @@
 #include "Ast/nodo.h"
 #include "Interprete/resultado.h"
 #include "TablaSimbolos/contexto.h"
+#include "Errores/errores.h"
 
 class Interprete
 {
 public:
+    static ManejoErrores *ma;
     static QList<Lienzo> *lienzos;
     static Lienzo searchLienzo(QString nombre);
     static QList<Lienzo> searchExtends(QString nombre);
@@ -32,7 +34,7 @@ public:
     static Resultado *resolverSum(Resultado op1, Resultado op2);
     static Resultado *resolverSub(Resultado op1, Resultado op2);
     static Resultado *resolverMul(Resultado op1, Resultado op2);
-    static Resultado *resolverDiv(Resultado op1, Resultado op2);
+    static Resultado *resolverDiv(Resultado op1, Resultado op2, int fila);
     static Resultado *resolverPow(Resultado op1, Resultado op2);
     static Resultado *resolverLogica(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp);
     static Resultado *resolverNot(Resultado op1);

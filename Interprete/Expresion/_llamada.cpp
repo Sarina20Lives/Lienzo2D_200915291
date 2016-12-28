@@ -2,6 +2,7 @@
 #include "General/constantes.h"
 
 Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
+    ma->getInstance(lienzo);
     Resultado *resultado = new Resultado();
 
     QList<Resultado> *params = new QList<Resultado>();
@@ -11,7 +12,7 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
     foreach (Nodo param, *exp.getHijos()) {
         parametro =Interprete::resolverExpresion(lienzo, ctxGlobal, ctxLocal, param);
         if(parametro->getTipo()==ERR || parametro->getRol() != NOTHING){
-            //TODO-ERROR-Los parametros no son validos
+            ma->addErrorSemantico("Los parametros no son validos", exp.getFila());
             return resultado;
         }
         params->append(*parametro);
@@ -29,7 +30,7 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
     }
 
     if(allMtds.count()==0){
-        //TODO-ERROR-El metodo buscado no existe
+        ma->addErrorSemantico("El método buscado no existe", exp.getFila());
         return resultado;
     }
 

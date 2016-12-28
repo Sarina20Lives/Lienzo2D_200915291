@@ -2,9 +2,9 @@
 #include "General/constantes.h"
 #include "Interprete/casteo.h"
 
+
 Resultado *Interprete::resolverAritmetica(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
     Resultado *resultado = new Resultado();
-
     Resultado *op1 = Interprete::resolverExpresion(lienzo, ctxGlobal, ctxLocal, exp.getHijo(0));
     Resultado *op2 = Interprete::resolverExpresion(lienzo, ctxGlobal, ctxLocal, exp.getHijo(1));
     if(op1->getTipo() == ERR || op2->getTipo() == ERR ){
@@ -24,7 +24,7 @@ Resultado *Interprete::resolverAritmetica(QString lienzo, Contexto *ctxGlobal, C
         return Interprete::resolverMul(*op1, *op2);
     }
     if(exp.getSubRol() == SRN_DIV){
-        return Interprete::resolverDiv(*op1, *op2);
+        return Interprete::resolverDiv(*op1, *op2, exp.getFila());
     }
     if(exp.getSubRol() == SRN_POW){
         return Interprete::resolverPow(*op1, *op2);
@@ -111,7 +111,7 @@ Resultado *Interprete::resolverMul(Resultado op1, Resultado op2){
     return resultado;
 }
 
-Resultado *Interprete::resolverDiv(Resultado op1, Resultado op2){
+Resultado *Interprete::resolverDiv(Resultado op1, Resultado op2, int fila){
     Resultado *resultado = new Resultado();
     if(op1.getTipo()==TCADENA || op2.getTipo()==TCADENA){
         return resultado;
@@ -120,7 +120,7 @@ Resultado *Interprete::resolverDiv(Resultado op1, Resultado op2){
     if(op1.getTipo()==TDOBLE || op2.getTipo()==TDOBLE){
         double divisor = Casteo::toDoble(op2);
         if(divisor==0){
-            //TODO-ERROR-División dentro de cero
+            ma->addErrorSemantico("División dentro de cero",fila);
             return resultado;
         }
         resultado->setTipo(TDOBLE);
@@ -131,7 +131,7 @@ Resultado *Interprete::resolverDiv(Resultado op1, Resultado op2){
     if(op1.getTipo()==TENTERO || op2.getTipo()==TENTERO){
         double divisor = Casteo::toDoble(op2);
         if(divisor==0){
-            //TODO-ERROR-División dentro de cero
+            ma->addErrorSemantico("División dentro de cero", fila);
             return resultado;
         }
         resultado->setTipo(TDOBLE);

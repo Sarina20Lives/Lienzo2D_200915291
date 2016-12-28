@@ -14,7 +14,7 @@ AreaGrafica::AreaGrafica(QWidget *parent) : QWidget(parent), ui(new Ui::AreaGraf
     y = 0;
     diametro = 20;
     color = QColor("#000");
-    lienzo = Canvas::getInstance();
+    lienzo = Canvas::resetInstance();
     lienzo->setStyleSheet("background-color:#FFFFFF;");
     ui->verticalLayout_2->addWidget(lienzo);
 }

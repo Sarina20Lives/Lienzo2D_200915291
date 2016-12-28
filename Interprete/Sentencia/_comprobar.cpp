@@ -3,6 +3,7 @@
 #include "Interprete/casteo.h"
 
 Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo){
+    ma->getInstance(lienzo);
     ctxL->aumentarNivel();
     //Resolver valor:
     Resultado *ini = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(0));
@@ -21,7 +22,7 @@ Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto
             if(caso.getRol()==RN_CASO){
                 cond = Interprete::resolverExpresion(lienzo, ctxG, ctxL, caso.getHijo(0));
                 if(cond->getTipo()!=ini->getTipo()){
-                    //TODO-ERROR-Los valores no se pueden igualar, no son del mismo tipo
+                    ma->addErrorSemantico("Los valores no se pueden igualar, no son del mismo tipo", nodo.getFila());
                     ctxL->limpiarContexto();
                     return new Resultado();
                 }
