@@ -46,7 +46,7 @@ Resultado *Interprete::resolverOrdenar(Contexto *ctxG, Contexto *ctxL, Nodo orde
     for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
         if(QString::compare(simL->getNombre(), ordenar.getCadena())==0 && simL->getEsArr()){
             if(!simL->getInstancia()){
-                //TODO-WARNING-El arreglo no posee una instancia inicial, puede haber error
+                ma->addErrorSemantico("El arreglo no posee una instancia inicial", ordenar.getFila());
             }
             if(ordenar.getSubRol()==SRN_ASC){
                 simL->setValores(Interprete::ascValores(simL->getValores(), simL->getTipo()));
@@ -72,7 +72,7 @@ Resultado *Interprete::resolverOrdenar(Contexto *ctxG, Contexto *ctxL, Nodo orde
     for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){
         if(QString::compare(simG->getNombre(), ordenar.getCadena())==0 && simG->getEsArr()){
             if(!simL->getInstancia()){
-                //TODO-WARNING-El arreglo no posee una instancia inicial, puede haber error
+                ma->addErrorSemantico("El arreglo no posee una instancia inicial", ordenar.getFila());
             }
             if(ordenar.getSubRol()==SRN_ASC){
                 simG->setValores(Interprete::ascValores(simG->getValores(), simG->getTipo()));
@@ -168,7 +168,7 @@ QList<QString> Interprete::descValores(QList<QString> original, int tipo){
 
 QList<QString> Interprete::parImparValores(QList<QString> original, int tipo, bool parImpar){
     if(tipo==TCADENA){
-        //TODO-ERROR-No es posible ordenar un arreglo de tipo cadena
+        ma->addError("No es posible ordenar por impar o par un arreglo de tipo cadena");
         return original;
     }
     QList<QString> nueva = *new QList<QString>();
@@ -204,7 +204,7 @@ QList<QString> Interprete::parImparValores(QList<QString> original, int tipo, bo
 
 QList<QString> Interprete::primosValores(QList<QString> original, int tipo){
     if(tipo==TCADENA){
-        //TODO-ERROR-No es posible ordenar un arreglo de tipo cadena
+        ma->addError("No es posible ordenar por primos una arreglo de tipo cadena");
         return original;
     }
     QList<QString> nueva = *new QList<QString>();

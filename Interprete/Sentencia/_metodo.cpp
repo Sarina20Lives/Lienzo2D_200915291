@@ -7,22 +7,22 @@ Resultado *Interprete::ejecutarMtd(QString lienzo, QString padre, Contexto *ctxG
         resultado = Interprete::ejecutarSentencia(lienzo, padre, ctxG, ctxL, sentencia);
         if(resultado->getRol()==RN_RETORNA){
             if(resultado->getTipo()!=mtd.getTipo()){
-                //TODO-ERROR-Se ha obtenido un retorno que no corresponde al tipo del metodo
+                ma->addErrorSemantico("Se obtuvo un retorno que no corresponde al tipo del metodo", mtd.getFila());
                 return new Resultado();
             }
             return resultado;
         }
         if(resultado->getRol()==RN_SALIR){
-            //TODO-ERROR-Salir fuera de contexto
-            return new Resultado();
+            ma->addErrorSemantico("Break fuera de contexto", mtd.getFila());
+            resultado = new Resultado();
         }
         if(resultado->getRol()==RN_CONTINUAR){
-            //TODO-ERROR-Continuar fuera de contexto
-            return new Resultado();
+            ma->addErrorSemantico("Continue fuera de contexto", mtd.getFila());
+            resultado = new Resultado();
         }
     }
     if(mtd.getTipo()!=TVOID){
-        //TODO-ERROR-No se ha encontrado ningún retorno
+        ma->addErrorSemantico("Se requeria un retorno y no fue encontrado", mtd.getFila());
     }
     return new Resultado();
 }

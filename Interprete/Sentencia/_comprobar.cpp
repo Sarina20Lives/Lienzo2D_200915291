@@ -3,6 +3,7 @@
 #include "Interprete/casteo.h"
 
 Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo){
+    ma->getInstance(lienzo);
     ctxL->aumentarNivel();
     //Resolver valor:
     Resultado *ini = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(0));
@@ -13,7 +14,7 @@ Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto
     bool esPrimero = true;
     Resultado *cond;
     Resultado *resultado = new Resultado();
-
+    bool encontrado = false;
     linicio:
     esPrimero = true;
     foreach (Nodo caso, *nodo.getHijos()) {
@@ -21,11 +22,12 @@ Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto
             if(caso.getRol()==RN_CASO){
                 cond = Interprete::resolverExpresion(lienzo, ctxG, ctxL, caso.getHijo(0));
                 if(cond->getTipo()!=ini->getTipo()){
-                    //TODO-ERROR-Los valores no se pueden igualar, no son del mismo tipo
+                    ma->addErrorSemantico("Los valores no se pueden igualar, no son del mismo tipo", nodo.getFila());
                     ctxL->limpiarContexto();
                     return new Resultado();
                 }
-                if(cond->getValor()==ini->getValor()){
+                if(encontrado || cond->getValor()==ini->getValor()){
+                    encontrado = true;
                     foreach (Nodo sentencia, *caso.getHijo(1).getHijos()) {
                         resultado = Interprete::ejecutarSentencia(lienzo, padre, ctxG, ctxL, sentencia);
                         if(resultado->getRol()==RN_RETORNA){

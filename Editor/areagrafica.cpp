@@ -14,7 +14,7 @@ AreaGrafica::AreaGrafica(QWidget *parent) : QWidget(parent), ui(new Ui::AreaGraf
     y = 0;
     diametro = 20;
     color = QColor("#000");
-    lienzo = Canvas::getInstance();
+    lienzo = Canvas::resetInstance();
     lienzo->setStyleSheet("background-color:#FFFFFF;");
     ui->verticalLayout_3->addWidget(lienzo);
 }
@@ -31,13 +31,22 @@ void AreaGrafica::mousePressEvent(QMouseEvent *event) {
 }
 
 void AreaGrafica::on_pushBtn_Publicar_clicked() {
+    Canvas *l = Canvas::getInstance();
+    QImage img(l->size(), QImage::Format_ARGB32);
+    QPainter painter(&img);
+    l->render(&painter);
+    img.save("/home/esvux/inicio.png");
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    img.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
+    QString imageBase64(byteArray.toBase64().data());
     QNetworkAccessManager *networkManager = new QNetworkAccessManager;
     QByteArray datos;
     QJsonObject jsonObject;
     jsonObject["titulo"] = ui->txt_Titulo->text();
     jsonObject["descripcion"] = ui->txt_Descripcion->toPlainText();
     jsonObject["fecha"] = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-    jsonObject["imagen"] = "asdfasdfasdf";
+    jsonObject["imagen"] = imageBase64;
     QJsonDocument doc(jsonObject);
     datos.append("json="+doc.toJson());
     networkManager->post(QNetworkRequest(QUrl("http://127.0.0.1:5000/publica")), datos);
