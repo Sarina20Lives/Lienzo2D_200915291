@@ -83,7 +83,6 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;    
-    void keyPressEvent(QKeyEvent *e)  Q_DECL_OVERRIDE;
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);

@@ -105,17 +105,6 @@ void CodeEditor::writeFile(QString path)
     ManejoArchivos::RAIZ = path.left(path.lastIndexOf('/'));
 }
 
-void CodeEditor::keyPressEvent(QKeyEvent *e){
-    switch (e->key()) {
-    case Qt::Key_F3:
-        Interprete::triggerDebug();
-        break;
-    case Qt::Key_F4:
-        Interprete::desactivarDebug();
-        break;
-    }
-}
-
 
 int CodeEditor::lineNumberAreaWidth()
 {
