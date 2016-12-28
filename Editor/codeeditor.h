@@ -82,7 +82,8 @@ public:
     QString getTitle() { return title; }
 
 protected:
-    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;    
+    void keyPressEvent(QKeyEvent *e)  Q_DECL_OVERRIDE;
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);

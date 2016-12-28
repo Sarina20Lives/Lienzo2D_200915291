@@ -2,6 +2,9 @@
 #include "General/constantes.h"
 
 QList<Lienzo> *Interprete::lienzos;
+bool Interprete::debuggeando = false;
+bool Interprete::pausa = false;
+int Interprete::tiempoPausa = 1000;
 
 Lienzo Interprete::searchLienzo(QString nombre){
     foreach (Lienzo lienzo, *Interprete::lienzos) {

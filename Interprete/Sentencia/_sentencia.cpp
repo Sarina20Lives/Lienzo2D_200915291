@@ -1,5 +1,6 @@
 #include "Interprete/interprete.h"
 #include "General/constantes.h"
+#include "QThread"
 
 
 Resultado *Interprete::ejecutarSentencia(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo sentencia){
@@ -51,7 +52,12 @@ Resultado *Interprete::ejecutarSentencia(QString lienzo, QString padre, Contexto
         Interprete::ejecutarPrimitiva(lienzo, ctxG, ctxL, sentencia);
         return new Resultado();
     }
-
+    if(sentencia.getRol() == RN_PAUSA && debuggeando){
+        QThread::msleep(tiempoPausa);
+        while (pausa) {
+            QThread::msleep(10);
+        }
+    }
     return new Resultado();
 }
 

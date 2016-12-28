@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include "Interprete/casteo.h"
 #include "Editor/codeeditor.h"
+#include "Interprete/interprete.h"
 
 extern bool parselienzo();
 
@@ -54,25 +55,18 @@ void Principal::on_pushBtn_Cerrar_clicked() {
     cerrarArchivo();
 }
 
-void Principal::on_pushBtn_AreaGrafica_clicked()
-{
+void Principal::on_pushBtn_AreaGrafica_clicked() {
     abrirAreaGrafica();
 }
 
-void Principal::on_pushBtn_Ejecutar_clicked()
-{
-    QString entrada = ui->pTEentrada->toPlainText();
-    if(entrada==""){
-        QMessageBox::critical(this, "Error en el análisis","No se admite una cadena vacia.");
-        return;
-    }
-    Principal::analisis(entrada);
-    QMessageBox::information(this, "Fin del análisis","El análisis ha sido exitoso.");
+void Principal::on_pushBtn_Ejecutar_clicked() {
+    Interprete::desactivarDebug();
+    analizarArchivo();
 }
 
-void Principal::on_pushBtn_Debuggear_clicked()
-{
-
+void Principal::on_pushBtn_Debuggear_clicked() {
+    Interprete::activarDebug();
+    analizarArchivo();
 }
 
 void Principal::on_pushBtn_Errores_clicked()
@@ -83,4 +77,8 @@ void Principal::on_pushBtn_Errores_clicked()
 void Principal::on_pushBtn_TablaSimbolos_clicked()
 {
 
+}
+
+void Principal::on_vertSlider_Velocidad_valueChanged(int value) {
+    Interprete::setPausa(value);
 }

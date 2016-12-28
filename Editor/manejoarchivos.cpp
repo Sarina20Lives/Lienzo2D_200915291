@@ -2,6 +2,8 @@
 #include <QTextStream>
 #include <QFile>
 
+QString ManejoArchivos::RAIZ = "/home/sarina/QtProjects/Lienzo2D_200915291/Lienzo2D_200915291/Recursos/Lienzos/";
+
 QString ManejoArchivos::abrirArchivo(QString dir){
     QByteArray ba = dir.toLatin1();
     char *acceso = ba.data();

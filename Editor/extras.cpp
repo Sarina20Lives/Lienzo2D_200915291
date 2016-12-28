@@ -3,7 +3,32 @@
 #include "Editor/codeeditor.h"
 #include "areagrafica.h"
 #include "qfiledialog.h"
+#include "qmessagebox.h"
 #include "General/constantes.h"
+#include "manejoarchivos.h"
+
+void Principal::analizarArchivo() {
+    int i = ui->tabArchivos->currentIndex();
+    if(i < 1)  return;
+    CodeEditor *editor = (CodeEditor*)ui->tabArchivos->currentWidget();
+    QString entrada = editor->toPlainText();
+    if(entrada==""){
+        QMessageBox::critical(this, "Error en el análisis", "No se admite una cadena vacia.");
+        return;
+    }
+    HiloDebug *hilo = new HiloDebug;
+    hilo->setCadena(entrada);
+    hilo->start();
+}
+
+void HiloDebug::setCadena(QString cadena) {
+    this->cadena = cadena;
+}
+
+void HiloDebug::run() {
+    Principal::analisis(cadena);
+}
+
 
 void Principal::nuevaPestania()
 {
@@ -17,7 +42,7 @@ void Principal::abrirArchivo()
 {
     int i = ui->tabArchivos->currentIndex();
     if(i < 1)  return;
-    QString pathTemp = QFileDialog::getOpenFileName(this, "Seleccione el lienzo...", RAIZ, "Archivos de Lienzos (*.lz)");
+    QString pathTemp = QFileDialog::getOpenFileName(this, "Seleccione el lienzo...", ManejoArchivos::RAIZ, "Archivos de Lienzos (*.lz)");
     if(pathTemp.isEmpty()) return;
     CodeEditor *editor = (CodeEditor*)ui->tabArchivos->currentWidget();
     editor->readFile(pathTemp);
@@ -31,7 +56,7 @@ void Principal::guardarArchivo(bool guardarComo)
     CodeEditor *editor = (CodeEditor*)ui->tabArchivos->currentWidget();
     QString pathTemp = editor->getPath();
     if(guardarComo || editor->getTitle().contains("*")){
-         pathTemp = QFileDialog::getSaveFileName(this, "Seleccione el lienzo...", RAIZ, "Archivos de Lienzos (*.lz)");
+         pathTemp = QFileDialog::getSaveFileName(this, "Seleccione el lienzo...", ManejoArchivos::RAIZ, "Archivos de Lienzos (*.lz)");
         if(pathTemp.isEmpty()) return;
     }
     editor->writeFile(pathTemp);

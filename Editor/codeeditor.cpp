@@ -50,6 +50,8 @@
 
 #include <QtWidgets>
 #include "codeeditor.h"
+#include "manejoarchivos.h"
+#include "Interprete/interprete.h"
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
@@ -85,7 +87,9 @@ void CodeEditor::readFile(QString path)
     }
     this->setPlainText(content);
     this->path = path;
-    this->title = path.remove(0, path.lastIndexOf('/') + 1);
+    int i = path.lastIndexOf('/');
+    this->title = path.mid(i + 1);
+    ManejoArchivos::RAIZ = path.left(path.lastIndexOf('/'));
 }
 
 void CodeEditor::writeFile(QString path)
@@ -97,7 +101,19 @@ void CodeEditor::writeFile(QString path)
     QTextStream out(&file);
     out << content;
     this->path = path;
-    this->title = path.remove(0, path.lastIndexOf('/') + 1);
+    this->title = path.mid(path.lastIndexOf('/') + 1);
+    ManejoArchivos::RAIZ = path.left(path.lastIndexOf('/'));
+}
+
+void CodeEditor::keyPressEvent(QKeyEvent *e){
+    switch (e->key()) {
+    case Qt::Key_F3:
+        Interprete::triggerDebug();
+        break;
+    case Qt::Key_F4:
+        Interprete::desactivarDebug();
+        break;
+    }
 }
 
 

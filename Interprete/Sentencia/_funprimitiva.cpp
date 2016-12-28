@@ -114,13 +114,13 @@ void Interprete::pintarOR(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo f
     int w = Casteo::strToInt(ancho->getValor());
     int h = Casteo::strToInt(alto->getValor());
     Canvas *canvas = Canvas::getInstance();
-    if(QString::compare(figura->getValor(), "r")==0){
+    if(QString::compare(figura->getValor(), "r", Qt::CaseInsensitive)==0){
         Elemento *elemento = Elemento::creaRectangulo(x,y,w,h,color);
         canvas->addElemento(elemento);
         canvas->update();
         return;
     }
-    if(QString::compare(figura->getValor(), "o")==0){
+    if(QString::compare(figura->getValor(), "o", Qt::CaseInsensitive)==0){
         Elemento *elemento = Elemento::creaOvalo(x,y,w,h,color);
         canvas->addElemento(elemento);
         canvas->update();

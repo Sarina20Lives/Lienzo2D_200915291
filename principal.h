@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QList>
 #include <QString>
+#include <QThread>
 #include "Ast/lienzo.h"
 #include "TablaSimbolos/simbolo.h"
 
@@ -37,6 +38,8 @@ private slots:
     void on_pushBtn_Errores_clicked();
     void on_pushBtn_TablaSimbolos_clicked();
 
+    void on_vertSlider_Velocidad_valueChanged(int value);
+
 private:
     Ui::Principal *ui;
     void nuevaPestania();
@@ -47,6 +50,18 @@ private:
     void guardarArchivoComo(){ guardarArchivo(true); }
     void guardarArchivo(bool guardarComo);
     void cerrarArchivo();
+    void analizarArchivo();
 };
+
+
+class HiloDebug : public QThread{
+private:
+    QString cadena;
+public:
+    void setCadena(QString cadena);
+protected:
+    void run();
+};
+
 
 #endif // PRINCIPAL_H

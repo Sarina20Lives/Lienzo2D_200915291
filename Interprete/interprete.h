@@ -10,7 +10,15 @@
 
 class Interprete
 {
+private:
+    static bool debuggeando;
+    static bool pausa;
+    static int tiempoPausa;
 public:
+    static void activarDebug() { debuggeando = true; }
+    static void desactivarDebug() { debuggeando = false; pausa = false; tiempoPausa = 0; }
+    static void setPausa(int tiempo) { tiempoPausa = tiempo; }
+    static void triggerDebug() { pausa = debuggeando ? !pausa : pausa; }
     static QList<Lienzo> *lienzos;
     static Lienzo searchLienzo(QString nombre);
     static QList<Lienzo> searchExtends(QString nombre);
@@ -18,7 +26,6 @@ public:
     static QList<Metodo> searchMetodoExtend(QString lienzoActual, QString nombre, QString paramsToStr);
     static Metodo searchMetodo(QString nombreL, QString nombre, QString paramsToStr);
     static Resultado searchVariable(QString nombreL, QString nombre, QString paramsToStr);
-
 
     static Resultado *resolverExpresion(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp);
     static Resultado *resolverOperando(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp);

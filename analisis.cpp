@@ -33,7 +33,7 @@ void Principal::agregarExtends(QList<Simbolo> *ts, QList<Lienzo> *lienzos, QList
     QString contenido = "";
     Lienzo *lienzo;
     foreach (QString nombre, extends) {
-        direccion = RAIZ + nombre + EXT;
+        direccion = ManejoArchivos::RAIZ + nombre + EXT;
         contenido = ManejoArchivos::abrirArchivo(direccion);
         lienzo = parselienzo(&contenido);
         if(lienzo==NULL){
