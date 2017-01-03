@@ -262,7 +262,7 @@ struct AtributoLienzo{
 				}
  ;
  tipof 			: tipo esArr		{ $<INT>$ = $<INT>1 + $<INT>2;}
- 				| %empty			{ $<INT>$ = T_VOID;}
+ 				| %empty			{ $<INT>$ = TVOID;}
  ;
  esArr 			: C_OPEN C_CLOSE 	{ $<INT>$ = 6; }
  				| %empty			{ $<INT>$ = 0;}
@@ -425,6 +425,7 @@ struct AtributoLienzo{
  ;
  acceso			: CONSERVAR visibilidad 	{ $<INT>$ = $<INT>2 + A_PRI; }
  				| visibilidad				{ $<INT>$ = $<INT>1; }
+ 				| CONSERVAR 				{ $<INT>$ = A_PUB_CON; }
  				| %empty					{ $<INT>$ = A_PUB; }
  ;
  iniVar 		: ASIG expresion

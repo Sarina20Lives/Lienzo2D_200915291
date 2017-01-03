@@ -91,10 +91,10 @@ void Principal::on_vertSlider_Velocidad_valueChanged(int value) {
     Interprete::setPausa(value);
 }
 
-void Principal::on_actionDetener_Reanudar_triggered() {
-    Interprete::triggerDebug();
-}
-
 void Principal::on_actionTerminar_triggered() {
     Interprete::desactivarDebug();
+}
+
+void Principal::on_actionDetenerReanudar_triggered() {
+    Interprete::triggerDebug();
 }

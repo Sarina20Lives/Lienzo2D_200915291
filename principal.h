@@ -39,8 +39,8 @@ private slots:
     void on_pushBtn_Errores_clicked();
     void on_pushBtn_TablaSimbolos_clicked();
     void on_vertSlider_Velocidad_valueChanged(int value);
-    void on_actionDetener_Reanudar_triggered();
     void on_actionTerminar_triggered();
+    void on_actionDetenerReanudar_triggered();
 
 private:
     Ui::Principal *ui;

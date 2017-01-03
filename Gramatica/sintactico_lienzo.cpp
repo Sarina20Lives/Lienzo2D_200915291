@@ -536,7 +536,7 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  58
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  153
+#define YYNRULES  154
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  317
 
@@ -597,17 +597,17 @@ static const yytype_uint16 yyrline[] =
      229,   248,   253,   247,   264,   265,   267,   268,   270,   275,
      281,   286,   297,   302,   308,   315,   321,   328,   333,   338,
      343,   348,   353,   358,   363,   368,   373,   378,   383,   388,
-     393,   398,   403,   408,   419,   426,   427,   428,   430,   435,
-     441,   442,   443,   444,   445,   452,   457,   462,   467,   472,
-     483,   490,   495,   501,   506,   511,   517,   522,   527,   533,
-     538,   549,   554,   559,   564,   569,   580,   580,   586,   591,
-     602,   602,   608,   614,   620,   631,   631,   637,   642,   653,
-     653,   664,   664,   675,   680,   685,   696,   701,   707,   708,
-     709,   710,   711,   713,   718,   729,   735,   740,   751,   757,
-     762,   767,   772,   777,   782,   787,   793,   798,   803,   808,
-     813,   818,   823,   829,   834,   839,   844,   849,   854,   860,
-     865,   870,   875,   880,   885,   890,   895,   900,   905,   910,
-     916,   921,   926,   931
+     393,   398,   403,   408,   419,   426,   427,   428,   429,   431,
+     436,   442,   443,   444,   445,   446,   453,   458,   463,   468,
+     473,   484,   491,   496,   502,   507,   512,   518,   523,   528,
+     534,   539,   550,   555,   560,   565,   570,   581,   581,   587,
+     592,   603,   603,   609,   615,   621,   632,   632,   638,   643,
+     654,   654,   665,   665,   676,   681,   686,   697,   702,   708,
+     709,   710,   711,   712,   714,   719,   730,   736,   741,   752,
+     758,   763,   768,   773,   778,   783,   788,   794,   799,   804,
+     809,   814,   819,   824,   830,   835,   840,   845,   850,   855,
+     861,   866,   871,   876,   881,   886,   891,   896,   901,   906,
+     911,   917,   922,   927,   932
 };
 #endif
 
@@ -662,7 +662,7 @@ static const yytype_uint16 yytoknum[] =
 #define yypact_value_is_default(Yystate) \
   (!!((Yystate) == (-275)))
 
-#define YYTABLE_NINF -95
+#define YYTABLE_NINF -96
 
 #define yytable_value_is_error(Yytable_value) \
   0
@@ -710,38 +710,38 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-      57,     5,     6,     7,     0,     0,     2,    56,     0,    55,
-       1,     0,     9,     0,     0,    11,     8,     3,     0,    57,
-      10,     0,    57,    57,    17,    18,    15,    25,    16,     4,
-      12,    13,     0,    19,    60,    61,    64,    62,    63,     0,
-      27,     0,     0,     0,     0,    24,     0,    59,     0,    21,
-      26,     0,     0,     0,     0,    29,     0,    75,     0,     0,
-       0,     0,     0,     0,   148,   149,   152,   153,   146,   147,
-     144,   140,   141,    58,   118,   125,   132,   138,   145,    54,
+      58,     5,     6,     7,    57,     0,     2,    56,     0,    55,
+       1,     0,     9,     0,     0,    11,     8,     3,     0,    58,
+      10,     0,    58,    58,    17,    18,    15,    25,    16,     4,
+      12,    13,     0,    19,    61,    62,    65,    63,    64,     0,
+      27,     0,     0,     0,     0,    24,     0,    60,     0,    21,
+      26,     0,     0,     0,     0,    29,     0,    76,     0,     0,
+       0,     0,     0,     0,   149,   150,   153,   154,   147,   148,
+     145,   141,   142,    59,   119,   126,   133,   139,   146,    54,
        0,    20,    22,    28,     0,     0,     0,     0,     0,     0,
-       0,   150,   151,   124,   143,   117,   142,     0,     0,     0,
+       0,   151,   152,   125,   144,   118,   143,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-     101,     0,     0,     0,     0,    33,     0,     0,    36,    37,
+     102,     0,     0,     0,     0,    33,     0,     0,    36,    37,
        0,     0,    39,     0,    41,    42,    43,    44,    45,    50,
-       0,     0,     0,    31,    72,     0,    74,    70,     0,     0,
-     113,     0,   139,   116,     0,    80,   119,   122,   123,   120,
-     121,   133,   134,   135,   136,   137,   126,   127,   129,   130,
-     128,   131,    53,    34,     0,     0,    46,    47,     0,     0,
-       0,    49,     0,     0,     0,     0,     0,    66,    67,     0,
+       0,     0,     0,    31,    73,     0,    75,    71,     0,     0,
+     114,     0,   140,   117,     0,    81,   120,   123,   124,   121,
+     122,   134,   135,   136,   137,   138,   127,   128,   130,   131,
+     129,   132,    53,    34,     0,     0,    46,    47,     0,     0,
+       0,    49,     0,     0,     0,     0,     0,    67,    68,     0,
        0,     0,     0,    32,    35,    38,    40,    51,    52,     0,
-       0,    71,     0,     0,    78,     0,     0,   107,   115,     0,
+       0,    72,     0,     0,    79,     0,     0,   108,   116,     0,
        0,     0,     0,     0,     0,     0,     0,    48,     0,     0,
-       0,    65,    68,    69,     0,    82,    83,     0,     0,    23,
-      30,     0,    73,   108,   109,   110,   111,   112,     0,   114,
-      79,    86,    90,     0,     0,     0,    99,     0,     0,     0,
-       0,    81,    84,    85,    77,   106,     0,     0,     0,    98,
-       0,     0,     0,     0,     0,     0,     0,    89,     0,     0,
-       0,   100,     0,     0,     0,     0,    76,     0,    87,     0,
-       0,     0,    97,     0,     0,     0,     0,     0,     0,    88,
-       0,     0,    91,    95,   102,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    96,     0,     0,     0,    92,
-     103,     0,   105,     0,     0,     0,   104
+       0,    66,    69,    70,     0,    83,    84,     0,     0,    23,
+      30,     0,    74,   109,   110,   111,   112,   113,     0,   115,
+      80,    87,    91,     0,     0,     0,   100,     0,     0,     0,
+       0,    82,    85,    86,    78,   107,     0,     0,     0,    99,
+       0,     0,     0,     0,     0,     0,     0,    90,     0,     0,
+       0,   101,     0,     0,     0,     0,    77,     0,    88,     0,
+       0,     0,    98,     0,     0,     0,     0,     0,     0,    89,
+       0,     0,    92,    96,   103,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    97,     0,     0,     0,    93,
+     104,     0,   106,     0,     0,     0,   105
 };
 
   /* YYPGOTO[NTERM-NUM].  */
@@ -780,12 +780,12 @@ static const yytype_int16 yytable[] =
      141,    13,   -14,    95,    26,   191,    15,    26,    26,   182,
      187,   188,   189,   190,    17,    34,    35,    36,    37,    38,
       29,    15,   267,   201,   213,    28,    18,   271,    28,    28,
-      30,    31,   192,     1,     2,     3,     1,     2,     3,   -57,
+      30,    31,   192,     1,     2,     3,     1,     2,     3,   -58,
        4,    43,   114,   289,   115,   279,   280,   116,   117,   118,
      119,   120,   121,   122,   123,   124,    44,    58,    59,    48,
      276,    49,   210,   211,   240,    50,   305,   215,    52,    56,
-     -93,   218,   219,   220,   221,   113,    79,   222,   223,     1,
-       2,     3,   -57,     4,    54,   114,    80,   115,   224,    86,
+     -94,   218,   219,   220,   221,   113,    79,   222,   223,     1,
+       2,     3,   -58,     4,    54,   114,    80,   115,   224,    86,
      116,   117,   118,   119,   120,   121,   122,   123,   124,    88,
       58,    59,    89,   225,   226,   227,   228,    94,   186,   144,
      143,   126,   251,   125,   147,   252,   253,   194,   104,   105,
@@ -796,13 +796,13 @@ static const yytype_int16 yytable[] =
      140,   286,   287,   288,   141,   140,   195,   290,   196,   197,
      198,   141,   141,   199,   200,   205,   209,   141,    34,    35,
       36,    37,    38,   301,   302,   303,    97,    98,    99,   100,
-     101,   207,   192,   208,   106,   311,     1,     2,     3,   -57,
+     101,   207,   192,   208,   106,   311,     1,     2,     3,   -58,
        4,   314,   114,   217,   115,   172,   232,   116,   117,   118,
      119,   120,   121,   122,   123,   124,   192,    58,    59,   239,
-       1,     2,     3,   -57,     4,   241,   114,   242,   115,   244,
+       1,     2,     3,   -58,     4,   241,   114,   242,   115,   244,
      193,   116,   117,   118,   119,   120,   121,   122,   123,   124,
-     192,    58,    59,   245,     1,     2,     3,   -57,     4,   246,
-     114,   247,   115,   248,   -94,   116,   117,   118,   119,   120,
+     192,    58,    59,   245,     1,     2,     3,   -58,     4,   246,
+     114,   247,   115,   248,   -95,   116,   117,   118,   119,   120,
      121,   122,   123,   124,   249,    58,    59,   254,   250,   258,
      255,   126,    58,    59,   102,   103,   104,   105,   106,   233,
      234,   235,   236,   237,   262,   266,   268,   273,   145,   269,
@@ -919,17 +919,17 @@ static const yytype_uint8 yyr1[] =
       91,    94,    95,    93,    96,    96,    97,    97,    98,    98,
       99,    99,   100,   100,   100,   101,   101,   102,   102,   102,
      102,   102,   102,   102,   102,   102,   102,   102,   102,   102,
-     102,   102,   102,   102,   103,   104,   104,   104,   105,   105,
-     106,   106,   106,   106,   106,   107,   107,   107,   107,   107,
-     108,   109,   109,   110,   110,   110,   111,   111,   111,   112,
-     112,   113,   113,   113,   113,   113,   115,   114,   116,   116,
-     118,   117,   119,   119,   119,   121,   120,   122,   122,   124,
-     123,   126,   125,   127,   127,   127,   128,   128,   129,   129,
-     129,   129,   129,   130,   130,   131,   132,   132,   133,   134,
-     134,   134,   134,   134,   134,   134,   135,   135,   135,   135,
-     135,   135,   135,   136,   136,   136,   136,   136,   136,   137,
+     102,   102,   102,   102,   103,   104,   104,   104,   104,   105,
+     105,   106,   106,   106,   106,   106,   107,   107,   107,   107,
+     107,   108,   109,   109,   110,   110,   110,   111,   111,   111,
+     112,   112,   113,   113,   113,   113,   113,   115,   114,   116,
+     116,   118,   117,   119,   119,   119,   121,   120,   122,   122,
+     124,   123,   126,   125,   127,   127,   127,   128,   128,   129,
+     129,   129,   129,   129,   130,   130,   131,   132,   132,   133,
+     134,   134,   134,   134,   134,   134,   134,   135,   135,   135,
+     135,   135,   135,   135,   136,   136,   136,   136,   136,   136,
      137,   137,   137,   137,   137,   137,   137,   137,   137,   137,
-     138,   138,   138,   138
+     137,   138,   138,   138,   138
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -940,17 +940,17 @@ static const yytype_uint8 yyr2[] =
        6,     0,     0,     9,     2,     0,     2,     0,     1,     0,
        4,     2,     3,     2,     3,     2,     1,     1,     2,     1,
        2,     1,     1,     1,     1,     1,     2,     2,     3,     2,
-       1,     2,     2,     2,     6,     2,     1,     0,     2,     0,
-       1,     1,     1,     1,     1,     3,     2,     2,     3,     3,
-       8,     4,     3,     4,     2,     0,     5,     3,     1,     3,
-       1,     4,     3,     3,     4,     4,     0,     7,     2,     0,
-       0,     8,     5,     4,     3,     0,    10,     5,     3,     0,
-       6,     0,     8,    11,    15,    11,     6,     4,     1,     1,
-       1,     1,     1,     1,     3,     4,     1,     0,     1,     3,
-       3,     3,     3,     3,     2,     1,     3,     3,     3,     3,
-       3,     3,     1,     3,     3,     3,     3,     3,     1,     3,
-       1,     1,     2,     2,     1,     1,     1,     1,     1,     1,
-       2,     2,     1,     1
+       1,     2,     2,     2,     6,     2,     1,     1,     0,     2,
+       0,     1,     1,     1,     1,     1,     3,     2,     2,     3,
+       3,     8,     4,     3,     4,     2,     0,     5,     3,     1,
+       3,     1,     4,     3,     3,     4,     4,     0,     7,     2,
+       0,     0,     8,     5,     4,     3,     0,    10,     5,     3,
+       0,     6,     0,     8,    11,    15,    11,     6,     4,     1,
+       1,     1,     1,     1,     1,     3,     4,     1,     0,     1,
+       3,     3,     3,     3,     3,     2,     1,     3,     3,     3,
+       3,     3,     3,     1,     3,     3,     3,     3,     3,     1,
+       3,     1,     1,     2,     2,     1,     1,     1,     1,     1,
+       1,     2,     2,     1,     1
 };
 
 
@@ -1311,12 +1311,12 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
       case N:                               \
         yyformat = S;                       \
       break
-        YYCASE_(0, YY_(""));
-        YYCASE_(1, YY_("Se detectó el token inesperado %s"));
-        YYCASE_(2, YY_("Se detectó el token inesperado %s, y se esperaba %s"));
-        YYCASE_(3, YY_("Se detectó el token inesperado %s, y se esperaba %s o %s"));
-        YYCASE_(4, YY_("Se detectó el token inesperado %s, y se esperaba %s o %s o %s"));
-        YYCASE_(5, YY_("Se detectó el token inesperado %s, y se esperaba %s o %s o %s o %s"));
+  YYCASE_(0, YY_(""));
+  YYCASE_(1, YY_("Se detectó el token inesperado %s"));
+  YYCASE_(2, YY_("Se detectó el token inesperado %s, y se esperaba %s"));
+  YYCASE_(3, YY_("Se detectó el token inesperado %s, y se esperaba %s o %s"));
+  YYCASE_(4, YY_("Se detectó el token inesperado %s, y se esperaba %s o %s o %s"));
+  YYCASE_(5, YY_("Se detectó el token inesperado %s, y se esperaba %s o %s o %s o %s"));
 # undef YYCASE_
     }
 
@@ -1825,7 +1825,7 @@ yyreduce:
 
   case 25:
 #line 265 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = T_VOID;}
+    { (yyval.INT) = TVOID;}
 #line 1830 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
@@ -2103,835 +2103,841 @@ yyreduce:
 
   case 57:
 #line 428 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = A_PUB; }
+    { (yyval.INT) = A_PUB_CON; }
 #line 2108 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 431 "sintactico_lienzo.y" /* yacc.c:1646  */
+#line 429 "sintactico_lienzo.y" /* yacc.c:1646  */
+    { (yyval.INT) = A_PUB; }
+#line 2114 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 59:
+#line 432 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  				 	(yyval.NODO) = new AtributoNodo();
  				 	(yyval.NODO->nodo) = (yyvsp[0].NODO->nodo);
  				}
-#line 2117 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2123 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 59:
-#line 436 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 60:
+#line 437 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  				 	(yyval.NODO) = new AtributoNodo();
  				 	(yyval.NODO->nodo) = new Nodo();
  				}
-#line 2126 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 60:
-#line 441 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = TENTERO; }
 #line 2132 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 61:
 #line 442 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = TDOBLE; }
+    { (yyval.INT) = TENTERO; }
 #line 2138 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
 #line 443 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = TBOOLEAN; }
+    { (yyval.INT) = TDOBLE; }
 #line 2144 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
 #line 444 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = TCARACTER; }
+    { (yyval.INT) = TBOOLEAN; }
 #line 2150 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
 #line 445 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = TCADENA; }
+    { (yyval.INT) = TCARACTER; }
 #line 2156 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 453 "sintactico_lienzo.y" /* yacc.c:1646  */
+#line 446 "sintactico_lienzo.y" /* yacc.c:1646  */
+    { (yyval.INT) = TCADENA; }
+#line 2162 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 66:
+#line 454 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigVarDir(*(yyvsp[-2].CADENA), *(yyvsp[0].NODO->nodo), lienzoline);  					
   				}
-#line 2165 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2171 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 66:
-#line 458 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 67:
+#line 459 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigVarInc(*(yyvsp[-1].CADENA), lienzoline);  					
   				}
-#line 2174 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2180 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 67:
-#line 463 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 68:
+#line 464 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigVarDec(*(yyvsp[-1].CADENA), lienzoline);  					
   				}
-#line 2183 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2189 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 68:
-#line 468 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 69:
+#line 469 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigVarSumSimply(*(yyvsp[-2].CADENA), *(yyvsp[0].NODO->nodo), lienzoline);  					
   				}
-#line 2192 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2198 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 69:
-#line 473 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 70:
+#line 474 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigVarSubSimply(*(yyvsp[-2].CADENA), *(yyvsp[0].NODO->nodo), lienzoline);  					
   				}
-#line 2201 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2207 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 70:
-#line 484 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 71:
+#line 485 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::decArr((yyvsp[-7].INT), (yyvsp[-5].INT), (yyvsp[-3].LSTRING->lstring), (yyvsp[-2].LNODO->lnodo),  *(yyvsp[-1].NODO->nodo), lienzoline);
                     ts->append(*Simbolo::crearArrs(nombreLienzo, padre->top(), *(yyval.NODO->nodo)));
  				}
-#line 2211 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2217 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 71:
-#line 491 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 72:
+#line 492 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::preHijo((yyvsp[0].LNODO->lnodo), *(yyvsp[-2].NODO->nodo));
  				}
-#line 2220 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2226 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 72:
-#line 496 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 73:
+#line 497 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::iniciarHijos(*(yyvsp[-1].NODO->nodo));
  				}
-#line 2229 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2235 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 73:
-#line 502 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 74:
+#line 503 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  				 	(yyval.NODO) = new AtributoNodo();
  				 	(yyval.NODO->nodo) = Nodo::crearRefArr(*(yyvsp[-1].LNODO->lnodo), lienzoline);
  				}
-#line 2238 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2244 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 74:
-#line 507 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 75:
+#line 508 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  				 	(yyval.NODO) = new AtributoNodo();
  				 	(yyval.NODO->nodo) = (yyvsp[0].NODO->nodo);
  				}
-#line 2247 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2253 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 75:
-#line 512 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 76:
+#line 513 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  				 	(yyval.NODO) = new AtributoNodo();
  				 	(yyval.NODO->nodo) = new Nodo();
  				}
-#line 2256 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2262 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 76:
-#line 518 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 77:
+#line 519 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::preHijo((yyvsp[0].LNODO->lnodo), *Nodo::crearRefArr(*(yyvsp[-3].LNODO->lnodo), lienzoline));
  				}
-#line 2265 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2271 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 77:
-#line 523 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 78:
+#line 524 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::iniciarHijos(*Nodo::crearRefArr(*(yyvsp[-1].LNODO->lnodo), lienzoline));
  				}
-#line 2274 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2280 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 78:
-#line 528 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 79:
+#line 529 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = (yyvsp[0].LNODO->lnodo);
  				}
-#line 2283 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2289 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 79:
-#line 534 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 80:
+#line 535 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::preHijo((yyvsp[0].LNODO->lnodo), *(yyvsp[-2].NODO->nodo));
  				}
-#line 2292 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2298 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 80:
-#line 539 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 81:
+#line 540 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::iniciarHijos(*(yyvsp[0].NODO->nodo));
  				}
-#line 2301 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2307 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 81:
-#line 550 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 82:
+#line 551 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigArrDir(*(yyvsp[-3].CADENA), (yyvsp[-2].LNODO->lnodo), *(yyvsp[0].NODO->nodo), lienzoline);  					
   				}
-#line 2310 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2316 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 82:
-#line 555 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 83:
+#line 556 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigArrInc(*(yyvsp[-2].CADENA), (yyvsp[-1].LNODO->lnodo), lienzoline);  					
   				}
-#line 2319 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2325 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 83:
-#line 560 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 84:
+#line 561 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigArrDec(*(yyvsp[-2].CADENA), (yyvsp[-1].LNODO->lnodo), lienzoline);  					
   				}
-#line 2328 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2334 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 84:
-#line 565 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 85:
+#line 566 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigArrSumSimply(*(yyvsp[-3].CADENA), (yyvsp[-2].LNODO->lnodo), *(yyvsp[0].NODO->nodo), lienzoline);  					
   				}
-#line 2337 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2343 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 85:
-#line 570 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 86:
+#line 571 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigArrSubSimply(*(yyvsp[-3].CADENA), (yyvsp[-2].LNODO->lnodo), *(yyvsp[0].NODO->nodo), lienzoline);  					
   				}
-#line 2346 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 86:
-#line 580 "sintactico_lienzo.y" /* yacc.c:1646  */
-    {recorrido->push(lienzoline);}
 #line 2352 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 87:
 #line 581 "sintactico_lienzo.y" /* yacc.c:1646  */
+    {recorrido->push(lienzoline);}
+#line 2358 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 88:
+#line 582 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::crearSi(*(yyvsp[-4].NODO->nodo), *(yyvsp[-1].LNODO->lnodo), *(yyvsp[0].NODO->nodo), recorrido->pop());
  				}
-#line 2361 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2367 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 88:
-#line 587 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 89:
+#line 588 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::crearSentencia(*(yyvsp[0].LNODO->lnodo));
  				}
-#line 2370 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2376 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 89:
-#line 592 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 90:
+#line 593 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = new Nodo();
  				}
-#line 2379 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 90:
-#line 602 "sintactico_lienzo.y" /* yacc.c:1646  */
-    {recorrido->push(lienzoline);}
 #line 2385 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 91:
 #line 603 "sintactico_lienzo.y" /* yacc.c:1646  */
+    {recorrido->push(lienzoline);}
+#line 2391 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 92:
+#line 604 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::crearComprobar(*(yyvsp[-5].NODO->nodo), *(yyvsp[-1].LNODO->lnodo), recorrido->pop());
  				}
-#line 2394 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2400 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 92:
-#line 609 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 93:
+#line 610 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::preCasos((yyvsp[0].LNODO->lnodo), *(yyvsp[-3].NODO->nodo), *(yyvsp[-1].LNODO->lnodo), lienzoline);
 
  				}
-#line 2404 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2410 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 93:
-#line 615 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 94:
+#line 616 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::crearCasos(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].LNODO->lnodo), lienzoline);
 
  				}
-#line 2414 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2420 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 94:
-#line 621 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 95:
+#line 622 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
  					(yyval.LNODO->lnodo) = Nodo::crearCasos(*(yyvsp[0].LNODO->lnodo), lienzoline);
 
  				}
-#line 2424 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 95:
-#line 631 "sintactico_lienzo.y" /* yacc.c:1646  */
-    {recorrido->push(lienzoline);}
 #line 2430 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 96:
 #line 632 "sintactico_lienzo.y" /* yacc.c:1646  */
+    {recorrido->push(lienzoline);}
+#line 2436 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 97:
+#line 633 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::crearPara(*(yyvsp[-7].NODO->nodo), *(yyvsp[-5].NODO->nodo), *(yyvsp[-3].NODO->nodo), *(yyvsp[0].LNODO->lnodo), recorrido->pop());
  				}
-#line 2439 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2445 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 97:
-#line 638 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 98:
+#line 639 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::decVar(*(yyvsp[-2].CADENA), (yyvsp[-3].INT), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2448 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2454 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 98:
-#line 643 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 99:
+#line 644 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::asigVarDir(*(yyvsp[-2].CADENA), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2457 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 99:
-#line 653 "sintactico_lienzo.y" /* yacc.c:1646  */
-    {recorrido->push(lienzoline);}
 #line 2463 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 100:
 #line 654 "sintactico_lienzo.y" /* yacc.c:1646  */
+    {recorrido->push(lienzoline);}
+#line 2469 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 101:
+#line 655 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::crearMientras(*(yyvsp[-3].NODO->nodo), *(yyvsp[0].LNODO->lnodo), recorrido->pop());
  				}
-#line 2472 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 101:
-#line 664 "sintactico_lienzo.y" /* yacc.c:1646  */
-    {recorrido->push(lienzoline);}
 #line 2478 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 102:
 #line 665 "sintactico_lienzo.y" /* yacc.c:1646  */
+    {recorrido->push(lienzoline);}
+#line 2484 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 103:
+#line 666 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
  					(yyval.NODO->nodo) = Nodo::crearHacer(*(yyvsp[-2].NODO->nodo), *(yyvsp[-5].LNODO->lnodo), recorrido->pop());
  				}
-#line 2487 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2493 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 103:
-#line 676 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 104:
+#line 677 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearPintarP(*(yyvsp[-8].NODO->nodo), *(yyvsp[-6].NODO->nodo), *(yyvsp[-4].NODO->nodo), *(yyvsp[-2].NODO->nodo), lienzoline);
  				}
-#line 2496 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2502 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 104:
-#line 681 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 105:
+#line 682 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearPintarOR(*(yyvsp[-12].NODO->nodo), *(yyvsp[-10].NODO->nodo), *(yyvsp[-8].NODO->nodo), *(yyvsp[-6].NODO->nodo), *(yyvsp[-4].NODO->nodo), *(yyvsp[-2].NODO->nodo), lienzoline);
  				}
-#line 2505 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2511 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 105:
-#line 686 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 106:
+#line 687 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearPintarS(*(yyvsp[-8].NODO->nodo), *(yyvsp[-6].NODO->nodo), *(yyvsp[-4].NODO->nodo), *(yyvsp[-2].NODO->nodo), lienzoline);
  				}
-#line 2514 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2520 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 106:
-#line 697 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 107:
+#line 698 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearOrdenar(*(yyvsp[-3].CADENA), (yyvsp[-1].INT), lienzoline);
  				}
-#line 2523 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2529 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 107:
-#line 702 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 108:
+#line 703 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearSumarizar(*(yyvsp[-1].NODO->nodo), lienzoline);
  				}
-#line 2532 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 108:
-#line 707 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = SRN_ASC; }
 #line 2538 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 109:
 #line 708 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = SRN_DESC; }
+    { (yyval.INT) = SRN_ASC; }
 #line 2544 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 110:
 #line 709 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = SRN_PAR; }
+    { (yyval.INT) = SRN_DESC; }
 #line 2550 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 111:
 #line 710 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = SRN_IMPAR; }
+    { (yyval.INT) = SRN_PAR; }
 #line 2556 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 112:
 #line 711 "sintactico_lienzo.y" /* yacc.c:1646  */
-    { (yyval.INT) = SRN_PRIMO; }
+    { (yyval.INT) = SRN_IMPAR; }
 #line 2562 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 714 "sintactico_lienzo.y" /* yacc.c:1646  */
+#line 712 "sintactico_lienzo.y" /* yacc.c:1646  */
+    { (yyval.INT) = SRN_PRIMO; }
+#line 2568 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 114:
+#line 715 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearRefArr(*(yyvsp[0].CADENA), lienzoline);
  				}
-#line 2571 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2577 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 114:
-#line 719 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 115:
+#line 720 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearRefArr(*(yyvsp[-1].LNODO->lnodo), lienzoline);
  				}
-#line 2580 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2586 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 115:
-#line 730 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 116:
+#line 731 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearLlamada(*(yyvsp[-3].CADENA), *(yyvsp[-1].LNODO->lnodo), lienzoline);
  				}
-#line 2589 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2595 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 116:
-#line 736 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 117:
+#line 737 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
 					(yyval.LNODO) = (yyvsp[0].LNODO) ;
  				}
-#line 2598 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2604 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 117:
-#line 741 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 118:
+#line 742 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.LNODO) = new AtributoLnodo();
 					(yyval.LNODO->lnodo) = Nodo::iniciarHijos();
  				}
-#line 2607 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2613 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 118:
-#line 752 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 119:
+#line 753 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO) = (yyvsp[0].NODO);
  				}
-#line 2616 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2622 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 119:
-#line 758 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 120:
+#line 759 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearOr(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2625 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2631 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 120:
-#line 763 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 121:
+#line 764 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearNor(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2634 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2640 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 121:
-#line 768 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 122:
+#line 769 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearXor(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2643 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2649 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 122:
-#line 773 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 123:
+#line 774 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearAnd(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2652 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2658 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 123:
-#line 778 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 124:
+#line 779 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearNand(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2661 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2667 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 124:
-#line 783 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 125:
+#line 784 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearNot(*(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2670 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2676 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 125:
-#line 788 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 126:
+#line 789 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO) = (yyvsp[0].NODO);
  				}
-#line 2679 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2685 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 126:
-#line 794 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 127:
+#line 795 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearIgual(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2688 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2694 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 127:
-#line 799 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 128:
+#line 800 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearDiferente(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2697 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2703 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 128:
-#line 804 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 129:
+#line 805 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearMenIgual(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2706 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2712 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 129:
-#line 809 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 130:
+#line 810 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearMen(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2715 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2721 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 130:
-#line 814 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 131:
+#line 815 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearMay(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2724 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2730 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 131:
-#line 819 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 132:
+#line 820 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearMayIgual(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2733 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2739 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 132:
-#line 824 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 133:
+#line 825 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO) = (yyvsp[0].NODO);
  				}
-#line 2742 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2748 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 133:
-#line 830 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 134:
+#line 831 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearSum(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2751 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2757 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 134:
-#line 835 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 135:
+#line 836 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearSub(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2760 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2766 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 135:
-#line 840 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 136:
+#line 841 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearMul(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2769 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2775 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 136:
-#line 845 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 137:
+#line 846 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearDiv(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2778 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2784 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 137:
-#line 850 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 138:
+#line 851 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearPow(*(yyvsp[-2].NODO->nodo), *(yyvsp[0].NODO->nodo), lienzoline);
  				}
-#line 2787 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2793 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 138:
-#line 855 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 139:
+#line 856 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO) = (yyvsp[0].NODO);
  				}
-#line 2796 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2802 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 139:
-#line 861 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 140:
+#line 862 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO) = (yyvsp[-1].NODO);
  				}
-#line 2805 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 140:
-#line 866 "sintactico_lienzo.y" /* yacc.c:1646  */
-    {
- 					(yyval.NODO) = new AtributoNodo();
-					(yyval.NODO) = (yyvsp[0].NODO);
- 				}
-#line 2814 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2811 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 141:
-#line 871 "sintactico_lienzo.y" /* yacc.c:1646  */
+#line 867 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO) = (yyvsp[0].NODO);
  				}
-#line 2823 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2820 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 142:
-#line 876 "sintactico_lienzo.y" /* yacc.c:1646  */
+#line 872 "sintactico_lienzo.y" /* yacc.c:1646  */
+    {
+ 					(yyval.NODO) = new AtributoNodo();
+					(yyval.NODO) = (yyvsp[0].NODO);
+ 				}
+#line 2829 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 143:
+#line 877 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearArr(*(yyvsp[-1].CADENA), *(yyvsp[0].LNODO->lnodo), lienzoline);
  				}
-#line 2832 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2838 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 143:
-#line 881 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 144:
+#line 882 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearNulo(*(yyvsp[0].CADENA), lienzoline);
  				}
-#line 2841 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2847 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 144:
-#line 886 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 145:
+#line 887 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearVar(*(yyvsp[0].CADENA), lienzoline);
  				}
-#line 2850 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2856 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 145:
-#line 891 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 146:
+#line 892 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = (yyvsp[0].NODO->nodo);
  				}
-#line 2859 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2865 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 146:
-#line 896 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 147:
+#line 897 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearCaracter(*(yyvsp[0].CADENA), lienzoline);
  				}
-#line 2868 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2874 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 147:
-#line 901 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 148:
+#line 902 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearCadena(*(yyvsp[0].CADENA), lienzoline);
  				}
-#line 2877 "sintactico_lienzo.cpp" /* yacc.c:1646  */
-    break;
-
-  case 148:
-#line 906 "sintactico_lienzo.y" /* yacc.c:1646  */
-    {
- 					(yyval.NODO) = new AtributoNodo();
-					(yyval.NODO->nodo) = Nodo::crearBoolean(*(yyvsp[0].CADENA), lienzoline);
- 				}
-#line 2886 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2883 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 149:
-#line 911 "sintactico_lienzo.y" /* yacc.c:1646  */
+#line 907 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearBoolean(*(yyvsp[0].CADENA), lienzoline);
  				}
-#line 2895 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2892 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
   case 150:
-#line 917 "sintactico_lienzo.y" /* yacc.c:1646  */
+#line 912 "sintactico_lienzo.y" /* yacc.c:1646  */
+    {
+ 					(yyval.NODO) = new AtributoNodo();
+					(yyval.NODO->nodo) = Nodo::crearBoolean(*(yyvsp[0].CADENA), lienzoline);
+ 				}
+#line 2901 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+    break;
+
+  case 151:
+#line 918 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearEntero(QString("-").append(*(yyvsp[0].CADENA)), lienzoline);
  				}
-#line 2904 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2910 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 151:
-#line 922 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 152:
+#line 923 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearDoble(QString("-").append(*(yyvsp[0].CADENA)), lienzoline);
  				}
-#line 2913 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2919 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 152:
-#line 927 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 153:
+#line 928 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearEntero(*(yyvsp[0].CADENA), lienzoline);
  				}
-#line 2922 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2928 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
-  case 153:
-#line 932 "sintactico_lienzo.y" /* yacc.c:1646  */
+  case 154:
+#line 933 "sintactico_lienzo.y" /* yacc.c:1646  */
     {
  					(yyval.NODO) = new AtributoNodo();
 					(yyval.NODO->nodo) = Nodo::crearDoble(*(yyvsp[0].CADENA), lienzoline);
  				}
-#line 2931 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2937 "sintactico_lienzo.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 2935 "sintactico_lienzo.cpp" /* yacc.c:1646  */
+#line 2941 "sintactico_lienzo.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -3159,7 +3165,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 938 "sintactico_lienzo.y" /* yacc.c:1906  */
+#line 939 "sintactico_lienzo.y" /* yacc.c:1906  */
 
 
 void lienzoinit(){
