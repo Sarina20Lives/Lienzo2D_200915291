@@ -3,12 +3,11 @@
 #include "Interprete/casteo.h"
 
 Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo nodo){
-    ma->getInstance(lienzo);
     ctxL->aumentarNivel();
     //Resolver valor:
     Resultado *ini = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(0));
     if(ini->getTipo()==ERR || ini->getEsArr()){
-        //TODO-ERROR-El valor inicial no es valido
+        ManejoErrores::addErrorSemantico("El valor inicial no es valido", nodo.getFila());
         return new Resultado();
     }
     bool esPrimero = true;
@@ -22,7 +21,7 @@ Resultado *Interprete::ejectuarComprobar(QString lienzo, QString padre, Contexto
             if(caso.getRol()==RN_CASO){
                 cond = Interprete::resolverExpresion(lienzo, ctxG, ctxL, caso.getHijo(0));
                 if(cond->getTipo()!=ini->getTipo()){
-                    ma->addErrorSemantico("Los valores no se pueden igualar, no son del mismo tipo", nodo.getFila());
+                    ManejoErrores::addErrorSemantico("Los valores no se pueden igualar, no son del mismo tipo", nodo.getFila());
                     ctxL->limpiarContexto();
                     return new Resultado();
                 }

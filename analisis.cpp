@@ -11,8 +11,7 @@
 void Principal::analisis(QString contenido){
     Lienzo *prin = parselienzo(&contenido);
     if (prin == NULL){
-        //TODO-ERROR-Lienzo no se pudo generar
-        //QMessageBox::critical(this, "Error en el análisis","El lienzo no se puede generar.");
+        ManejoErrores::addErrorSemantico("El lienzo no se pudo generar.", 0);
         return;
     }
     QList<Simbolo> *ts = new QList<Simbolo>();
@@ -37,13 +36,11 @@ void Principal::agregarExtends(QList<Simbolo> *ts, QList<Lienzo> *lienzos, QList
         contenido = ManejoArchivos::abrirArchivo(direccion);
         lienzo = parselienzo(&contenido);
         if(lienzo==NULL){
-            //TODO-ERROR-El lienzo no se pudo generar, comprobar archivos
-            //QMessageBox::critical(this, "Error en el análisis","El lienzo "+nombre+" no se puede generar, comprobar Archivos.");
+            ManejoErrores::addErrorSemantico("El lienzo no se pudo generar, comprobar la existencia de los archivos.", 0);
             return;
         }
         if(Principal::existeUnLienzo(lienzos, nombre)){
-            //TODO-ERROR-Referencia redundante
-            //QMessageBox::critical(this, "Error en el análisis","El lienzo "+nombre+" hace una referencia redundante.");
+            ManejoErrores::addErrorSemantico("Referencia de extends redudante.", 0);
             return;
         }
         ts->append(*getTS());

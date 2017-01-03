@@ -27,7 +27,7 @@ void Interprete::ejecutarPrincipal(QString lienzo){
     }
 
     if(allMtds.count()==0){
-        //TODO-ERROR-El metodo buscado no existe
+        ManejoErrores::addErrorSemantico("No existe ningún método Principal.", -1);
         return;
     }
 
@@ -114,7 +114,7 @@ Metodo Interprete::searchMetodoConservar(QList<Metodo> metds){
         return encontrados.at(0);
     }
     if(encontrados.count()>1){
-        //TODO-ERROR-DUPLICACION DE METODOS, EXISTE MÁS DE UN MÉTODO CON EL ATRIBUTO CONSERVAR
+        ManejoErrores::addErrorSemantico("Existe más de un método con el atributo 'Conservar'.", -1);
     }
     return *new Metodo();
 }

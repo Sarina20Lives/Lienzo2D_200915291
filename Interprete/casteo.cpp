@@ -1,5 +1,6 @@
 #include "casteo.h"
 #include "General/constantes.h"
+#include "Errores/errores.h"
 
 int Casteo::strToInt(QString valor){
     int casteo = valor.toInt();
@@ -55,7 +56,7 @@ QString Casteo::intToChar(int valor){
 QString Casteo::intToChar(QString valor){
     int valint = Casteo::strToInt(valor);
     if(valint < 32 || valint > 126){
-        //TODO-ERROR-Conversion de char fuera de los limites...
+        ManejoErrores::addErrorSemantico("Conversion de caracter fuera de los limites.", -1);
         return "";
     }
     return Casteo::intToChar(valint);

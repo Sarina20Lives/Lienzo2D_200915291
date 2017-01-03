@@ -1,6 +1,6 @@
 #include "lienzo.h"
 #include "General/constantes.h"
-
+#include "Errores/errores.h"
 
 Lienzo::Lienzo()
 {
@@ -71,11 +71,10 @@ void Lienzo::addMetodo(Metodo mtd)
 {
     foreach (Metodo metodo, *this->metodos) {
         if(QString::compare(mtd.getNombre(), metodo.getNombre())==0 && QString::compare(metodo.getParamsToStr(), mtd.getParamsToStr())==0){
-            //TODO-ERROR-Metodo duplicado en la declaración de lienzo.
+            ManejoErrores::addErrorSemantico("Metodo duplicado en la declaración de lienzo.", metodo.getFila());
             return;
         }
     }
-
     this->metodos->prepend(mtd);
 }
 
@@ -85,7 +84,7 @@ void Lienzo::addVariable(Nodo var)
         foreach (QString variableN, *variable.getIds()) {
             foreach (QString varN, *var.getIds()) {
                 if(QString::compare(variableN, varN)==0){
-                    //TODO-ERROR-Variable duplicada.
+                    ManejoErrores::addErrorSemantico("La variable '"+varN+"' ya ha sido declarada previamente, variable duplicada.", var.getFila());
                     var.getIds()->removeOne(varN);
                     if(var.getIds()->count() == 0){
                         return;

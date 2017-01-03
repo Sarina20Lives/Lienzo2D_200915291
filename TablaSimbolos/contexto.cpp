@@ -38,9 +38,12 @@ Contexto *Contexto::generarContextoLocal(QString lienzo, QString padre, int acce
     QList<Simbolo> *parametros = Simbolo::crearParams(lienzo, padre, acceso, params);
     Resultado res = *new Resultado();
     int cont = 0;
+    int fila = -1;
+    if(!params.isEmpty())
+        fila = params.first().getFila();
     foreach (Simbolo nuevo, *parametros) {
         if(temp->existeVariable(nuevo.getNombre())){
-            //TODO-ERROR-Duplicación de variables
+            ManejoErrores::addErrorSemantico("El método '"+padre+"' tiene duplicado el parámetro '"+ nuevo.getNombre() +"'.", fila);
             return new Contexto();
         }
         res = valores.at(cont);
@@ -66,7 +69,8 @@ void Contexto::agregarVariables(QString lienzo, QString padre, Contexto *ctxG, C
 
     foreach (Simbolo sim, *variables) {
         if(existeVariable(sim.getNombre())){
-           return;
+            ManejoErrores::addErrorSemantico("La variable '"+sim.getNombre()+"' ya existe.", declaracion.getFila(), lienzo);
+            return;
         }
         if(valor.getTipo()!=ERR){
             sim.setValor(valor.getValor());
@@ -84,7 +88,7 @@ void Contexto::agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Co
     foreach (Nodo dim, *declaracion.getHijo(0).getHijos()) {
         unaDim = Interprete::resolverExpresion(lienzo, ctxG, ctxL, dim);
         if(unaDim->getTipo()!=TENTERO){
-            //TODO-ERROR-La dimensión que se quiere definir no es de tipo entero
+            ManejoErrores::addErrorSemantico("La dimensión que se quiere definir no es de tipo entero.", dim.getFila());
             return;
         }
         dims->append(*unaDim);
@@ -92,7 +96,7 @@ void Contexto::agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Co
 
     Resultado valor = *Interprete::resolverExpresion(lienzo, ctxG, ctxL, declaracion.getHijo(1));
     if(valor.getEsArr() && dims->count()!=valor.getDimensiones().count()){
-        //TODO-ERROR-La magnitud de los arreglos no corresponden
+        ManejoErrores::addErrorSemantico("La cantidad de dimensiones de los arreglos no corresponde.",declaracion.getFila());
         return;
     }
 
@@ -101,7 +105,7 @@ void Contexto::agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Co
         QList<int> posiciones = valor.getDimensiones();
         foreach (Resultado dim, *dims) {
             if(posiciones.at(pos)<0 || posiciones.at(pos)>Casteo::strToInt(dim.getValor())){
-                //TODO-ERROR-Indices fuera de la capacidad del arreglo
+                ManejoErrores::addErrorSemantico("Índice fuera de la capacidad del arreglo", declaracion.getFila());
             }
             pos = pos+1;
         }
@@ -241,7 +245,6 @@ Simbolo Contexto::getVariable(QString nombre)
 bool Contexto::existeVariable(QString nombre){
     foreach (Simbolo sim, *this->contexto) {
         if(QString::compare(sim.getNombre(), nombre)==0){
-            //TODO-ERROR-Duplicación de variables
             return true;
         }
     }
@@ -254,14 +257,14 @@ void Contexto::agregarVariable(Simbolo sim)
     foreach (Simbolo var, *this->contexto) {
         if(var.getNombre() == sim.getNombre()){
             if(var.getAcceso()>A_PRI){
-                //TODO:WARNING-LA VARIABLE PRESENTA DUPLICACION
+                ManejoErrores::addErrorSemantico("La variable '"+var.getNombre()+"' presenta duplicación.", -1);
                 return;
             }
             if(sim.getAcceso()>A_PRI && sim.getAcceso()!=A_PRI_CON){
                 this->contexto->replace(cont, sim);
                 return;
             }else{
-                //TODO:WARNING-LA VARIABLE PRESENTA DUPLICACION
+                ManejoErrores::addErrorSemantico("La variable '"+var.getNombre()+"' presenta duplicación.", -1);
                 return;
             }
         }
