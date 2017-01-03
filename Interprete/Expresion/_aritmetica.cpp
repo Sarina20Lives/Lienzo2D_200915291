@@ -120,7 +120,7 @@ Resultado *Interprete::resolverDiv(Resultado op1, Resultado op2, int fila){
     if(op1.getTipo()==TDOBLE || op2.getTipo()==TDOBLE){
         double divisor = Casteo::toDoble(op2);
         if(divisor==0){
-            ma->addErrorSemantico("División dentro de cero",fila);
+            ManejoErrores::addErrorSemantico("División dentro de cero", fila);
             return resultado;
         }
         resultado->setTipo(TDOBLE);
@@ -131,7 +131,7 @@ Resultado *Interprete::resolverDiv(Resultado op1, Resultado op2, int fila){
     if(op1.getTipo()==TENTERO || op2.getTipo()==TENTERO){
         double divisor = Casteo::toDoble(op2);
         if(divisor==0){
-            ma->addErrorSemantico("División dentro de cero", fila);
+            ManejoErrores::addErrorSemantico("División dentro de cero", fila);
             return resultado;
         }
         resultado->setTipo(TDOBLE);

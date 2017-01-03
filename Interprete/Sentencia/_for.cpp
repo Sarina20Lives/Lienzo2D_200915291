@@ -14,6 +14,7 @@ linicio:
     condicion = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(1));
     if(condicion->getTipo()!=TBOOLEAN){
         ctxL->limpiarContexto();
+        ManejoErrores::addErrorSemantico("Error al obtener la condicion del for", nodo.getHijo(1).getFila());
         return new Resultado();
     }
     if(!Casteo::strToBool(condicion->getValor())){
@@ -40,7 +41,4 @@ linicio:
     //Variacion
     Interprete::ejecutarSentencia(lienzo, padre, ctxG, ctxL, nodo.getHijo(2));
     goto linicio;
-
-
-
 }
