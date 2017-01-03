@@ -5,13 +5,12 @@
 
 Resultado *Interprete::resolverAsigArr(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig ){
     Resultado *resultado = new Resultado();
-    ma->getInstance(lienzo);
     //Resolviendo valor
     Resultado *valor = new Resultado();
     if(asig.getSubRol()==SRN_DIRECTO || asig.getSubRol()==SRN_SUM_SIMPLY || asig.getSubRol()==SRN_SUB_SIMPLY){
        valor = Interprete::resolverExpresion(lienzo, ctxG, ctxL, asig.getHijo(1));
        if(valor->getTipo()==ERR || valor->getEsArr()){
-           ma->addErrorSemantico("La asignación no puede ser posible", asig.getFila());
+           ManejoErrores::addErrorSemantico("La asignación no puede ser posible", asig.getFila());
            return resultado;
        }
     }
@@ -22,32 +21,32 @@ Resultado *Interprete::resolverAsigArr(QString lienzo, Contexto *ctxG, Contexto 
     foreach (Nodo nodo, *asig.getHijo(0).getHijos()) {
         temp = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo);
         if(temp->getTipo()!=TENTERO || temp->getEsArr()){
-            ma->addErrorSemantico("Se esperaba tipo Entero para las dimensiones", asig.getFila());
+            ManejoErrores::addErrorSemantico("Se esperaba tipo Entero para las dimensiones", asig.getFila());
             return resultado;
         }
         dims->append(*temp);
     }
 
     if(asig.getSubRol()==SRN_DIRECTO){
-        return Interprete::asigDirectaArr(asig.getCadena(), dims, *valor, ctxG, ctxL);
+        return Interprete::asigDirectaArr(asig.getCadena(), asig.getFila(), dims, *valor, ctxG, ctxL);
     }
     if(asig.getSubRol()==SRN_SUM_SIMPLY){
-        return Interprete::asigSumSimplyArr(asig.getCadena(), dims, *valor, ctxG, ctxL);
+        return Interprete::asigSumSimplyArr(asig.getCadena(), asig.getFila(), dims, *valor, ctxG, ctxL);
     }
     if(asig.getSubRol()==SRN_SUB_SIMPLY){
-        return Interprete::asigSubSimplyArr(asig.getCadena(), dims, *valor, ctxG, ctxL);
+        return Interprete::asigSubSimplyArr(asig.getCadena(), asig.getFila(), dims, *valor, ctxG, ctxL);
     }
     if(asig.getSubRol()==SRN_INC){
-        return Interprete::asigIncArr(asig.getCadena(), dims, ctxG, ctxL);
+        return Interprete::asigIncArr(asig.getCadena(), asig.getFila(), dims, ctxG, ctxL);
     }
     if(asig.getSubRol()==SRN_DEC){
-        return Interprete::asigDecArr(asig.getCadena(), dims, ctxG, ctxL);
+        return Interprete::asigDecArr(asig.getCadena(), asig.getFila(), dims, ctxG, ctxL);
     }
 
     return resultado;
 }
 
-Resultado *Interprete::asigDirectaArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
+Resultado *Interprete::asigDirectaArr(QString nombre, int fila, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
     Resultado *resultado = new Resultado();
     //Buscando el arreglo en el contexto local
     QList<Simbolo>::iterator simL;
@@ -55,13 +54,13 @@ Resultado *Interprete::asigDirectaArr(QString nombre, QList<Resultado> *dims, Re
         if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simL->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simL->getDims());
             valor = Casteo::toAsigVar(simL->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addError("La asignación no es posible");
+                ManejoErrores::addErrorSemantico("La asignación no es posible", fila);
                 return resultado;
             }
             simL->setValor(pos, valor.getValor());
@@ -74,13 +73,13 @@ Resultado *Interprete::asigDirectaArr(QString nombre, QList<Resultado> *dims, Re
         if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simG->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simG->getDims());
             valor = Casteo::toAsigVar(simG->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addError("La asignación no es posible");
+                ManejoErrores::addErrorSemantico("La asignación no es posible, comprobar el valor", fila);
                 return resultado;
             }
             simG->setValor(pos, valor.getValor());
@@ -91,7 +90,7 @@ Resultado *Interprete::asigDirectaArr(QString nombre, QList<Resultado> *dims, Re
     return resultado;
 }
 
-Resultado *Interprete::asigSumSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
+Resultado *Interprete::asigSumSimplyArr(QString nombre, int fila,  QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
     Resultado *resultado = new Resultado();
     Resultado *tempL = new Resultado();
     //Buscando el arreglo en el contexto local
@@ -100,7 +99,7 @@ Resultado *Interprete::asigSumSimplyArr(QString nombre, QList<Resultado> *dims, 
         if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simL->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simL->getDims());
@@ -110,7 +109,7 @@ Resultado *Interprete::asigSumSimplyArr(QString nombre, QList<Resultado> *dims, 
             valor = *Interprete::resolverSum(*tempL, valor);
             valor = Casteo::toAsigVar(simL->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addError("Los tipos de asignación no son permitidos");
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", fila);
                 return resultado;
             }
             simL->setValor(pos, valor.getValor());
@@ -124,7 +123,7 @@ Resultado *Interprete::asigSumSimplyArr(QString nombre, QList<Resultado> *dims, 
         if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simG->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simG->getDims());
@@ -134,7 +133,7 @@ Resultado *Interprete::asigSumSimplyArr(QString nombre, QList<Resultado> *dims, 
             valor = *Interprete::resolverSum(*tempG, valor);
             valor = Casteo::toAsigVar(simG->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addError("Los tipos de asignación no son permitidos");
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", fila);
                 return resultado;
             }
             simG->setValor(pos, valor.getValor());
@@ -144,7 +143,7 @@ Resultado *Interprete::asigSumSimplyArr(QString nombre, QList<Resultado> *dims, 
     return resultado;
 }
 
-Resultado *Interprete::asigSubSimplyArr(QString nombre, QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
+Resultado *Interprete::asigSubSimplyArr(QString nombre, int fila,  QList<Resultado> *dims, Resultado valor, Contexto *ctxG, Contexto *ctxL){
     Resultado *resultado = new Resultado();
     Resultado *tempL = new Resultado();
     //Buscando el arreglo en el contexto local
@@ -153,7 +152,7 @@ Resultado *Interprete::asigSubSimplyArr(QString nombre, QList<Resultado> *dims, 
         if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simL->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simL->getDims());
@@ -163,7 +162,7 @@ Resultado *Interprete::asigSubSimplyArr(QString nombre, QList<Resultado> *dims, 
             valor = *Interprete::resolverSub(*tempL, valor);
             valor = Casteo::toAsigVar(simL->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addError("Los tipos de asignación no son permitidos");
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", fila);
                 return resultado;
             }
             simL->setValor(pos, valor.getValor());
@@ -177,7 +176,7 @@ Resultado *Interprete::asigSubSimplyArr(QString nombre, QList<Resultado> *dims, 
         if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simG->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simG->getDims());
@@ -187,7 +186,7 @@ Resultado *Interprete::asigSubSimplyArr(QString nombre, QList<Resultado> *dims, 
             valor = *Interprete::resolverSub(*tempG, valor);
             valor = Casteo::toAsigVar(simG->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addError("Los tipos de asignación no son permitidos");
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", fila);
                 return resultado;
             }
             simG->setValor(pos, valor.getValor());
@@ -197,7 +196,7 @@ Resultado *Interprete::asigSubSimplyArr(QString nombre, QList<Resultado> *dims, 
     return resultado;
 }
 
-Resultado *Interprete::asigIncArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL){
+Resultado *Interprete::asigIncArr(QString nombre, int fila, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL){
     Resultado *resultado = new Resultado();
     //Buscando el arreglo en el contexto local
     QList<Simbolo>::iterator simL;
@@ -205,13 +204,13 @@ Resultado *Interprete::asigIncArr(QString nombre, QList<Resultado> *dims, Contex
         if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simL->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simL->getDims());
 
             if(simL->getValor(pos) == "" && !simL->getInstancia()){
-                ma->addError("Se requiere una instancia previa para realizar un incremento");
+                ManejoErrores::addErrorSemantico("Se requiere una instancia previa para realizar un incremento", fila);
                 return resultado;
             }
 
@@ -226,7 +225,7 @@ Resultado *Interprete::asigIncArr(QString nombre, QList<Resultado> *dims, Contex
                 simL->setValor(pos, Casteo::intToStr(Casteo::charToInt(simL->getValor(pos)) + 1));
 
             }
-            ma->addError("El tipo de arreglo no es valido para realizar un incremento");
+            ManejoErrores::addErrorSemantico("El tipo de arreglo no es valido para realizar un incremento", fila);
             return resultado;
         }
     }
@@ -236,13 +235,13 @@ Resultado *Interprete::asigIncArr(QString nombre, QList<Resultado> *dims, Contex
         if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simG->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simG->getDims());
 
             if(simG->getValor(pos) == "" && !simG->getInstancia()){
-                ma->addError("Se requiere una instancia previa para realizar un incremento");
+                ManejoErrores::addErrorSemantico("Se requiere una instancia previa para realizar un incremento", fila);
                 return resultado;
             }
 
@@ -257,14 +256,14 @@ Resultado *Interprete::asigIncArr(QString nombre, QList<Resultado> *dims, Contex
                 simG->setValor(pos, Casteo::intToStr(Casteo::charToInt(simG->getValor(pos)) + 1));
 
             }
-            ma->addError("El tipo de arreglo no es valido para realizar un incremento");
+            ManejoErrores::addErrorSemantico("El tipo de arreglo no es valido para realizar un incremento", fila);
             return resultado;
         }
     }
     return resultado;
 }
 
-Resultado *Interprete::asigDecArr(QString nombre, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL){
+Resultado *Interprete::asigDecArr(QString nombre, int fila, QList<Resultado> *dims, Contexto *ctxG, Contexto *ctxL){
     Resultado *resultado = new Resultado();
     //Buscando el arreglo en el contexto local
     QList<Simbolo>::iterator simL;
@@ -272,13 +271,13 @@ Resultado *Interprete::asigDecArr(QString nombre, QList<Resultado> *dims, Contex
         if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simL->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simL->getDims());
 
             if(simL->getValor(pos) == "" && !simL->getInstancia()){
-                ma->addError("Se requiere una instancia previa para realizar un decremento");
+                ManejoErrores::addErrorSemantico("Se requiere una instancia previa para realizar un incremento", fila);
                 return resultado;
             }
 
@@ -293,7 +292,7 @@ Resultado *Interprete::asigDecArr(QString nombre, QList<Resultado> *dims, Contex
                 simL->setValor(pos, Casteo::intToStr(Casteo::charToInt(simL->getValor(pos)) - 1));
 
             }
-            ma->addError("El tipo de arreglo no es valido para realizar un decremento");
+            ManejoErrores::addErrorSemantico("El tipo de arreglo no es valido para realizar un decremento", fila);
             return resultado;
         }
     }
@@ -303,13 +302,13 @@ Resultado *Interprete::asigDecArr(QString nombre, QList<Resultado> *dims, Contex
         if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
             //Verificar que las dimensiones concuerdan
             if(!Contexto::verificarDims(dims, simG->getDims())){
-                ma->addError("Las dimensiones no corresponden al arreglo");
+                ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", fila);
                 return resultado;
             }
             int pos = Contexto::obtenerPosicion(dims, simG->getDims());
 
             if(simG->getValor(pos) == "" && !simG->getInstancia()){
-                ma->addError("Se requiere una instancia previa para realizar un decremento");
+                ManejoErrores::addErrorSemantico("Se requiere una instancia previa para realizar un incremento", fila);
                 return resultado;
             }
 
@@ -324,7 +323,7 @@ Resultado *Interprete::asigDecArr(QString nombre, QList<Resultado> *dims, Contex
                 simG->setValor(pos, Casteo::intToStr(Casteo::charToInt(simG->getValor(pos)) - 1));
 
             }
-            ma->addError("El tipo de arreglo no es valido para realizar un decremento");
+            ManejoErrores::addErrorSemantico("El tipo de arreglo no es valido para realizar un decremento", fila);
             return resultado;
         }
     }
@@ -383,8 +382,7 @@ void Interprete::asigDecVar(Contexto *ctxG, Contexto *ctxL, Nodo asig){
             return;
         }
     }
-
-    ma->addError("La variable no existe");
+    ManejoErrores::addErrorSemantico("La variable no existe", asig.getFila());
 }
 
 void Interprete::asigIncVar(Contexto *ctxG, Contexto *ctxL, Nodo asig){
@@ -420,19 +418,19 @@ void Interprete::asigIncVar(Contexto *ctxG, Contexto *ctxL, Nodo asig){
             return;
         }
     }
-
-    ma->addError("La variable no existe");
+    ManejoErrores::addErrorSemantico("La variable no existe", asig.getFila());
 }
 
-void Interprete::asigArrArr(Contexto *ctxG, Contexto *ctxL, QString nombre, Resultado arr){
+void Interprete::asigArrArr(Contexto *ctxG, Contexto *ctxL, QString nombre, int fila, Resultado arr){
 
     QList<Simbolo>::iterator simL;
     for(simL = (ctxL->getContexto())->begin(); simL!=(ctxL->getContexto())->end(); ++simL){
         if(QString::compare(simL->getNombre(), nombre)==0 && simL->getEsArr()){
             if(arr.getTipo()!=simL->getTipo()){
-                ma->addError("Los tipos de asignación no son permitidos");
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son iguales", fila);
                 return;
             }
+            simL->setContDims(arr.getDimensiones().count());
             simL->setValores(arr.getValores());
             simL->setInstancia(true);
             return;
@@ -443,14 +441,16 @@ void Interprete::asigArrArr(Contexto *ctxG, Contexto *ctxL, QString nombre, Resu
     for(simG = (ctxG->getContexto())->begin(); simG!=(ctxG->getContexto())->end(); ++simG){
         if(QString::compare(simG->getNombre(), nombre)==0 && simG->getEsArr()){
             if(arr.getTipo()!=simG->getTipo()){
-                ma->addError("Los tipos de asignación no son permitidos");
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son iguales", fila);
                 return;
             }
+            simG->setContDims(arr.getDimensiones().count());
             simG->setValores(arr.getValores());
             simG->setInstancia(true);
             return;
         }
     }
+    ManejoErrores::addErrorSemantico("El arreglo no existe", fila);
 }
 
 
@@ -458,11 +458,11 @@ void Interprete::asigArrArr(Contexto *ctxG, Contexto *ctxL, QString nombre, Resu
 void Interprete::asigDirectaVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig){
     Resultado valor = *Interprete::resolverExpresion(lienzo, ctxG, ctxL, asig.getHijo(0));
     if(valor.getTipo()==ERR){
-        ma->addErrorSemantico("La asignación no es posible", asig.getFila());
+        ManejoErrores::addErrorSemantico("La asignación no es posible, compruebe el valor", asig.getFila());
         return;
     }
     if(valor.getEsArr()){
-        Interprete::asigArrArr(ctxG, ctxL, asig.getCadena(), valor);
+        Interprete::asigArrArr(ctxG, ctxL, asig.getCadena(), asig.getFila(), valor);
         return;
     }
 
@@ -471,7 +471,7 @@ void Interprete::asigDirectaVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, 
         if(QString::compare(simL->getNombre(), asig.getCadena())==0 && !simL->getEsArr()){
             valor = Casteo::toAsigVar(simL->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
                 return;
             }
             simL->setValor(valor.getValor());
@@ -485,7 +485,7 @@ void Interprete::asigDirectaVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, 
         if(QString::compare(simG->getNombre(), asig.getCadena())==0 && !simG->getEsArr()){
             valor = Casteo::toAsigVar(simG->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
                 return;
             }
             simG->setValor(valor.getValor());
@@ -493,13 +493,13 @@ void Interprete::asigDirectaVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, 
             return;
         }
     }
-    ma->addErrorSemantico("La variable no existe", asig.getFila());
+    ManejoErrores::addErrorSemantico("La variable no existe", asig.getFila());
 }
 
 void Interprete::asigSumSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig){
     Resultado valor = *Interprete::resolverExpresion(lienzo, ctxG, ctxL, asig.getHijo(0));
     if(valor.getTipo()==ERR || valor.getEsArr()){
-        ma->addErrorSemantico("La asignación no es posible", asig.getFila());
+        ManejoErrores::addErrorSemantico("La asignación no es posible, comprobar el valor", asig.getFila());
         return;
     }
 
@@ -512,7 +512,7 @@ void Interprete::asigSumSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL
             valor = *Interprete::resolverSum(*tempL, valor);
             valor = Casteo::toAsigVar(simL->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
                 return;
             }
             simL->setValor(valor.getValor());
@@ -531,7 +531,7 @@ void Interprete::asigSumSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL
             valor = *Interprete::resolverSum(*tempG, valor);
             valor = Casteo::toAsigVar(simG->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
                 return;
             }
             simG->setValor(valor.getValor());
@@ -539,14 +539,13 @@ void Interprete::asigSumSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL
             return;
         }
     }
-    ma->addErrorSemantico("La variable no existe", asig.getFila());
-
+    ManejoErrores::addErrorSemantico("La variable no existe", asig.getFila());
 }
 
 void Interprete::asigSubSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo asig){
     Resultado valor = *Interprete::resolverExpresion(lienzo, ctxG, ctxL, asig.getHijo(0));
     if(valor.getTipo()==ERR || valor.getEsArr()){
-        ma->addErrorSemantico("La asignación no es posible", asig.getFila());
+        ManejoErrores::addErrorSemantico("La asignación no es posible, comprobar el valor", asig.getFila());
         return;
     }
 
@@ -559,7 +558,7 @@ void Interprete::asigSubSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL
             valor = *Interprete::resolverSub(*tempL, valor);
             valor = Casteo::toAsigVar(simL->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
                 return;
             }
             simL->setValor(valor.getValor());
@@ -577,7 +576,7 @@ void Interprete::asigSubSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL
             valor = *Interprete::resolverSub(*tempG, valor);
             valor = Casteo::toAsigVar(simG->getTipo(), valor);
             if(valor.getTipo()==ERR){
-                ma->addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
+                ManejoErrores::addErrorSemantico("Los tipos de asignación no son permitidos", asig.getFila());
                 return;
             }
             simG->setValor(valor.getValor());
@@ -585,5 +584,5 @@ void Interprete::asigSubSimplyVar(QString lienzo, Contexto *ctxG, Contexto *ctxL
             return;
         }
     }
-    ma->addErrorSemantico("La variable no existe", asig.getFila());
+    ManejoErrores::addErrorSemantico("La variable no existe", asig.getFila());
 }

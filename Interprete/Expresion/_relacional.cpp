@@ -42,7 +42,7 @@ Resultado *Interprete::resolverRelacional(QString lienzo, Contexto *ctxGlobal, C
 
 Resultado *Interprete::resolverNulo(Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
     Resultado *resultado = new Resultado();
-    resultado = Interprete::buscarValVar(ctxGlobal, ctxLocal, exp.getCadena());
+    resultado = Interprete::buscarValVar(ctxGlobal, ctxLocal, exp.getCadena(), exp.getFila());
     resultado->setValor("true");
     if(resultado->getTipo()==ERR){
         resultado->setValor("true");

@@ -4,7 +4,6 @@
 
 
 Resultado *Interprete::resolverExpresion(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
-    ma = ManejoErrores::getInstance(lienzo);
     if(exp.getRol() == RN_ARITMETICA){
         return Interprete::resolverAritmetica(lienzo, ctxGlobal, ctxLocal, exp);
     }
@@ -42,7 +41,7 @@ Resultado *Interprete::resolverOperando(QString lienzo, Contexto *ctxGlobal, Con
     if(exp.getSubRol()==SRN_VAR){
         resultado = Interprete::resolverRefArr(lienzo, ctxGlobal, ctxLocal, exp);
         if(resultado->getTipo()==ERR){
-            return buscarValVar(ctxGlobal, ctxLocal, exp.getCadena());
+            return buscarValVar(ctxGlobal, ctxLocal, exp.getCadena(), exp.getFila());
         }
     }
     if(exp.getSubRol()==SRN_ARR){
@@ -53,14 +52,12 @@ Resultado *Interprete::resolverOperando(QString lienzo, Contexto *ctxGlobal, Con
 
 
 Resultado *Interprete::buscarValArr(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
-    ma->getInstance(lienzo);
-    //Resolver dimensiones...
     QList<Resultado> *dims = new QList<Resultado>();
     Resultado *dim;
     foreach (Nodo nodo, *exp.getHijos()) {
         dim = Interprete::resolverExpresion(lienzo, ctxGlobal, ctxLocal, nodo);
         if(dim->getTipo()!=TENTERO){
-            ma->addErrorSemantico("Error al querer obtener los valores de las dimensiones", exp.getFila());
+            ManejoErrores::addErrorSemantico("Error al querer obtener los valores de las dimensiones", exp.getFila());
             return new Resultado();
         }
         dims->append(*dim);
@@ -69,26 +66,26 @@ Resultado *Interprete::buscarValArr(QString lienzo, Contexto *ctxGlobal, Context
     //Buscar arreglo:
     Simbolo arreglo = Interprete::buscarSimboloArr(ctxGlobal, ctxLocal, exp.getCadena());
     if(arreglo.getTipo()==ERR){
-        ma->addErrorSemantico("El arreglo no existe", exp.getFila());
+        ManejoErrores::addErrorSemantico("El arreglo no existe", exp.getFila());
         return new Resultado();
     }
 
     //Comprobar la cantidad de dimensiones:
     if(arreglo.getDims().count()!=dims->count()){
-        ma->addErrorSemantico("Las dimensiones no corresponden al arreglo", exp.getFila());
+        ManejoErrores::addErrorSemantico("Las dimensiones no corresponden al arreglo", exp.getFila());
         return new Resultado();
     }
     int cont = 0;
     foreach (Resultado res, *dims) {
         if(Casteo::strToInt(res.getValor())<0 || Casteo::strToInt(res.getValor())>arreglo.getDims().at(cont)){
-            ma->addErrorSemantico("Los indices se encuentran fuera de los limites permitidos", exp.getFila());
+            ManejoErrores::addErrorSemantico("Los indices se encuentran fuera de los limites permitidos", exp.getFila());
             return new Resultado();
         }
         cont = cont + 1;
     }
     int pos= Contexto::obtenerPosicion(dims, arreglo.getDims());
     if(!arreglo.getInstancia() && QString::compare(arreglo.getValores().at(pos),"")==0){
-        ma->addErrorSemantico("Se hace referencia a una posición de arreglo no definida", exp.getFila());
+        ManejoErrores::addErrorSemantico("Se hace referencia a una posicion de arreglo no definida", exp.getFila());
         return new Resultado();
     }
 
@@ -114,12 +111,12 @@ Simbolo Interprete::buscarSimboloArr(Contexto *ctxGlobal, Contexto *ctxLocal, QS
     return arreglo;
 }
 
-Resultado *Interprete::buscarValVar(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre){
+Resultado *Interprete::buscarValVar(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre, int fila){
     Resultado *resultado = new Resultado();
     foreach (Simbolo simbolo, *ctxLocal->getContexto()) {
         if(QString::compare(simbolo.getNombre(), nombre)==0 && !simbolo.getEsArr()){
             if(!simbolo.getInstancia()){
-                ma->addError("La variable no ha sido instanciada previamente");
+                ManejoErrores::addErrorSemantico("La variable no ha sido instanciada previamente", fila);
                 return resultado;
             }
             resultado->setTipo(simbolo.getTipo());
@@ -131,7 +128,7 @@ Resultado *Interprete::buscarValVar(Contexto *ctxGlobal, Contexto *ctxLocal, QSt
     foreach (Simbolo simbolo, *ctxGlobal->getContexto()) {
         if(QString::compare(simbolo.getNombre(), nombre)==0 && !simbolo.getEsArr()){
             if(!simbolo.getInstancia()){
-                ma->addError("La variable no ha sido instanciada previamente");
+                ManejoErrores::addErrorSemantico("La variable no ha sido instanciada previamente", fila);
                 return resultado;
             }
             resultado->setTipo(simbolo.getTipo());
@@ -145,7 +142,7 @@ Resultado *Interprete::buscarValVar(Contexto *ctxGlobal, Contexto *ctxLocal, QSt
 Resultado *Interprete::resolverRefArr(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
     Resultado *resultado = new Resultado();
     if(exp.getSubRol()==SRN_ARR || exp.getSubRol()==SRN_VAR){
-        return Interprete::buscarArr(ctxGlobal, ctxLocal, exp.getCadena());
+        return Interprete::buscarArr(ctxGlobal, ctxLocal, exp.getCadena(), exp.getFila());
     }
     if(exp.getSubRol()==SRN_VAL_ARR){
         return Interprete::resolverValArr(lienzo, ctxGlobal, ctxLocal, exp);
@@ -153,12 +150,12 @@ Resultado *Interprete::resolverRefArr(QString lienzo, Contexto *ctxGlobal, Conte
     return resultado;
 }
 
-Resultado *Interprete::buscarArr(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre){
+Resultado *Interprete::buscarArr(Contexto *ctxGlobal, Contexto *ctxLocal, QString nombre, int fila){
     Resultado *resultado = new Resultado();
     foreach (Simbolo simbolo, *ctxLocal->getContexto()) {
         if(QString::compare(simbolo.getNombre(), nombre)==0 && simbolo.getEsArr()){
             if(!simbolo.getInstancia()){
-                ma->addError("El arreglo puede contener valores no instanciados");
+                ManejoErrores::addErrorSemantico("El arreglo puede contener valores no instanciados", fila);
             }
             resultado->setDimensiones(simbolo.getDims());
             resultado->setTipo(simbolo.getTipo());
@@ -171,7 +168,7 @@ Resultado *Interprete::buscarArr(Contexto *ctxGlobal, Contexto *ctxLocal, QStrin
     foreach (Simbolo simbolo, *ctxGlobal->getContexto()) {
         if(QString::compare(simbolo.getNombre(), nombre)==0 && simbolo.getEsArr()){
             if(!simbolo.getInstancia()){
-                ma->addError("El arreglo puede contener valores no instanciados");
+                ManejoErrores::addErrorSemantico("El arreglo puede contener valores no instanciados", fila);
             }
             resultado->setTipo(simbolo.getTipo());
             resultado->setEsArr(true);
@@ -183,7 +180,6 @@ Resultado *Interprete::buscarArr(Contexto *ctxGlobal, Contexto *ctxLocal, QStrin
 }
 
 Resultado *Interprete::resolverValArr(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo valArr){
-    ma->getInstance(lienzo);
     Resultado *unnion = new Resultado();
     QList<Resultado> *resultados = new QList<Resultado>();
     Resultado *temp;
@@ -201,11 +197,11 @@ Resultado *Interprete::resolverValArr(QString lienzo, Contexto *ctxG, Contexto *
     foreach (Resultado resultado, *resultados) {
         cont = cont + 1;
         if(resultado.getTipo()!=tipo){
-            ma->addErrorSemantico("Los tipos no corresponden", valArr.getFila());
+            ManejoErrores::addErrorSemantico("Los tipos no corresponden", valArr.getFila());
             return new Resultado();
         }
         if(resultado.getValores().count()!=hijos){
-            ma->addErrorSemantico("Las dimensiones no son de igual magnitud", valArr.getFila());
+            ManejoErrores::addErrorSemantico("Las dimensiones no son de igual magnitud", valArr.getFila());
             return new Resultado();
         }
         if(hijos==0){

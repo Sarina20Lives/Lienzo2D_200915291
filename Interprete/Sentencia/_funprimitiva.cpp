@@ -22,29 +22,29 @@ void Interprete::pintarP(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo fu
     bool parametrosCorrectos = true;
 
     if(posX->getTipo()!=TENTERO || posX->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para la posición x sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para la posición x sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(posY->getTipo()!=TENTERO || posY->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para la posición y sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para la posición y sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(diametro->getTipo()!=TENTERO || diametro->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para el diametro sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para el diametro sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(colorH->getTipo()!=TCADENA || colorH->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para el color sea de tipo cadena", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para el color sea de tipo cadena", func.getFila());
         parametrosCorrectos = false;
     }
 
     QColor color = QColor(colorH->getValor());
 
     if(!color.isValid()){
-        ma->addErrorSemantico("La definición del color no es valida", func.getFila());
+        ManejoErrores::addErrorSemantico("La definición del color no es valida", func.getFila());
         parametrosCorrectos = false;
     }
 
@@ -70,39 +70,39 @@ void Interprete::pintarOR(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo f
     bool parametrosCorrectos = true;
 
     if(posX->getTipo()!=TENTERO || posX->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para la posición x sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para la posición x sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(posY->getTipo()!=TENTERO || posY->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para la posición y sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para la posición y sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(ancho->getTipo()!=TENTERO || ancho->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para el ancho sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para el ancho sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(alto->getTipo()!=TENTERO || alto->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para el alto sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para el alto sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(colorH->getTipo()!=TCADENA || colorH->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para el color sea de tipo cadena", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para el color sea de tipo cadena", func.getFila());
         parametrosCorrectos = false;
     }
 
     QColor color = QColor(colorH->getValor());
 
     if(!color.isValid()){
-        ma->addErrorSemantico("El color no está escrito en un formato valido", func.getFila());
+        ManejoErrores::addErrorSemantico("El color no está escrito en un formato valido", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(figura->getTipo()!=TCARACTER || figura->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para la figura sea de tipo caracter", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para la figura sea de tipo caracter", func.getFila());
         parametrosCorrectos = false;
     }
 
@@ -126,7 +126,7 @@ void Interprete::pintarOR(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo f
         canvas->update();
         return;
     }
-    ma->addErrorSemantico("El parametro figura no es valido", func.getFila());
+    ManejoErrores::addErrorSemantico("El parametro figura no es valido", func.getFila());
 
 }
 
@@ -137,25 +137,25 @@ void Interprete::pintarS(QString lienzo, Contexto *ctxG, Contexto *ctxL, Nodo fu
     Resultado *texto = Interprete::resolverExpresion(lienzo, ctxG, ctxL, func.getHijo(3));
     bool parametrosCorrectos = true;
     if(posX->getTipo()!=TENTERO || posX->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para la posición x sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para la posición x sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(posY->getTipo()!=TENTERO || posY->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para la posición y sea de tipo entero", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para la posición y sea de tipo entero", func.getFila());
         parametrosCorrectos = false;
     }
 
     if(colorH->getTipo()!=TCADENA || colorH->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para el color sea de tipo cadena", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para el color sea de tipo cadena", func.getFila());
         parametrosCorrectos = false;
     } QColor color = QColor(colorH->getValor());
     if(!color.isValid()){
-        ma->addErrorSemantico("El color no está escrito en un formato valido", func.getFila());
+        ManejoErrores::addErrorSemantico("El color no está escrito en un formato valido", func.getFila());
         parametrosCorrectos = false;
     }
     if(texto->getTipo()!=TCADENA || texto->getEsArr()){
-        ma->addErrorSemantico("Se requiere que el parametro para el texto sea de tipo cadena", func.getFila());
+        ManejoErrores::addErrorSemantico("Se requiere que el parametro para el texto sea de tipo cadena", func.getFila());
         parametrosCorrectos = false;
     }
     if(!parametrosCorrectos)

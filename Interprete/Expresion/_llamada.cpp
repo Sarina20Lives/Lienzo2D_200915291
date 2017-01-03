@@ -2,7 +2,6 @@
 #include "General/constantes.h"
 
 Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Contexto *ctxLocal, Nodo exp){
-    ma->getInstance(lienzo);
     Resultado *resultado = new Resultado();
 
     QList<Resultado> *params = new QList<Resultado>();
@@ -12,7 +11,7 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
     foreach (Nodo param, *exp.getHijos()) {
         parametro =Interprete::resolverExpresion(lienzo, ctxGlobal, ctxLocal, param);
         if(parametro->getTipo()==ERR || parametro->getRol() != NOTHING){
-            ma->addErrorSemantico("Los parametros no son validos", exp.getFila());
+            ManejoErrores::addErrorSemantico("Los parametros no son validos", exp.getFila());
             return resultado;
         }
         params->append(*parametro);
@@ -30,7 +29,7 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
     }
 
     if(allMtds.count()==0){
-        ma->addErrorSemantico("El método buscado no existe", exp.getFila());
+        ManejoErrores::addErrorSemantico("El método buscado no existe", exp.getFila());
         return resultado;
     }
 
@@ -46,7 +45,10 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
         //Crear contexto Local...
         ctxL2 = Contexto::generarContextoLocal(lienzo, conservar.getNombre(), conservar.getAcceso(), *conservar.getParametros(), *params);
         //ejecutar el metodo conservar
-        return resultado = Interprete::ejecutarMtd(conservar.getLienzoPadre(), conservar.getNombre(), ctxG2, ctxL2, conservar);
+        ManejoErrores::getInstance(conservar.getLienzoPadre());
+        resultado = Interprete::ejecutarMtd(conservar.getLienzoPadre(), conservar.getNombre(), ctxG2, ctxL2, conservar);
+        ManejoErrores::getInstance(lienzo);
+        return resultado;
     }
 
     //No existe un metodo que posea conservar y el metodo local si existe
@@ -56,9 +58,11 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
         ctxG2->agregarVariablesExtends(encontrado.getLienzoPadre());
         //Crear contexto Local...
         ctxL2 = Contexto::generarContextoLocal(lienzo, encontrado.getNombre(), encontrado.getAcceso(), *encontrado.getParametros(), *params);
-        //ejecutar el metodo conservar
-        return Interprete::ejecutarMtd(encontrado.getLienzoPadre(), encontrado.getNombre(), ctxG2, ctxL2, encontrado);
-
+        //ejecutar el metodo encontrado
+        ManejoErrores::getInstance(encontrado.getLienzoPadre());
+        resultado = Interprete::ejecutarMtd(encontrado.getLienzoPadre(), encontrado.getNombre(), ctxG2, ctxL2, encontrado);
+        ManejoErrores::getInstance(lienzo);
+        return resultado;
     }
 
     //No existe un metodo que posea conservar y el metodo local no existe
@@ -68,8 +72,11 @@ Resultado *Interprete::resolverLlamada(QString lienzo, Contexto *ctxGlobal, Cont
     ctxG2->agregarVariablesExtends(seleccionado.getLienzoPadre());
     //Crear contexto Local...
     ctxL2 = Contexto::generarContextoLocal(lienzo, seleccionado.getNombre(), seleccionado.getAcceso(), *seleccionado.getParametros(), *params);
-    //ejecutar el metodo conservar
-    return Interprete::ejecutarMtd(seleccionado.getLienzoPadre(), seleccionado.getNombre(), ctxG2, ctxL2, seleccionado);
+    //ejecutar el metodo seleccionado
+    ManejoErrores::getInstance(encontrado.getLienzoPadre());
+    resultado = Interprete::ejecutarMtd(seleccionado.getLienzoPadre(), seleccionado.getNombre(), ctxG2, ctxL2, seleccionado);
+    ManejoErrores::getInstance(lienzo);
+    return resultado;
 }
 
 

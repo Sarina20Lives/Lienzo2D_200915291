@@ -26,6 +26,7 @@ linicio:
     condicion = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(0));
     if(condicion->getTipo()!=TBOOLEAN){
         ctxL->limpiarContexto();
+        ManejoErrores::addErrorSemantico("Error al resolver la condicion para hacer-mientras", nodo.getHijo(0).getFila());
         return new Resultado();
     }
     if(Casteo::strToBool(condicion->getValor())){

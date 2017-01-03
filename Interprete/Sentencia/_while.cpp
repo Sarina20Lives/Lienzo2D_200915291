@@ -8,6 +8,7 @@ Resultado *Interprete::ejecutarWhile(QString lienzo, QString padre,  Contexto *c
     linicio:
     Resultado *condicion = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(0));
     if(condicion->getTipo()!=TBOOLEAN){
+        ManejoErrores::addErrorSemantico("Error al resolver la condicion para mientras", nodo.getHijo(0).getFila());
         return resultado;
     }
     if(!Casteo::strToBool(condicion->getValor())){

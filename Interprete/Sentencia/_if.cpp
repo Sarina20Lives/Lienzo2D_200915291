@@ -6,6 +6,7 @@ Resultado *Interprete::ejecutarIf(QString lienzo, QString padre,  Contexto *ctxG
     Resultado *resultado = new Resultado();
     Resultado *condicion = Interprete::resolverExpresion(lienzo, ctxG, ctxL, nodo.getHijo(0));
     if(condicion->getTipo()!=TBOOLEAN){
+        ManejoErrores::addErrorSemantico("Error al resolver la condicion para if", nodo.getHijo(0).getFila());
         return resultado;
     }
 
