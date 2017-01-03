@@ -114,6 +114,7 @@ Metodo *Metodo::crearPrincipal(int acceso, int fila, QList<Nodo> *sentencias)
     metodo->fila = fila;
     metodo->esPrincipal = true;
     metodo->sentencias = sentencias;
+    metodo->tipo = TVOID;
     return metodo;
 }
 

@@ -17,7 +17,7 @@ void Contexto::agregarVariablesExtends(QString nombreL){
     foreach (Lienzo lienzo, extends) {
         ctxTemp=generarContextoGlobal(lienzo.getNombre());
         foreach (Simbolo var, *ctxTemp->getContexto()) {
-            this->agregarVariable(var);
+            this->agregarVariableExtend(var);
         }
     }
 }
@@ -251,22 +251,18 @@ bool Contexto::existeVariable(QString nombre){
     return false;
 }
 
-void Contexto::agregarVariable(Simbolo sim)
+void Contexto::agregarVariableExtend(Simbolo sim)
 {
     int cont = 0;
     foreach (Simbolo var, *this->contexto) {
         if(var.getNombre() == sim.getNombre()){
-            if(var.getAcceso()>A_PRI){
-                ManejoErrores::addErrorSemantico("La variable '"+var.getNombre()+"' presenta duplicación.", -1);
-                return;
-            }
-            if(sim.getAcceso()>A_PRI && sim.getAcceso()!=A_PRI_CON){
+            if(var.getAcceso()<=A_PRI && (sim.getAcceso()>A_PRI && sim.getAcceso()!=A_PRI_CON)){
                 this->contexto->replace(cont, sim);
                 return;
-            }else{
-                ManejoErrores::addErrorSemantico("La variable '"+var.getNombre()+"' presenta duplicación.", -1);
-                return;
+            }else if(var.getAcceso()>A_PRI && (sim.getAcceso()>A_PRI && sim.getAcceso()!=A_PRI_CON)){
+                ManejoErrores::addErrorSemantico("Existen variables globales duplicadas con conservar ", -1);
             }
+            return;
         }
         cont = cont + 1;
     }

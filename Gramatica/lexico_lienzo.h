@@ -439,7 +439,7 @@ extern int lienzolex (void);
 #undef YY_DECL
 #endif
 
-#line 144 "lexico_lienzo.l"
+#line 145 "lexico_lienzo.l"
 
 
 #line 446 "lexico_lienzo.h"

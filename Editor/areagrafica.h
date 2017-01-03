@@ -14,16 +14,13 @@ class AreaGrafica : public QWidget
 public:
     explicit AreaGrafica(QWidget *parent = 0);
     ~AreaGrafica();
+    void erase();
 
 private slots:
     void on_pushBtn_Publicar_clicked();
 
 private:
     Ui::AreaGrafica *ui;
-    int x;
-    int y;
-    int diametro;
-    QColor color;
     Canvas *lienzo;    
     QString escaparDatos(QString data);
 };

@@ -40,7 +40,7 @@
 extern int lienzodebug;
 #endif
 /* "%code requires" blocks.  */
-#line 60 "sintactico_lienzo.y" /* yacc.c:1909  */
+#line 59 "sintactico_lienzo.y" /* yacc.c:1909  */
 
 	#include <QList>
     #include <QString>
@@ -140,7 +140,7 @@ extern int lienzodebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 75 "sintactico_lienzo.y" /* yacc.c:1909  */
+#line 74 "sintactico_lienzo.y" /* yacc.c:1909  */
 
     QString *CADENA;
     int INT;
@@ -161,7 +161,7 @@ extern YYSTYPE lienzolval;
 
 int lienzoparse (void);
 /* "%code provides" blocks.  */
-#line 66 "sintactico_lienzo.y" /* yacc.c:1909  */
+#line 65 "sintactico_lienzo.y" /* yacc.c:1909  */
  
 	Lienzo *parselienzo(QString *entrada);
 	QList<Simbolo> *getTS();

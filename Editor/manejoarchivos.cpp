@@ -4,18 +4,16 @@
 
 QString ManejoArchivos::RAIZ = "/home/sarina/QtProjects/Lienzo2D_200915291/Lienzo2D_200915291/Recursos/Lienzos/";
 
-QString ManejoArchivos::abrirArchivo(QString dir){
-    QByteArray ba = dir.toLatin1();
-    char *acceso = ba.data();
-
-    FILE* file = fopen(acceso, "r+t");
-    if (file==NULL)
-        return "";
-    QString content = "";
-    while (feof(file)==0){
-        content = content + QChar(fgetc(file));
+QString *ManejoArchivos::abrirArchivo(QString dir){
+    QFile file(dir);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return NULL;
+    QTextStream in(&file);
+    QString *content = new QString("");
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        content->append(line + "\n");
     }
-    fclose(file);
     return content;
 }
 

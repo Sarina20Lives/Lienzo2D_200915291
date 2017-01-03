@@ -3,6 +3,7 @@
 #include "qtextstream.h"
 #include "errores.h"
 #include "General/constantes.h"
+#include "Editor/manejoarchivos.h"
 
 // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 // Patrón de diseño singleton
@@ -79,37 +80,14 @@ void ManejoErrores::addError(ErrorCompilador err)
 
 void ManejoErrores::generarReporte()
 {
-    QFile file("/home/esvux/errores.html");
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-       return;
-    QTextStream out(&file);
-    out << "<!DOCTYPE html>";
-    out << "<html>";
-    out << "<head>";
-    out << "	<meta charset='utf-8'>";
-    out << "	<title>Reporte de errores</title>";
-    out << "</head>";
-    out << "<body>";
-    out << "	<div class='container'>";
-    out << "		<table>";
-    out << "			<thead>";
-    out << "				<tr>";
-    out << "					<th>Tipo</th>";
-    out << "					<th>Descripción</th>";
-    out << "					<th>Lienzo</th>";
-    out << "					<th>Fila</th>";
-    out << "				</tr>";
-    out << "			</thead>";
-    out << "            <tbody>";
+    QString *contenido = ManejoArchivos::abrirArchivo(RUTA_PLANTILLA_ERR);
+    QString c(contenido->toUtf8());
+    QString body = "";
     foreach (ErrorCompilador err, *this->errores) {
-        out << err.getHTML();
+        body.append(err.getHTML());
     }
-    out << "            </tbody>";
-    out << "		</table>";
-    out << "	</div>";
-    out << "</body>";
-    out << "</html>";
-    file.close();
+    c = c.replace("__BODY__", body);
+    ManejoArchivos::guardarArchivo(RUTA_ERR, c);
 }
 
 // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -133,6 +111,6 @@ QString ErrorCompilador::getHTML()
     if(this->fila==-1)
         html = html + "\t<td> No aplica </td>\n";
     else
-        html = html + "\t<td>" + this->fila+ "</td>\n";
+        html = html + "\t<td>" + QString::number(this->fila) + "</td>\n";
     return html + "</tr>\n";
 }

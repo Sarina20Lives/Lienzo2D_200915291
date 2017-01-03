@@ -353,6 +353,139 @@
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>751</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDebug">
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="actionNuevo"/>
+    <addaction name="actionAbrir"/>
+    <addaction name="actionGuardar"/>
+    <addaction name="actionGuardarComo"/>
+    <addaction name="actionCerrar"/>
+   </widget>
+   <widget class="QMenu" name="menuCompilar">
+    <property name="title">
+     <string>Compilar</string>
+    </property>
+    <widget class="QMenu" name="menuDebugger">
+     <property name="title">
+      <string>Debugger</string>
+     </property>
+     <addaction name="actionIniciar"/>
+     <addaction name="actionDetenerReanudar"/>
+     <addaction name="actionTerminar"/>
+    </widget>
+    <addaction name="actionEjecutar"/>
+    <addaction name="menuDebugger"/>
+   </widget>
+   <widget class="QMenu" name="menuVer">
+    <property name="title">
+     <string>Ver</string>
+    </property>
+    <addaction name="actionErrores"/>
+    <addaction name="actionTablaSimbolos"/>
+   </widget>
+   <addaction name="menuDebug"/>
+   <addaction name="menuCompilar"/>
+   <addaction name="menuVer"/>
+  </widget>
+  <action name="actionNuevo">
+   <property name="text">
+    <string>Nuevo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionAbrir">
+   <property name="text">
+    <string>Abrir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionGuardar">
+   <property name="text">
+    <string>Guardar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionGuardarComo">
+   <property name="text">
+    <string>Guardar como...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionCerrar">
+   <property name="text">
+    <string>Cerrar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionEjecutar">
+   <property name="text">
+    <string>Ejecutar</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionIniciar">
+   <property name="text">
+    <string>Iniciar</string>
+   </property>
+   <property name="shortcut">
+    <string>F10</string>
+   </property>
+  </action>
+  <action name="actionDetenerReanudar">
+   <property name="text">
+    <string>Detener/Reanudar</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionTerminar">
+   <property name="text">
+    <string>Terminar</string>
+   </property>
+   <property name="shortcut">
+    <string>F4</string>
+   </property>
+  </action>
+  <action name="actionErrores">
+   <property name="text">
+    <string>Errores</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionTablaSimbolos">
+   <property name="text">
+    <string>Tabla de símbolos</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+F2</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

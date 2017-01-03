@@ -94,7 +94,9 @@ QList<Metodo> Interprete::searchMetodoExtend(QString lienzoActual, QString nombr
     Metodo encontrado = *new Metodo();
     foreach (Lienzo lienzo, extendidos) {
           encontrado = Interprete::searchMetodo(lienzo.getNombre(), nombre, paramsToStr);
-          if(encontrado.getAcceso()!=ERR || encontrado.getAcceso()!=A_PRI || encontrado.getAcceso()!=A_PRI_CON){
+          if(encontrado.getAcceso()!=ERR &&
+             encontrado.getAcceso()!=A_PRI &&
+             encontrado.getAcceso()!=A_PRI_CON){
               metds.append(encontrado);
           }
    }

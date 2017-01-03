@@ -50,6 +50,6 @@ QList<Nodo> *Nodo::agregarPausa(QList<Nodo> *lista, int fila){
     Nodo *nodo = new Nodo();
     nodo->rol = RN_PAUSA;
     nodo->fila = fila;
-    lista->prepend(*nodo);
+    lista->append(*nodo);
     return lista;
 }

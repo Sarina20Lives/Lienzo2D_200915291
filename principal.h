@@ -7,6 +7,7 @@
 #include <QThread>
 #include "Ast/lienzo.h"
 #include "TablaSimbolos/simbolo.h"
+#include "Editor/areagrafica.h"
 
 namespace Ui {
 class Principal;
@@ -20,7 +21,7 @@ public:
     explicit Principal(QWidget *parent = 0);
     ~Principal();
     static bool existeUnLienzo(QList<Lienzo> *lienzos, QString nombre);    
-    static void agregarExtends(QList<Simbolo> *ts, QList<Lienzo> *lienzos, QList<QString> extends);
+    static void agregarExtends(QList<Simbolo> *ts, QList<Lienzo> *lienzos, QList<QString> extends, int fila);
     static void analisis(QString contenido);
 
 private slots:
@@ -37,11 +38,13 @@ private slots:
     void on_pushBtn_Debuggear_clicked();
     void on_pushBtn_Errores_clicked();
     void on_pushBtn_TablaSimbolos_clicked();
-
     void on_vertSlider_Velocidad_valueChanged(int value);
+    void on_actionDetener_Reanudar_triggered();
+    void on_actionTerminar_triggered();
 
 private:
     Ui::Principal *ui;
+    AreaGrafica *area;
     void nuevaPestania();
     void abrirAreaGrafica();
     void showInfo(QString mensaje);
@@ -51,6 +54,8 @@ private:
     void guardarArchivo(bool guardarComo);
     void cerrarArchivo();
     void analizarArchivo();
+    void mostrarReporteErrores();
+    void mostrarReporteTablaSimbolos();
 };
 
 

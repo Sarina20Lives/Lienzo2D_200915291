@@ -89,7 +89,7 @@ void CodeEditor::readFile(QString path)
     this->path = path;
     int i = path.lastIndexOf('/');
     this->title = path.mid(i + 1);
-    ManejoArchivos::RAIZ = path.left(path.lastIndexOf('/'));
+    ManejoArchivos::RAIZ = path.left(path.lastIndexOf('/')+1);
 }
 
 void CodeEditor::writeFile(QString path)
@@ -102,7 +102,7 @@ void CodeEditor::writeFile(QString path)
     out << content;
     this->path = path;
     this->title = path.mid(path.lastIndexOf('/') + 1);
-    ManejoArchivos::RAIZ = path.left(path.lastIndexOf('/'));
+    ManejoArchivos::RAIZ = path.left(path.lastIndexOf('/')+1);
 }
 
 

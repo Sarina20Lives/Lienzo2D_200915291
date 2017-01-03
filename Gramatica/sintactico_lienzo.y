@@ -8,13 +8,16 @@
 #include "Ast/metodo.h"
 #include "General/constantes.h"
 #include "TablaSimbolos/simbolo.h"
+#include "Errores/errores.h"
 #include <QList>
 #include <QString>
 #include <QStack>
+#define YYDEBUG 1
+#define YYERROR_VERBOSE 5
 extern int lienzolex();
 extern char * lienzotext;
 extern int lienzoline;
-void lienzoerror(char * s);
+void lienzoerror(const char * s);
 
 /*--------------------------------------------------------------------------
  *	Declaracion de variables globales
@@ -48,11 +51,7 @@ struct AtributoLienzo{
     Lienzo *lienzo = new Lienzo();
 };
 
-
-
-
 %}
-
 
 /*--------------------------------------------------------------------------
  *	Declaracion de métodos 
@@ -136,6 +135,7 @@ struct AtributoLienzo{
  				{
  					recorrido->push(lienzoline); 
  					padre->push(*$<CADENA>3); 
+ 					ManejoErrores::getInstance(*$<CADENA>3);
  					ts=new QList<Simbolo>();
  					nombreLienzo = *$<CADENA>3;
  				} 
@@ -231,10 +231,10 @@ struct AtributoLienzo{
  					recorrido->push(lienzoline);
  					padre->push("Principal");
  				} 
- 				P_OPEN P_CLOSE OPEN sentencias CLOSE	
+ 				P_OPEN P_CLOSE cuerpo	
  				{
 					$<METODO>$ = new AtributoMetodo();
-					$<METODO->metodo>$ = Metodo::crearPrincipal($<INT>1, recorrido->pop(), $<LNODO->lnodo>7);
+					$<METODO->metodo>$ = Metodo::crearPrincipal($<INT>1, recorrido->pop(), $<LNODO->lnodo>6);
 					padre->pop();
 	                ts->append(*Simbolo::crearMtd(nombreLienzo, padre->top(), *$<METODO->metodo>$));
 				}	
@@ -253,10 +253,10 @@ struct AtributoLienzo{
  				{
 				    ts->append(*Simbolo::crearParams(nombreLienzo, padre->top(), $<INT>1, *$<LNODO->lnodo>6));
  				}
- 				P_CLOSE OPEN sentencias CLOSE
+ 				P_CLOSE cuerpo
 				{
 					$<METODO>$ = new AtributoMetodo();
-                    $<METODO->metodo>$ = Metodo::crearMetodo(*$<CADENA>3, $<INT>1, $<INT>2, recorrido->pop(), $<LNODO->lnodo>6, $<LNODO->lnodo>10);
+                    $<METODO->metodo>$ = Metodo::crearMetodo(*$<CADENA>3, $<INT>1, $<INT>2, recorrido->pop(), $<LNODO->lnodo>6, $<LNODO->lnodo>9);
                     padre->pop();
 	                ts->append(*Simbolo::crearMtd(nombreLienzo, padre->top(), *$<METODO->metodo>$));
 				}
@@ -294,16 +294,34 @@ struct AtributoLienzo{
  *	Sentencias
  *--------------------------------------------------------------------------*/
 
- sentencias 	: sentencia sentencias
+ cuerpo			: OPEN sentencias CLOSE
  				{
  					$<LNODO>$ = new AtributoLnodo();
- 					$<LNODO->lnodo>$ = Nodo::preHijo($<LNODO->lnodo>2, *$<NODO->nodo>1);
+ 					$<LNODO->lnodo>$ = $<LNODO->lnodo>2; 					
+ 				}
+ 				| OPEN CLOSE
+ 				{
+ 					$<LNODO>$ = new AtributoLnodo();
+ 					$<LNODO->lnodo>$ = Nodo::iniciarHijos(); 					
  					$<LNODO->lnodo>$ = Nodo::agregarPausa($<LNODO->lnodo>$, lienzoline);
  				}
- 				| %empty
+ 				| OPEN error CLOSE
  				{
  					$<LNODO>$ = new AtributoLnodo();
- 					$<LNODO->lnodo>$ = Nodo::iniciarHijos();
+ 					$<LNODO->lnodo>$ = Nodo::iniciarHijos(); 					
+ 					$<LNODO->lnodo>$ = Nodo::agregarPausa($<LNODO->lnodo>$, lienzoline);
+ 				}
+
+ sentencias 	: sentencias sentencia
+ 				{
+ 					$<LNODO>$ = new AtributoLnodo();
+ 					$<LNODO->lnodo>$ = Nodo::addHijo($<LNODO->lnodo>1, *$<NODO->nodo>2);
+ 					$<LNODO->lnodo>$ = Nodo::agregarPausa($<LNODO->lnodo>$, lienzoline);
+ 				}
+ 				| sentencia
+ 				{
+ 					$<LNODO>$ = new AtributoLnodo();
+ 					$<LNODO->lnodo>$ = Nodo::iniciarHijos(*$<NODO->nodo>1);
  					$<LNODO->lnodo>$ = Nodo::agregarPausa($<LNODO->lnodo>$, lienzoline);
  				}
  ;
@@ -386,6 +404,11 @@ struct AtributoLienzo{
  				{
  				 	$<NODO>$ = new AtributoNodo();
  				 	$<NODO->nodo>$ = $<NODO->nodo>1;
+ 				}
+ 				| error FIN
+ 				{
+ 				 	$<NODO>$ = new AtributoNodo();
+ 				 	$<NODO->nodo>$ = new Nodo(); 					
  				}
  ;
 
@@ -554,16 +577,16 @@ struct AtributoLienzo{
  *	Flujo Si
  *--------------------------------------------------------------------------*/
 
- fSi 			: SI P_OPEN expresion P_CLOSE  {recorrido->push(lienzoline);} OPEN sentencias CLOSE fSino
+ fSi 			: SI P_OPEN expresion P_CLOSE  {recorrido->push(lienzoline);} cuerpo fSino
  				{
  					$<NODO>$ = new AtributoNodo();
- 					$<NODO->nodo>$ = Nodo::crearSi(*$<NODO->nodo>3, *$<LNODO->lnodo>7, *$<NODO->nodo>9, recorrido->pop());
+ 					$<NODO->nodo>$ = Nodo::crearSi(*$<NODO->nodo>3, *$<LNODO->lnodo>6, *$<NODO->nodo>7, recorrido->pop());
  				} 				
  ;
- fSino 			: SINO OPEN sentencias CLOSE
+ fSino 			: SINO cuerpo
  				{
  					$<NODO>$ = new AtributoNodo();
- 					$<NODO->nodo>$ = Nodo::crearSentencia(*$<LNODO->lnodo>3);
+ 					$<NODO->nodo>$ = Nodo::crearSentencia(*$<LNODO->lnodo>2);
  				}
  				| %empty
  				{
@@ -605,10 +628,10 @@ struct AtributoLienzo{
 /*--------------------------------------------------------------------------
  *	Bucle para
  *--------------------------------------------------------------------------*/
- bpara 			: PARA P_OPEN inicial PYC expresion PYC asigVar P_CLOSE {recorrido->push(lienzoline);} OPEN sentencias CLOSE
+ bpara 			: PARA P_OPEN inicial PYC expresion PYC asigVar P_CLOSE {recorrido->push(lienzoline);} cuerpo
  				{
  					$<NODO>$ = new AtributoNodo();
- 					$<NODO->nodo>$ = Nodo::crearPara(*$<NODO->nodo>3, *$<NODO->nodo>5, *$<NODO->nodo>7, *$<LNODO->lnodo>11, recorrido->pop());
+ 					$<NODO->nodo>$ = Nodo::crearPara(*$<NODO->nodo>3, *$<NODO->nodo>5, *$<NODO->nodo>7, *$<LNODO->lnodo>10, recorrido->pop());
  				}
  ;
  inicial 		: VAR tipo ID ASIG expresion
@@ -627,10 +650,10 @@ struct AtributoLienzo{
  *	Bucle mientras
  *--------------------------------------------------------------------------*/
 
- bmientras 		: MIENTRAS P_OPEN expresion P_CLOSE {recorrido->push(lienzoline);} OPEN sentencias CLOSE
+ bmientras 		: MIENTRAS P_OPEN expresion P_CLOSE {recorrido->push(lienzoline);} cuerpo
  				{
  					$<NODO>$ = new AtributoNodo();
- 					$<NODO->nodo>$ = Nodo::crearMientras(*$<NODO->nodo>3, *$<LNODO->lnodo>7, recorrido->pop());
+ 					$<NODO->nodo>$ = Nodo::crearMientras(*$<NODO->nodo>3, *$<LNODO->lnodo>6, recorrido->pop());
  				}
  ;
 
@@ -638,10 +661,10 @@ struct AtributoLienzo{
  *	Bucle hacer mientras
  *--------------------------------------------------------------------------*/
 
- bhacer 		: HACER {recorrido->push(lienzoline);} OPEN sentencias CLOSE MIENTRAS P_OPEN expresion P_CLOSE FIN
+ bhacer 		: HACER {recorrido->push(lienzoline);} cuerpo MIENTRAS P_OPEN expresion P_CLOSE FIN
  				{
  					$<NODO>$ = new AtributoNodo();
- 					$<NODO->nodo>$ = Nodo::crearHacer(*$<NODO->nodo>8, *$<LNODO->lnodo>4, recorrido->pop());
+ 					$<NODO->nodo>$ = Nodo::crearHacer(*$<NODO->nodo>6, *$<LNODO->lnodo>3, recorrido->pop());
  				}
  ;
 
@@ -918,9 +941,10 @@ void lienzoinit(){
 	lienzoline = 1;
 }
 
-void lienzoerror(char *s)
+void lienzoerror(const char *s)
 {
-  fprintf(stderr, "Error sintactico: %s", s);
+	ManejoErrores::addErrorSintactico(QString(s), lienzoline);
+	fprintf(stderr, "Error sintactico: %s", s);
 }
 
 QList<Simbolo> *getTS(){

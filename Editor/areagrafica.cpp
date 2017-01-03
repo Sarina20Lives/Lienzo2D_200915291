@@ -10,17 +10,24 @@
 
 AreaGrafica::AreaGrafica(QWidget *parent) : QWidget(parent), ui(new Ui::AreaGrafica) {
     ui->setupUi(this);
-    x = 0;
-    y = 0;
-    diametro = 20;
-    color = QColor("#000");
-    lienzo = Canvas::resetInstance();
-    lienzo->setStyleSheet("background-color:#FFFFFF;");
-    ui->verticalLayout_3->addWidget(lienzo);
 }
 
 AreaGrafica::~AreaGrafica() {
     delete ui;
+}
+
+void AreaGrafica::erase(){
+    QLayoutItem* child;
+    while(ui->verticalLayout->count()!=0){
+        child = ui->verticalLayout->takeAt(0);
+        if(child->widget() != 0) {
+            delete child->widget();
+        }
+        delete child;
+    }
+    lienzo = Canvas::resetInstance();
+    lienzo->setStyleSheet("background-color:#FFFFFF;");
+    ui->verticalLayout->addWidget(lienzo);
 }
 
 void AreaGrafica::on_pushBtn_Publicar_clicked() {

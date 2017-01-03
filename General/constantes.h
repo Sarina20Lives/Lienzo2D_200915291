@@ -2,10 +2,12 @@
 #define CONSTANTES_H
 #include "qstring.h"
 
-const QString RAIZ                = "/home/sarina/QtProjects/Lienzo2D_200915291/Lienzo2D_200915291/Recursos/Lienzos/";
+const QString RAIZ                = "/home/sarina/QtProjects/Lienzo2D_200915291/";
 const QString EXT                 = ".lz";
 const QString RUTA_PLANTILLA_TS   = RAIZ + "PlantillaTS.html";
+const QString RUTA_PLANTILLA_ERR  = RAIZ + "PlantillaERRORES.html";
 const QString RUTA_TS             = RAIZ + "TS.html";
+const QString RUTA_ERR            = RAIZ + "ERRORES.html";
 
 const int ERR                     =  -2;
 const int NOTHING                 =  -1;

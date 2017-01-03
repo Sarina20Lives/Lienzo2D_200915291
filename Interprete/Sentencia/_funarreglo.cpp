@@ -55,13 +55,13 @@ Resultado *Interprete::resolverOrdenar(Contexto *ctxG, Contexto *ctxL, Nodo orde
                 simL->setValores(Interprete::descValores(simL->getValores(), simL->getTipo()));
             }
             if(ordenar.getSubRol()==SRN_PAR){
-                simL->setValores(Interprete::parImparValores(simL->getValores(), simL->getTipo(), true));
+                simL->setValores(Interprete::parImparValores(simL->getValores(), simL->getTipo(), ordenar.getFila(), true));
             }
             if(ordenar.getSubRol()==SRN_IMPAR){
-                simL->setValores(Interprete::parImparValores(simL->getValores(), simL->getTipo(), false));
+                simL->setValores(Interprete::parImparValores(simL->getValores(), simL->getTipo(), ordenar.getFila(), false));
             }
             if(ordenar.getSubRol()==SRN_PRIMO){
-                simL->setValores(Interprete::primosValores(simL->getValores(), simL->getTipo()));
+                simL->setValores(Interprete::primosValores(simL->getValores(), simL->getTipo(), ordenar.getFila()));
             }
             resultado->setValor("1");
             return resultado;
@@ -87,7 +87,7 @@ Resultado *Interprete::resolverOrdenar(Contexto *ctxG, Contexto *ctxL, Nodo orde
                 simG->setValores(Interprete::parImparValores(simG->getValores(), simG->getTipo(), ordenar.getFila(), false));
             }
             if(ordenar.getSubRol()==SRN_PRIMO){
-                simG->setValores(Interprete::primosValores(simG->getValores(), simG->getTipo(), ordenar.getFila(),));
+                simG->setValores(Interprete::primosValores(simG->getValores(), simG->getTipo(), ordenar.getFila()));
             }
             resultado->setValor("1");
             return resultado;

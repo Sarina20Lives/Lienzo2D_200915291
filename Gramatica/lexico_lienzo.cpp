@@ -791,15 +791,15 @@ int lienzo_flex_debug = 1;
 
 static yyconst flex_int16_t yy_rule_linenum[84] =
     {   0,
-       21,   22,   23,   24,   25,   26,   27,   28,   29,   30,
-       31,   32,   33,   34,   35,   36,   37,   38,   39,   40,
-       41,   42,   43,   44,   45,   46,   47,   48,   49,   50,
-       52,   53,   54,   55,   56,   57,   58,   59,   60,   61,
-       62,   63,   64,   66,   67,   68,   69,   70,   71,   72,
-       74,   75,   76,   77,   78,   79,   81,   82,   83,   84,
-       85,   86,   87,   88,   89,   91,   92,   93,   94,   95,
-       96,   98,  103,  108,  113,  118,  124,  132,  137,  138,
-      139,  140,  142
+       22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
+       32,   33,   34,   35,   36,   37,   38,   39,   40,   41,
+       42,   43,   44,   45,   46,   47,   48,   49,   50,   51,
+       53,   54,   55,   56,   57,   58,   59,   60,   61,   62,
+       63,   64,   65,   67,   68,   69,   70,   71,   72,   73,
+       75,   76,   77,   78,   79,   80,   82,   83,   84,   85,
+       86,   87,   88,   89,   90,   92,   93,   94,   95,   96,
+       97,   99,  104,  109,  114,  119,  125,  133,  138,  139,
+      140,  141,  143
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -815,11 +815,12 @@ char *lienzotext;
 #include <stdio.h>
 #include <stdlib.h>
 #include "sintactico_lienzo.h"
+#include "Errores/errores.h"
 int lienzoline = 1;
 /*--------------------------------------------------------------------------
  *	Tokens definidos por ER
  *--------------------------------------------------------------------------*/
-#line 823 "lexico_lienzo.cpp"
+#line 824 "lexico_lienzo.cpp"
 
 #define INITIAL 0
 
@@ -1066,10 +1067,10 @@ YY_DECL
 	register int yy_act;
     
 /* %% [7.0] user's declarations go here */
-#line 19 "lexico_lienzo.l"
+#line 20 "lexico_lienzo.l"
 
 
-#line 1073 "lexico_lienzo.cpp"
+#line 1074 "lexico_lienzo.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -1185,362 +1186,362 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 21 "lexico_lienzo.l"
+#line 22 "lexico_lienzo.l"
 { return(LIENZO); };
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 22 "lexico_lienzo.l"
+#line 23 "lexico_lienzo.l"
 { return(EXTIENDE); };
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 23 "lexico_lienzo.l"
+#line 24 "lexico_lienzo.l"
 { return(PUBLICO); };
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 24 "lexico_lienzo.l"
+#line 25 "lexico_lienzo.l"
 { return(PRIVADO); };
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 25 "lexico_lienzo.l"
+#line 26 "lexico_lienzo.l"
 { return(PROTEGIDO); };
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 26 "lexico_lienzo.l"
+#line 27 "lexico_lienzo.l"
 { return(VAR); };
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 27 "lexico_lienzo.l"
+#line 28 "lexico_lienzo.l"
 { return(CONSERVAR); };
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 28 "lexico_lienzo.l"
+#line 29 "lexico_lienzo.l"
 { return(ARR); };
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 29 "lexico_lienzo.l"
+#line 30 "lexico_lienzo.l"
 { return(SI); };
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 30 "lexico_lienzo.l"
+#line 31 "lexico_lienzo.l"
 { return(SINO); };
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 31 "lexico_lienzo.l"
+#line 32 "lexico_lienzo.l"
 { return(COMPROBAR); };
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 32 "lexico_lienzo.l"
+#line 33 "lexico_lienzo.l"
 { return(CASO); };
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 33 "lexico_lienzo.l"
+#line 34 "lexico_lienzo.l"
 { return(DEFECTO); };
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 34 "lexico_lienzo.l"
+#line 35 "lexico_lienzo.l"
 { return(SALIR); };
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 35 "lexico_lienzo.l"
+#line 36 "lexico_lienzo.l"
 { return(CONTINUAR); };
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 36 "lexico_lienzo.l"
+#line 37 "lexico_lienzo.l"
 { return(PARA); };
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 37 "lexico_lienzo.l"
+#line 38 "lexico_lienzo.l"
 { return(MIENTRAS); };
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 38 "lexico_lienzo.l"
+#line 39 "lexico_lienzo.l"
 { return(HACER); };
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 39 "lexico_lienzo.l"
+#line 40 "lexico_lienzo.l"
 { return(RETORNA); };
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 40 "lexico_lienzo.l"
+#line 41 "lexico_lienzo.l"
 { return(PINTAR_P); };
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 41 "lexico_lienzo.l"
+#line 42 "lexico_lienzo.l"
 { return(PINTAR_OR); };
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 42 "lexico_lienzo.l"
+#line 43 "lexico_lienzo.l"
 { return(PINTAR_S); };
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 43 "lexico_lienzo.l"
+#line 44 "lexico_lienzo.l"
 { return(PRINCIPAL); };
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 44 "lexico_lienzo.l"
+#line 45 "lexico_lienzo.l"
 { return(ORDENAR); };
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 45 "lexico_lienzo.l"
+#line 46 "lexico_lienzo.l"
 { return(ASC); };
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 46 "lexico_lienzo.l"
+#line 47 "lexico_lienzo.l"
 { return(DESC); };
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 47 "lexico_lienzo.l"
+#line 48 "lexico_lienzo.l"
 { return(PAR); };
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 48 "lexico_lienzo.l"
+#line 49 "lexico_lienzo.l"
 { return(IMPAR); };
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 49 "lexico_lienzo.l"
+#line 50 "lexico_lienzo.l"
 { return(PRIMO); };
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 50 "lexico_lienzo.l"
+#line 51 "lexico_lienzo.l"
 { return(SUMARIZAR); };
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 52 "lexico_lienzo.l"
+#line 53 "lexico_lienzo.l"
 { return(FIN); };
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 53 "lexico_lienzo.l"
+#line 54 "lexico_lienzo.l"
 { return(PYC); };
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 54 "lexico_lienzo.l"
+#line 55 "lexico_lienzo.l"
 { return(OPEN); };
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 55 "lexico_lienzo.l"
+#line 56 "lexico_lienzo.l"
 { return(CLOSE); };
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 56 "lexico_lienzo.l"
+#line 57 "lexico_lienzo.l"
 { return(COMA); };
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 57 "lexico_lienzo.l"
+#line 58 "lexico_lienzo.l"
 { return(ASIG); };
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 58 "lexico_lienzo.l"
+#line 59 "lexico_lienzo.l"
 { return(C_OPEN); };
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 59 "lexico_lienzo.l"
+#line 60 "lexico_lienzo.l"
 { return(C_CLOSE); };
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 60 "lexico_lienzo.l"
+#line 61 "lexico_lienzo.l"
 { return(LL_OPEN); };
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 61 "lexico_lienzo.l"
+#line 62 "lexico_lienzo.l"
 { return(LL_CLOSE); };
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 62 "lexico_lienzo.l"
+#line 63 "lexico_lienzo.l"
 { return(P_OPEN); };
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 63 "lexico_lienzo.l"
+#line 64 "lexico_lienzo.l"
 { return(P_CLOSE); };
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 64 "lexico_lienzo.l"
+#line 65 "lexico_lienzo.l"
 { return(DANGOS); };
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 66 "lexico_lienzo.l"
+#line 67 "lexico_lienzo.l"
 { return(IGUAL); };
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 67 "lexico_lienzo.l"
+#line 68 "lexico_lienzo.l"
 { return(DIFERENTE); };
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 68 "lexico_lienzo.l"
+#line 69 "lexico_lienzo.l"
 { return(MEN); };
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 69 "lexico_lienzo.l"
+#line 70 "lexico_lienzo.l"
 { return(MAY); };
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 70 "lexico_lienzo.l"
+#line 71 "lexico_lienzo.l"
 { return(MEN_IGUAL); };
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 71 "lexico_lienzo.l"
+#line 72 "lexico_lienzo.l"
 { return(MAY_IGUAL); };
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 72 "lexico_lienzo.l"
+#line 73 "lexico_lienzo.l"
 { return(NULO); };
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 74 "lexico_lienzo.l"
+#line 75 "lexico_lienzo.l"
 { return(OR); };
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 75 "lexico_lienzo.l"
+#line 76 "lexico_lienzo.l"
 { return(AND); };
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 76 "lexico_lienzo.l"
+#line 77 "lexico_lienzo.l"
 { return(NAND); };
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 77 "lexico_lienzo.l"
+#line 78 "lexico_lienzo.l"
 { return(NOR); };
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 78 "lexico_lienzo.l"
+#line 79 "lexico_lienzo.l"
 { return(XOR); };
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 79 "lexico_lienzo.l"
+#line 80 "lexico_lienzo.l"
 { return(NOT); };
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 81 "lexico_lienzo.l"
+#line 82 "lexico_lienzo.l"
 { return(SUM); };
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 82 "lexico_lienzo.l"
+#line 83 "lexico_lienzo.l"
 { return(SUB); };
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 83 "lexico_lienzo.l"
+#line 84 "lexico_lienzo.l"
 { return(MUL); };
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 84 "lexico_lienzo.l"
+#line 85 "lexico_lienzo.l"
 { return(DIV); };
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 85 "lexico_lienzo.l"
+#line 86 "lexico_lienzo.l"
 { return(POW); };
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 86 "lexico_lienzo.l"
+#line 87 "lexico_lienzo.l"
 { return(INCREMENTO); };
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 87 "lexico_lienzo.l"
+#line 88 "lexico_lienzo.l"
 { return(DECREMENTO); };
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 88 "lexico_lienzo.l"
+#line 89 "lexico_lienzo.l"
 { return(SUM_SIMPLY); };
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 89 "lexico_lienzo.l"
+#line 90 "lexico_lienzo.l"
 { return(SUB_SIMPLY); };
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 91 "lexico_lienzo.l"
+#line 92 "lexico_lienzo.l"
 { return(T_VOID); };
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 92 "lexico_lienzo.l"
+#line 93 "lexico_lienzo.l"
 { return(T_ENTERO); };
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 93 "lexico_lienzo.l"
+#line 94 "lexico_lienzo.l"
 { return(T_DOBLE); };
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 94 "lexico_lienzo.l"
+#line 95 "lexico_lienzo.l"
 { return(T_CADENA); };
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 95 "lexico_lienzo.l"
+#line 96 "lexico_lienzo.l"
 { return(T_BOOLEAN); };
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 96 "lexico_lienzo.l"
+#line 97 "lexico_lienzo.l"
 { return(T_CARACTER); };
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 98 "lexico_lienzo.l"
+#line 99 "lexico_lienzo.l"
 {
     lienzolval.CADENA = new QString(lienzotext);
     return(TRUE);
@@ -1548,7 +1549,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 103 "lexico_lienzo.l"
+#line 104 "lexico_lienzo.l"
 {
     lienzolval.CADENA = new QString(lienzotext);
     return(FALSE);
@@ -1556,7 +1557,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 108 "lexico_lienzo.l"
+#line 109 "lexico_lienzo.l"
 {
     lienzolval.CADENA = new QString(lienzotext);
     return(ENTERO);
@@ -1564,7 +1565,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 113 "lexico_lienzo.l"
+#line 114 "lexico_lienzo.l"
 {
     lienzolval.CADENA = new QString(lienzotext);
     return(DOBLE);
@@ -1572,7 +1573,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 118 "lexico_lienzo.l"
+#line 119 "lexico_lienzo.l"
 {
     QString aux = QString(lienzotext);
     lienzolval.CADENA = new QString(aux.mid(1,aux.length()-2));
@@ -1581,7 +1582,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 124 "lexico_lienzo.l"
+#line 125 "lexico_lienzo.l"
 {
     QString aux = QString(lienzotext);
     aux = aux.replace("\\n","\n");
@@ -1592,7 +1593,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 132 "lexico_lienzo.l"
+#line 133 "lexico_lienzo.l"
 {
     lienzolval.CADENA = new QString(lienzotext);
     return(ID);
@@ -1600,37 +1601,37 @@ YY_RULE_SETUP
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 137 "lexico_lienzo.l"
+#line 138 "lexico_lienzo.l"
 { /* comentario de una línea */ } ;
 	YY_BREAK
 case 80:
 /* rule 80 can match eol */
 YY_RULE_SETUP
-#line 138 "lexico_lienzo.l"
+#line 139 "lexico_lienzo.l"
 { /* comentarios multilínea*/ }; 
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 139 "lexico_lienzo.l"
+#line 140 "lexico_lienzo.l"
 { /* espacios en blanco */ }
 	YY_BREAK
 case 82:
 /* rule 82 can match eol */
 YY_RULE_SETUP
-#line 140 "lexico_lienzo.l"
+#line 141 "lexico_lienzo.l"
 { lienzoline++; }; 
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 142 "lexico_lienzo.l"
-{ fprintf(stderr, "Error léxico '%s' en la línea %d\n", lienzotext, lienzoline); };
+#line 143 "lexico_lienzo.l"
+{ ManejoErrores::addErrorLexico("Caracter no válido '" + QString(lienzotext)+  "'", lienzoline); fprintf(stderr, "Error léxico '%s' en la línea %d\n", lienzotext, lienzoline); };
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 144 "lexico_lienzo.l"
+#line 145 "lexico_lienzo.l"
 ECHO;
 	YY_BREAK
-#line 1634 "lexico_lienzo.cpp"
+#line 1635 "lexico_lienzo.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2765,7 +2766,7 @@ void lienzofree (void * ptr )
 
 /* %ok-for-header */
 
-#line 144 "lexico_lienzo.l"
+#line 145 "lexico_lienzo.l"
 
 
 

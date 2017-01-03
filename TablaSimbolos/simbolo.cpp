@@ -247,14 +247,14 @@ QString Simbolo::getHTML()
 
 void Simbolo::reporte(QList<Simbolo> ts, QString principal)
 {
-    QString contenido = ManejoArchivos::abrirArchivo(RUTA_PLANTILLA_TS);
-    QString body  = "";
+    QString *contenido = ManejoArchivos::abrirArchivo(RUTA_PLANTILLA_TS);
+    QString c(contenido->toUtf8());
+    QString body = "";
     foreach (Simbolo sim, ts) {
         body.append(sim.getHTML());
     }
-    contenido = contenido.replace("__BODY__", body);
-    contenido = contenido.replace("__FILE__", principal);
-    contenido = contenido.replace("__DATE__", QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
-    ManejoArchivos::guardarArchivo(RUTA_TS, contenido);
-
+    c = c.replace("__BODY__", body);
+    c = c.replace("__FILE__", principal);
+    c = c.replace("__DATE__", QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
+    ManejoArchivos::guardarArchivo(RUTA_TS, c);
 }

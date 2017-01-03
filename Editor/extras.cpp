@@ -3,11 +3,15 @@
 #include "Editor/codeeditor.h"
 #include "areagrafica.h"
 #include "qfiledialog.h"
+#include "qdesktopservices.h"
 #include "qmessagebox.h"
 #include "General/constantes.h"
+#include "Errores/errores.h"
 #include "manejoarchivos.h"
 
 void Principal::analizarArchivo() {
+    ManejoErrores::resetInstance();
+    area->erase();
     int i = ui->tabArchivos->currentIndex();
     if(i < 1)  return;
     CodeEditor *editor = (CodeEditor*)ui->tabArchivos->currentWidget();
@@ -80,6 +84,16 @@ void Principal::showInfo(QString mensaje) {
 }
 
 void Principal::abrirAreaGrafica() {
-    AreaGrafica *area = new AreaGrafica();
-    area->show();
+    if(area==NULL)
+        area = new AreaGrafica();
+    area->erase();
+    area->show();    
+}
+
+void Principal::mostrarReporteErrores() {
+    QDesktopServices::openUrl(QUrl(RUTA_ERR));
+}
+
+void Principal::mostrarReporteTablaSimbolos() {
+    QDesktopServices::openUrl(QUrl(RUTA_TS));
 }

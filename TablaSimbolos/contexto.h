@@ -23,7 +23,7 @@ public:
     void disminuirNivel();
     Simbolo getVariable(QString nombre);
     bool existeVariable(QString nombre);
-    void agregarVariable(Simbolo sim);
+    void agregarVariableExtend(Simbolo sim);
     void agregarArreglos(QString lienzo, QString padre, Contexto *ctxG, Contexto *ctxL, Nodo declaracion);
     static QList<QString> crearEspacios(QList<Resultado> dims);
     static int obtenerCapacidad(QList<Resultado> dims);

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sintactico_lienzo.h"
+#include "Errores/errores.h"
 int lienzoline = 1;
 %}
 
@@ -139,7 +140,7 @@ ID 			[A-Za-z][A-Za-z0-9_]*
 [\t ]+						{ /* espacios en blanco */ }
 \n       			    	{ lienzoline++; }; 
 
-.		{ fprintf(stderr, "Error léxico '%s' en la línea %d\n", lienzotext, lienzoline); };
+.		{ ManejoErrores::addErrorLexico("Caracter no válido '" + QString(lienzotext)+  "'", lienzoline); fprintf(stderr, "Error léxico '%s' en la línea %d\n", lienzotext, lienzoline); };
 
 %%
 
