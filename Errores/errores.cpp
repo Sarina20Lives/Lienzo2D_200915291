@@ -1,4 +1,6 @@
 #include "qlist.h"
+#include "qfile.h"
+#include "qtextstream.h"
 #include "errores.h"
 #include "General/constantes.h"
 
@@ -46,28 +48,68 @@ ManejoErrores::ManejoErrores(QString ubicacion)
     this->ubicacion = ubicacion;
 }
 
-void ManejoErrores::addError(QString descripcion)
+void ManejoErrores::addError(QString descripcion, QString ubicacion)
 {
-    ErrorCompilador nuevo = ErrorCompilador(descripcion, -1, ERR_GENERAL, this->ubicacion);
-    this->errores->append(nuevo);
+    ErrorCompilador nuevo = ErrorCompilador(descripcion, -1, ERR_GENERAL, ubicacion);
+    singleton->addError(nuevo);
 }
 
-void ManejoErrores::addErrorLexico(QString descripcion, int fila)
+void ManejoErrores::addErrorLexico(QString descripcion, int fila, QString ubicacion)
 {
-    ErrorCompilador nuevo = ErrorCompilador(descripcion, fila, ERR_LEXICO, this->ubicacion);
-    this->errores->append(nuevo);
+    ErrorCompilador nuevo = ErrorCompilador(descripcion, fila, ERR_LEXICO, ubicacion);
+    singleton->addError(nuevo);
 }
 
-void ManejoErrores::addErrorSintactico(QString descripcion, int fila)
+void ManejoErrores::addErrorSintactico(QString descripcion, int fila, QString ubicacion)
 {
-    ErrorCompilador nuevo = ErrorCompilador(descripcion, fila, ERR_SINTACTICO, this->ubicacion);
-    this->errores->append(nuevo);
+    ErrorCompilador nuevo = ErrorCompilador(descripcion, fila, ERR_SINTACTICO, ubicacion);
+    singleton->addError(nuevo);
 }
 
-void ManejoErrores::addErrorSemantico(QString descripcion, int fila)
+void ManejoErrores::addErrorSemantico(QString descripcion, int fila, QString ubicacion)
 {
-    ErrorCompilador nuevo = ErrorCompilador(descripcion, fila, ERR_SEMANTICO, this->ubicacion);
-    this->errores->append(nuevo);
+    ErrorCompilador nuevo = ErrorCompilador(descripcion, fila, ERR_SEMANTICO, ubicacion);
+    singleton->addError(nuevo);
+}
+
+void ManejoErrores::addError(ErrorCompilador err)
+{
+    this->errores->append(err);
+}
+
+void ManejoErrores::generarReporte()
+{
+    QFile file("/home/esvux/errores.html");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+       return;
+    QTextStream out(&file);
+    out << "<!DOCTYPE html>";
+    out << "<html>";
+    out << "<head>";
+    out << "	<meta charset='utf-8'>";
+    out << "	<title>Reporte de errores</title>";
+    out << "</head>";
+    out << "<body>";
+    out << "	<div class='container'>";
+    out << "		<table>";
+    out << "			<thead>";
+    out << "				<tr>";
+    out << "					<th>Tipo</th>";
+    out << "					<th>Descripción</th>";
+    out << "					<th>Lienzo</th>";
+    out << "					<th>Fila</th>";
+    out << "				</tr>";
+    out << "			</thead>";
+    out << "            <tbody>";
+    foreach (ErrorCompilador err, *this->errores) {
+        out << err.getHTML();
+    }
+    out << "            </tbody>";
+    out << "		</table>";
+    out << "	</div>";
+    out << "</body>";
+    out << "</html>";
+    file.close();
 }
 
 // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>

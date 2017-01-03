@@ -20,7 +20,6 @@ public:
     static void desactivarDebug() { debuggeando = false; pausa = false; tiempoPausa = 0; }
     static void setPausa(int tiempo) { tiempoPausa = tiempo; }
     static void triggerDebug() { pausa = debuggeando ? !pausa : pausa; }
-    static ManejoErrores *ma;
     static QList<Lienzo> *lienzos;
     static Lienzo searchLienzo(QString nombre);
     static QList<Lienzo> searchExtends(QString nombre);

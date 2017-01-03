@@ -23,32 +23,56 @@ AreaGrafica::~AreaGrafica() {
     delete ui;
 }
 
-void AreaGrafica::mousePressEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
-        this->x = event->x()-12;
-        this->y = event->y()-57;
-    }
-}
-
 void AreaGrafica::on_pushBtn_Publicar_clicked() {
     Canvas *l = Canvas::getInstance();
     QImage img(l->size(), QImage::Format_ARGB32);
     QPainter painter(&img);
     l->render(&painter);
-    img.save("/home/esvux/inicio.png");
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
-    img.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
-    QString imageBase64(byteArray.toBase64().data());
-    QNetworkAccessManager *networkManager = new QNetworkAccessManager;
-    QByteArray datos;
+    img.save(&buffer, "PNG");
+    QString encoded = QString(byteArray.toBase64());
+
     QJsonObject jsonObject;
     jsonObject["titulo"] = ui->txt_Titulo->text();
     jsonObject["descripcion"] = ui->txt_Descripcion->toPlainText();
     jsonObject["fecha"] = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-    jsonObject["imagen"] = imageBase64;
+    jsonObject["imagen"] = encoded;
     QJsonDocument doc(jsonObject);
-    datos.append("json="+doc.toJson());
-    networkManager->post(QNetworkRequest(QUrl("http://127.0.0.1:5000/publica")), datos);
+
+    QNetworkAccessManager *networkManager = new QNetworkAccessManager;
+    QNetworkRequest req(QUrl("http://localhost:5000/publica"));
+    req.setRawHeader("Content-Type", "application/x-www-form-urlencoded");
+    QByteArray datos;
+    datos.append("json=");
+    datos.append(escaparDatos(QString(doc.toJson())));
+    networkManager->post(req, datos);
 }
 
+QString AreaGrafica::escaparDatos(QString data){
+    data = data.replace("%", "%25");
+    data = data.replace("\n", "%0A");
+    data = data.replace("\\", "%5C");
+    data = data.replace(" ", "%20");
+    data = data.replace("<", "%3C");
+    data = data.replace(">", "%3E");
+    data = data.replace("#", "%23");
+    data = data.replace("{", "%7B");
+    data = data.replace("}", "%7D");
+    data = data.replace("|", "%7C");
+    data = data.replace("^", "%5E");
+    data = data.replace("~", "%7E");
+    data = data.replace("[", "%5B");
+    data = data.replace("]", "%5D");
+    data = data.replace("`", "%60");
+    data = data.replace(";", "%3B");
+    data = data.replace("/", "%2F");
+    data = data.replace("?", "%3F");
+    data = data.replace(":", "%3A");
+    data = data.replace("@", "%40");
+    data = data.replace("=", "%3D");
+    data = data.replace("&", "%26");
+    data = data.replace("+", "%2B");
+    data = data.replace("*", "%2A");
+    return data.replace("$", "%24");
+}

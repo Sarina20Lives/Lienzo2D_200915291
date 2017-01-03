@@ -11,6 +11,7 @@ class ErrorCompilador
         QString descripcion;
 
     public:
+        ErrorCompilador(){}
         ErrorCompilador(QString descripcion, int fila, int tipo, QString ubicacion = "No disponible");
         QString getHTML();
 };
@@ -24,15 +25,17 @@ public:
     static ManejoErrores *resetInstance();
     static ManejoErrores *resetInstance(QString ubicacion);
     static ManejoErrores *singleton;
-    void addError(QString descripcion);
-    void addErrorLexico(QString descripcion, int fila);
-    void addErrorSintactico(QString descripcion, int fila);
-    void addErrorSemantico(QString descripcion, int fila);
+    static void addError(QString descripcion, QString ubicacion = singleton->ubicacion);
+    static void addErrorLexico(QString descripcion, int fila, QString ubicacion = singleton->ubicacion);
+    static void addErrorSintactico(QString descripcion, int fila, QString ubicacion = singleton->ubicacion);
+    static void addErrorSemantico(QString descripcion, int fila, QString ubicacion = singleton->ubicacion);
+    void generarReporte();
 
 private:
     ManejoErrores(QString ubicacion = "No disponible");
     QList<ErrorCompilador> *errores;
     QString ubicacion;
+    void addError(ErrorCompilador err);
 
 };
 

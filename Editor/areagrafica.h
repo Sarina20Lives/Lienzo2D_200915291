@@ -24,10 +24,8 @@ private:
     int y;
     int diametro;
     QColor color;
-    Canvas *lienzo;
-
-protected:
-    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    Canvas *lienzo;    
+    QString escaparDatos(QString data);
 };
 
 #endif // AREAGRAFICA_H
